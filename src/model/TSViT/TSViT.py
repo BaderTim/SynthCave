@@ -116,12 +116,10 @@ if __name__ == "__main__":
                     'max_seq_len': 16, 'dim': 128, 'temporal_depth': 6, 'spatial_depth': 2,
                     'heads': 4, 'pool': 'cls', 'num_channels': 14, 'dim_head': 64, 'dropout': 0., 'emb_dropout': 0.,
                     'scale_dim': 4, 'depth': 4}
-    train_config = {'dataset': "psetae_repl_2018_100_3", 'label_map': "labels_20k2k", 'max_seq_len': 16, 'batch_size': 5,
-                    'extra_data': [], 'num_workers': 4}
 
     x = torch.rand((3, 16, res, res, 14))
 
-    model = TSViTdense(model_config).cuda()
+    model = TSViTdense(model_config)
 
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
