@@ -106,3 +106,18 @@ class NTU(nn.Module):
         out = self.fc(new_feature)
 
         return out
+
+if __name__ == "__main__":
+
+
+    model = NTU()
+
+    parameters = filter(lambda p: p.requires_grad, model.parameters())
+    parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
+    print('Trainable Parameters: %.3fM' % parameters)
+
+    x = torch.randn(32, 100, 10, 3)  # Batch size of 32, 100 time steps, 10 nodes, 3D coordinates
+
+    out = model(x)
+
+    print("Shape of out :", out.shape) 
