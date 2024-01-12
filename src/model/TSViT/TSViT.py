@@ -1,81 +1,21 @@
+# Copyright (c) 2023 Michail Tarasiou
+# 
+# Source: https://github.com/michaeltrs/DeepSatModels/blob/main/models/TSViT/TSViTdense.py
+#
+# This source code is licensed under the Apache 2.0 license found in the
+# LICENSE file in the root directory of this source tree.
+
 import torch
 from torch import nn
 import torch.nn.functional as F
-from einops import rearrange, repeat
+from einops import repeat
 from einops.layers.torch import Rearrange
 import numpy as np
 
-
-class PreNorm(nn.Module):
-    """
-    Source: https://github.com/michaeltrs/DeepSatModels/blob/main/models/TSViT/module.py
-    """
-    def __init__(self, dim, fn):
-        super().__init__()
-        self.norm = nn.LayerNorm(dim)
-        self.fn = fn
-
-    def forward(self, x, **kwargs):
-        return self.fn(self.norm(x), **kwargs)
-    
-
-class FeedForward(nn.Module):
-    """
-    Source: https://github.com/michaeltrs/DeepSatModels/blob/main/models/TSViT/module.py
-    """
-    def __init__(self, dim, hidden_dim, dropout=0.):
-        super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(dim, hidden_dim),
-            nn.GELU(),
-            nn.Dropout(dropout),
-            nn.Linear(hidden_dim, dim),
-            nn.Dropout(dropout)
-        )
-
-    def forward(self, x):
-        return self.net(x)
-    
-
-class Attention(nn.Module):
-    """
-    Source: https://github.com/michaeltrs/DeepSatModels/blob/main/models/TSViT/module.py
-    """
-    def __init__(self, dim, heads=8, dim_head=64, dropout=0.):
-        super().__init__()
-        inner_dim = dim_head * heads
-        project_out = not (heads == 1 and dim_head == dim)
-
-        self.heads = heads
-        self.scale = dim_head ** -0.5
-
-        self.to_qkv = nn.Linear(dim, inner_dim * 3, bias=False)
-
-        self.to_out = nn.Sequential(
-            nn.Linear(inner_dim, dim),
-            nn.Dropout(dropout)
-        ) if project_out else nn.Identity()
-
-    def forward(self, x):
-        # print(x.shape)
-        b, n, _, h = *x.shape, self.heads
-        qkv = self.to_qkv(x).chunk(3, dim=-1)
-        q, k, v = map(lambda t: rearrange(t, 'b n (h d) -> b h n d', h=h), qkv)
-        # print(q.shape, k.shape, v.shape)
-        dots = einsum('b h i d, b h j d -> b h i j', q, k) * self.scale
-
-        attn = dots.softmax(dim=-1)
-
-        out = einsum('b h i j, b h j d -> b h i d', attn, v)
-        out = rearrange(out, 'b h n d -> b n (h d)')
-        out = self.to_out(out)
-        return out
+from model.TSViT.module import Attention, PreNorm, FeedForward
 
 
 class Transformer(nn.Module):
-    """
-    Source: https://github.com/michaeltrs/DeepSatModels/blob/main/models/TSViT/TSViTdense.py
-    """
     def __init__(self, dim, depth, heads, dim_head, mlp_dim, dropout=0.):
         super().__init__()
         self.layers = nn.ModuleList([])
@@ -93,10 +33,8 @@ class Transformer(nn.Module):
         return self.norm(x)
 
 
-class TSViT(nn.Module):
+class TSViTdense(nn.Module):
     """
-    Source: https://github.com/michaeltrs/DeepSatModels/blob/main/models/TSViT/TSViTdense.py
-
     Temporal-Spatial ViT5 (used in main results, section 4.3)
     For improved training speed, this implementation uses a (365 x dim) temporal position encodings indexed for
     each day of the year. Use TSViT_lookup for a slower, yet more general implementation of lookup position encodings
@@ -172,24 +110,24 @@ class TSViT(nn.Module):
 
 
 
-# if __name__ == "__main__":
-#     res = 24
-#     model_config = {'img_res': res, 'patch_size': 3, 'patch_size_time': 1, 'patch_time': 4, 'num_classes': 20,
-#                     'max_seq_len': 16, 'dim': 128, 'temporal_depth': 6, 'spatial_depth': 2,
-#                     'heads': 4, 'pool': 'cls', 'num_channels': 14, 'dim_head': 64, 'dropout': 0., 'emb_dropout': 0.,
-#                     'scale_dim': 4, 'depth': 4}
-#     train_config = {'dataset': "psetae_repl_2018_100_3", 'label_map': "labels_20k2k", 'max_seq_len': 16, 'batch_size': 5,
-#                     'extra_data': [], 'num_workers': 4}
+if __name__ == "__main__":
+    res = 24
+    model_config = {'img_res': res, 'patch_size': 3, 'patch_size_time': 1, 'patch_time': 4, 'num_classes': 20,
+                    'max_seq_len': 16, 'dim': 128, 'temporal_depth': 6, 'spatial_depth': 2,
+                    'heads': 4, 'pool': 'cls', 'num_channels': 14, 'dim_head': 64, 'dropout': 0., 'emb_dropout': 0.,
+                    'scale_dim': 4, 'depth': 4}
+    train_config = {'dataset': "psetae_repl_2018_100_3", 'label_map': "labels_20k2k", 'max_seq_len': 16, 'batch_size': 5,
+                    'extra_data': [], 'num_workers': 4}
 
-#     x = torch.rand((3, 16, res, res, 14))
+    x = torch.rand((3, 16, res, res, 14))
 
-#     model = TSViT(model_config).cuda()
+    model = TSViTdense(model_config).cuda()
 
-#     parameters = filter(lambda p: p.requires_grad, model.parameters())
-#     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
-#     print('Trainable Parameters: %.3fM' % parameters)
+    parameters = filter(lambda p: p.requires_grad, model.parameters())
+    parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
+    print('Trainable Parameters: %.3fM' % parameters)
 
-#     out = model(x)
+    out = model(x)
 
-#     # torch.norm(cls, dim=2).shape
-#     print("Shape of out :", out.shape)  # [B, num_classes]
+    # torch.norm(cls, dim=2).shape
+    print("Shape of out :", out.shape)  # [B, num_classes]
