@@ -8,4 +8,4 @@ Compile the CUDA layers for PointNet++, which are used for furthest point sampli
 cd src\model\PSTNet\modules
 python setup.py install
 ```
-To see if the compilation is successful, try to run `python modules/pst_convolutions.py` to see if a forward pass works.
+To see if the compilation is successful, try to run `python src/model/PSTNet/modules/pst_convolutions.py` to see if a forward pass works.
