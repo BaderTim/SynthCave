@@ -1,7 +1,6 @@
 import numpy as np
 import random
 
-
 def mag(C_imu: np.array, p_occ=0.1, max_length=20, impact_std_dev=0.1):
     """
     Add magnetic-field-like noise to an input sequence of IMU data.
