@@ -6,7 +6,6 @@ This script applies Structured Domain Randomization (SDR) as defined in the Synt
 Example Usage:
 --------------
 To apply SDR to lidar and IMU data and save the results:
-
 python sdr.py --lidars lidar1.csv lidar2.csv --imu imu.csv --output output_folder
 
 Required Arguments:
