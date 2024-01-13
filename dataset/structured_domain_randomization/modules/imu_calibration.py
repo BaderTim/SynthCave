@@ -12,10 +12,10 @@ def cal(C_imu: np.array, std_dev=0.1):
     - std_dev: float, optional, magnitude of the calibration error impact on each measurement.
 
     Returns:
-    - C_imu + noise_2d: 2D numpy array, shape (N, 6), representing the input IMU data with added calibration-error-like noise.
+    - C_imu + cal_noise_2d: 2D numpy array, shape (N, 6), representing the input IMU data with added calibration-error-like noise.
 
     """
-    noise_1d = np.random.normal(0, std_dev, 6)
+    cal_noise_1d = np.random.normal(0, std_dev, 6)
     # Repeat the same noise for each time step
-    noise_2d = np.tile(noise_1d, (len(C_imu), 1))
-    return C_imu + noise_2d
+    cal_noise_2d = np.tile(cal_noise_1d, (len(C_imu), 1))
+    return C_imu + cal_noise_2d
