@@ -1,7 +1,7 @@
 import numpy as np
 import random
 
-def mag(C_imu: np.array, p_occ=0.1, max_length=20, impact_std_dev=0.1):
+def mag(C_imu: np.array, p_occ=0.1, occurence_range=100, max_length=20, impact_std_dev=0.1):
     """
     Add magnetic-field-like noise to an input sequence of IMU data.
 
@@ -10,7 +10,9 @@ def mag(C_imu: np.array, p_occ=0.1, max_length=20, impact_std_dev=0.1):
              Each inner list represents a set of IMU measurements for a specific time step, containing the following float values:
              [acceleration_X, acceleration_Y, acceleration_Z, rotation_rate_X, rotation_rate_Y, rotation_rate_Z]
 
-    - p_occ: float, optional, probability of a magnetic field being present within 100 time steps.
+    - p_occ: float, optional, probability of a magnetic field being present within occurence_range time steps.
+
+    - occurence_range: int, optional, range in time steps within which a magnetic field can be present.
 
     - max_length: int, optional, maximum length in time steps of the magnetic field.
     
@@ -22,8 +24,8 @@ def mag(C_imu: np.array, p_occ=0.1, max_length=20, impact_std_dev=0.1):
     """
     mag_noise_2d = np.zeros((len(C_imu), 6))
 
-    # For each 100 time steps, randomly decide whether to introduce a magnetic field
-    for i in range(0, (len(C_imu)//100)*100, 100):
+    # For each occurence_range time steps, randomly decide whether to introduce a magnetic field
+    for i in range(0, (len(C_imu)//occurence_range)*occurence_range, occurence_range):
         # Randomly decide whether to introduce a magnetic field
         if random.random() < p_occ:
             # Define the length of the magnetic field
