@@ -2,11 +2,8 @@ import numpy as np
 import argparse
 import csv
 
-from modules.imu_calibration import cal
-from modules.imu_magnetic_fields import mag
-from modules.lidar_reflections import ref
-from modules.lidar_technical_faults import tf
-from modules.lidar_volumes import vol
+from modules.imu_sdr import cal, mag
+from modules.lidar_sdr import ref, tf, vol
 
 
 def sdr_1(C_lidars: list[np.array]) -> list[np.array]:
@@ -15,11 +12,14 @@ def sdr_1(C_lidars: list[np.array]) -> list[np.array]:
         res.append(vol(ref(tf(C_lidar))))
     return res
 
+
 def sdr_2(C_imu: np.array) -> np.array:
     return mag(cal(C_imu))
 
+
 def sdr(C_lidars: list[np.array], C_imu: np.array) -> (list[np.array], np.array):
     return sdr_1(C_lidars), [sdr_2(C_imu)]
+
 
 def read_csv(path: str) -> np.array:
     with open(path, newline='') as csvfile:
