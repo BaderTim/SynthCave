@@ -1,3 +1,27 @@
+"""
+sdr.py
+
+This script applies Structured Domain Randomization (SDR) as defined in the SynthCave paper to lidar and IMU data in the form of CSV files.
+
+Example Usage:
+--------------
+To apply SDR to lidar and IMU data and save the results:
+
+python sdr.py --lidars lidar1.csv lidar2.csv --imu imu.csv --output output_folder
+
+Required Arguments:
+-------------------
+--lidars: Array of csv file paths containing lidar data.
+--imu: csv file path containing IMU data.
+--output: Folder path to write output data to.
+
+The script reads lidar and IMU data from the specified files, applies SDR, and saves the SDR-processed data to the output folder.
+
+Author:
+-------
+Tim Bader
+Date: January 13, 2024
+"""
 import numpy as np
 import argparse
 import csv
