@@ -34,8 +34,8 @@ def mag(C_imu: np.array, p_occ=0.1, occurence_range=100, max_length=20, impact_s
             x = np.linspace(0, mag_field_length, mag_field_length)
             gaussian = (1/(impact_std_dev * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mag_field_length // 2) / impact_std_dev)**2)
             mag_field = gaussian.reshape(-1, 1)
-            # Randomly position the magnetic field within the current 100 time step window
-            mag_field_start_index = random.randint(i, i + 100 - mag_field_length)
+            # Randomly position the magnetic field within the current occurence_range time step window
+            mag_field_start_index = random.randint(i, i + occurence_range - mag_field_length)
             mag_field_end_index = mag_field_start_index + mag_field_length
             # Add the magnetic field to the 2D array, but only for rotational measurements
             mag_noise_2d[mag_field_start_index:mag_field_end_index, 3:6] += mag_field
