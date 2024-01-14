@@ -2,7 +2,7 @@ import numpy as np
 import random
 
 
-def ref(C_lidar: np.array, max_range=100, p_occ=0.2, occurence_range=100, time_length=50, hv_length=(20, 20)):
+def ref(C_lidar: np.array, max_range=100, p_occ=0.2, occurence_range=100, max_length=50, hv_length=(20, 20)):
     """
     Add reflective-like noise to an input sequence of LiDAR distance scans. When a reflection is present, the distance scans
     tend to be either 0 or multiples of the actual distance to the object, eventually capped by the maximum range of the LiDAR.
@@ -16,7 +16,7 @@ def ref(C_lidar: np.array, max_range=100, p_occ=0.2, occurence_range=100, time_l
 
     - occurence_range: int, optional, range in time steps within which a reflection can be present.
 
-    - time_length: int, optional, maximum length in time steps of the reflection.
+    - max_length: int, optional, maximum length in time steps of the reflection.
 
     - hv_length: tuple of ints, optional, maximum length in horizontal and vertical resolution of the reflection.
 
@@ -24,6 +24,16 @@ def ref(C_lidar: np.array, max_range=100, p_occ=0.2, occurence_range=100, time_l
     - C_lidar_with_ref_noise: 3D numpy float array, shape (N, H, V), representing the input LiDAR data with added reflection-error-like noise.
 
     """
+    if p_occ == 0:
+        return C_lidar
+    if occurence_range > len(C_lidar):
+        raise ValueError("occurence_range must be less than or equal to the length of C_lidar")
+    if max_length > occurence_range:
+        raise ValueError("max_length must be less than or equal to occurence_range")
+    if hv_length[0] > C_lidar.shape[1]:
+        raise ValueError("hv_length[0] must be less than or equal to the horizontal resolution of C_lidar")
+    if hv_length[1] > C_lidar.shape[2]:
+        raise ValueError("hv_length[1] must be less than or equal to the vertical resolution of C_lidar")
     C_lidar_with_ref_noise = C_lidar.copy()
     N, H, V = C_lidar.shape
     # For each occurence_range time steps, randomly decide whether to introduce a reflection
@@ -31,7 +41,7 @@ def ref(C_lidar: np.array, max_range=100, p_occ=0.2, occurence_range=100, time_l
         # Randomly decide whether to introduce a reflection
         if random.random() < p_occ:
             # Define the N,H,V-lengths of the reflection
-            ref_n_length = random.randint(1, time_length)
+            ref_n_length = random.randint(1, max_length)
             ref_h_length = random.randint(1, hv_length[0])
             ref_v_length = random.randint(1, hv_length[1])
             # Position the reflection within the 3D array
@@ -46,7 +56,7 @@ def ref(C_lidar: np.array, max_range=100, p_occ=0.2, occurence_range=100, time_l
             nhv_slice = C_lidar[ref_field_n_start_index:ref_field_n_end_index, 
                               ref_field_h_start_index:ref_field_h_end_index, 
                               ref_field_v_start_index:ref_field_v_end_index]
-            nhv_ref = nhv_slice[nhv_slice != max_range] * np.random.randint(0, 4, size=nhv_ref[nhv_slice != max_range].shape)
+            nhv_ref = nhv_slice[nhv_slice != max_range] * np.random.randint(0, 4, size=nhv_slice[nhv_slice != max_range].shape)
             # cap the values by the maximum range of the LiDAR
             nhv_ref[nhv_ref > max_range] = max_range
             # Add the reflection to the 3D array
@@ -68,6 +78,8 @@ def tf(C_lidar: np.array, p_occ=0.01):
     - C_lidar_with_tf_noise: 3D numpy float array, shape (N, H, V), representing the input LiDAR data with added reflection-error-like noise.
 
     """
+    if p_occ == 0:
+        return C_lidar
     C_lidar_with_tf_noise = C_lidar.copy()
     N, H, V = C_lidar.shape
     # Randomly decide whether to introduce a technical fault
@@ -75,13 +87,13 @@ def tf(C_lidar: np.array, p_occ=0.01):
         for v in range(V):
             if random.random() < p_occ:
                 # define time step from which the technical fault occurs
-                tf_start_index = random.randint(0, N)
+                tf_start_index = random.randint(0, N-1)
                 # set all distance scans at that certain angle to 0
                 C_lidar_with_tf_noise[tf_start_index:, h, v] = 0
     return C_lidar_with_tf_noise
 
 
-def vol(C_lidar: np.array, max_range=100, p_occ=0.1, occurence_range=1000, time_length=200, hv_length=(60, 40), max_vol_impact=0.5):
+def vol(C_lidar: np.array, max_range=100, p_occ=0.1, occurence_range=1000, max_length=200, hv_length=(60, 40), max_vol_impact=0.5):
     """
     Add different-volume-like noise to an input sequence of LiDAR distance scans. When a different volume is present, the distance scans
     tend to be larger than the actual distance to the object because in any other volume than air light travels slower through.
@@ -95,7 +107,7 @@ def vol(C_lidar: np.array, max_range=100, p_occ=0.1, occurence_range=1000, time_
 
     - occurence_range: int, optional, range in time steps within which a different volume can be present.
 
-    - time_length: int, optional, maximum length in time steps of the different volume.
+    - max_length: int, optional, maximum length in time steps of the different volume.
 
     - hv_length: tuple of ints, optional, maximum length in horizontal and vertical resolution of the different volume.
 
@@ -105,6 +117,16 @@ def vol(C_lidar: np.array, max_range=100, p_occ=0.1, occurence_range=1000, time_
     - C_lidar_with_vol_noise: 3D numpy float array, shape (N, H, V), representing the input LiDAR data with added different-volume-error-like noise.
 
     """
+    if p_occ == 0:
+        return C_lidar
+    if occurence_range > len(C_lidar):
+        raise ValueError("occurence_range must be less than or equal to the length of C_lidar")
+    if max_length > occurence_range:
+        raise ValueError("max_length must be less than or equal to occurence_range")
+    if hv_length[0] > C_lidar.shape[1]:
+        raise ValueError("hv_length[0] must be less than or equal to the horizontal resolution of C_lidar")
+    if hv_length[1] > C_lidar.shape[2]:
+        raise ValueError("hv_length[1] must be less than or equal to the vertical resolution of C_lidar")
     C_lidar_with_vol_noise = C_lidar.copy()
     N, H, V = C_lidar.shape
     # For each occurence_range time steps, randomly decide whether to introduce a volume
@@ -112,7 +134,7 @@ def vol(C_lidar: np.array, max_range=100, p_occ=0.1, occurence_range=1000, time_
         # Randomly decide whether to introduce a volume
         if random.random() < p_occ:
             # Define the N,H,V-lengths of the volume
-            vol_n_length = random.randint(1, time_length)
+            vol_n_length = random.randint(1, max_length)
             vol_h_length = random.randint(1, hv_length[0])
             vol_v_length = random.randint(1, hv_length[1])
             # Position the volume within the 3D array

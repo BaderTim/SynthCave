@@ -25,8 +25,8 @@ import numpy as np
 import argparse
 import csv
 
-from modules.imu_sdr import cal, mag
-from modules.lidar_sdr import ref, tf, vol
+from sdr.modules.imu_sdr import cal, mag
+from sdr.modules.lidar_sdr import ref, tf, vol
 
 
 def sdr_1(C_lidars: list[np.array]) -> list[np.array]:

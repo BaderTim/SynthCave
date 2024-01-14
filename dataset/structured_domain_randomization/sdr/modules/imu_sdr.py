@@ -44,6 +44,13 @@ def mag(C_imu: np.array, p_occ=0.1, occurence_range=100, max_length=20, impact_s
     - C_imu + mag_noise_2d: 2D numpy float array, shape (N, 6), representing the input IMU data with added calibration-error-like noise.
 
     """
+    if p_occ == 0:
+        return C_imu
+    if occurence_range > len(C_imu):
+        raise ValueError("occurence_range must be less than or equal to the length of C_imu")
+    if max_length > occurence_range:
+        raise ValueError("max_length must be less than or equal to occurence_range")
+
     mag_noise_2d = np.zeros(C_imu.shape)
     # For each occurence_range time steps, randomly decide whether to introduce a magnetic field
     for i in range(0, (len(C_imu)//occurence_range)*occurence_range, occurence_range):
