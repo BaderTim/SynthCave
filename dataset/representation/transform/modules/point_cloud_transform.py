@@ -1,6 +1,6 @@
 import numpy as np
 
-def distances_to_point_cloud(C_lidar: np.array, lidar_h_angle: int, lidar_v_angle: int = 1) -> np.array:
+def distances_to_point_cloud(C_lidar: np.array, lidar_h_angle: int, lidar_v_angle: int = 1, lidar_range: int = 100) -> np.array:
     """
     Creates a point cloud list from LiDAR distances. A point cloud is a collection of points in 3D space,
     where the sensor is the origin of the coordinate system. 
@@ -9,6 +9,7 @@ def distances_to_point_cloud(C_lidar: np.array, lidar_h_angle: int, lidar_v_angl
     - C_lidar: 3D numpy array representing the NxHxV LiDAR distances as floats
     - lidar_h_angle: int, horizontal angle of the LiDAR in degrees
     - lidar_v_angle: int, vertical angle of the LiDAR in degrees
+    - lidar_range: int, maximum range of the LiDAR in meters
 
     Returns:
     - point_clouds: 3D numpy array representing the point cloud like so: [[[x1, y1, z1], [x2, y2, z2], ...]]
@@ -33,9 +34,10 @@ def distances_to_point_cloud(C_lidar: np.array, lidar_h_angle: int, lidar_v_angl
                 # calculate the rotation around the y-axis
                 phi = np.deg2rad(90 - lidar_v_angle / 2 + v * v_rot_step)
                 # calculate x, y, z coordinates for the current point
-                x = C_lidar[n, h, v] * np.sin(phi) * np.cos(theta)
-                y = C_lidar[n, h, v] * np.sin(phi) * np.sin(theta)
-                z = C_lidar[n, h, v] * np.cos(phi)
+                normalized_range = C_lidar[n, h, v] / lidar_range
+                x = normalized_range * np.sin(phi) * np.cos(theta)
+                y = normalized_range * np.sin(phi) * np.sin(theta)
+                z = normalized_range * np.cos(phi)
                 # add the point to the point cloud
                 point_clouds[n, h*V + v, :] = [x, y, z]
     return point_clouds

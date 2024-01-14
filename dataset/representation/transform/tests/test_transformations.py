@@ -41,16 +41,16 @@ def test_distances_to_depth_image_values_above_lidar_range():
 
 def test_distances_to_point_cloud_main_case():
     # Test main case with typical input
-    input_lidar_data = np.array([[[1.0, 1.0], [1.0, 1.0]]])
+    input_lidar_data = np.array([[[1.0, 1.0], [1.0, 0.5]]])
     lidar_h_angle = 90
     lidar_v_angle = 40
-    result = distances_to_point_cloud(input_lidar_data, lidar_h_angle, lidar_v_angle)
+    result = distances_to_point_cloud(input_lidar_data, lidar_h_angle, lidar_v_angle, lidar_range=1)
     # disable scientific notation
     expected_result = np.array([[
         [0.66, -0.66, 0.34],
         [0.71, -0.71, 0],
         [0.94, 0, 0.34],
-        [1, 0, 0]
+        [0.5, 0, 0]
     ]])
     np.testing.assert_allclose(result, expected_result, rtol=0, atol=0.01)
 
@@ -93,13 +93,14 @@ def test_distances_to_graph_main_functionality():
                                   [7.0, 8.0, 9.0]]]) 
     lidar_h_angle = 90
     lidar_v_angle = 45
-    graphs, edges = distances_to_graph(input_lidar_data, lidar_h_angle, lidar_v_angle)
+    lidar_range = 10
+    graphs, edges = distances_to_graph(input_lidar_data, lidar_h_angle, lidar_v_angle, lidar_range)
     # Check the shape of the resulting graph and edges
     assert graphs.shape == (1, input_lidar_data.shape[1] * input_lidar_data.shape[2], 3)
     assert edges.shape == (1, (input_lidar_data.shape[1] - 1) * input_lidar_data.shape[2] +
                            input_lidar_data.shape[1] * (input_lidar_data.shape[2] - 1), 2)
     # Check the correctness of node features
-    assert np.array_equal(graphs[0, :, 0], input_lidar_data[0].flatten())
+    assert np.array_equal(graphs[0, :, 0], input_lidar_data[0].flatten()/lidar_range)
     # Check the correctness of edges
     assert np.all(edges >= 0)  # Ensure all indices are non-negative
     assert np.all(edges < graphs.shape[1])  # Ensure all indices are within the range of nodes

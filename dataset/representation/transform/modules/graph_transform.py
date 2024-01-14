@@ -1,6 +1,6 @@
 import numpy as np
 
-def distances_to_graph(C_lidar: np.array, lidar_h_angle: int, lidar_v_angle: int) -> tuple:
+def distances_to_graph(C_lidar: np.array, lidar_h_angle: int, lidar_v_angle: int, lidar_range=100) -> tuple:
     """
     Creates a temporal graph from LiDAR distances. The graph is a collection of nodes and edges.
     Distances and angles are features of the nodes, edges are connections between nodes.
@@ -9,6 +9,7 @@ def distances_to_graph(C_lidar: np.array, lidar_h_angle: int, lidar_v_angle: int
     - C_lidar_n: 3D numpy array representing the NxHxV LiDAR distances as floats
     - lidar_h_angle: int, horizontal angle of the LiDAR in degrees
     - lidar_v_angle: int, vertical angle of the LiDAR in degrees
+    - lidar_range: int, maximum distance of the LiDAR in meters
 
     Returns:
     - (graphs, edges): tuple of numpy arrays with a graph (time_step, nodes, features) where features
@@ -38,7 +39,7 @@ def distances_to_graph(C_lidar: np.array, lidar_h_angle: int, lidar_v_angle: int
                 phi = np.deg2rad(90 - lidar_v_angle / 2 + v * v_rot_step)
                 node_index = h*V + v
                 # add the feature to the node
-                graphs[n, node_index, :] = [C_lidar[n, h, v], theta, phi]
+                graphs[n, node_index, :] = [C_lidar[n, h, v]/lidar_range, theta/(2*np.pi), phi/np.pi]
                 # add horizontal edge towards right if not last column
                 if h < H - 1:
                     edges[n, edge_index, :] = [node_index, node_index + V]
