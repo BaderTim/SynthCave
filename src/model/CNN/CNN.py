@@ -20,10 +20,10 @@ class CNN(nn.Module):
         self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
 
         # Fully connected layers
-        self.fc1 = nn.Linear(64 * 8 * 8, 256)
+        self.fc1 = nn.Linear(64 * 8 * 8 * 4, 256)
         self.fc2 = nn.Linear(256, 128)
         self.fc3 = nn.Linear(128, 32)
-        self.fc4 = nn.Linear(32, 1)  # Assuming regression for odometry estimation
+        self.fc4 = nn.Linear(32, 6)  # Assuming regression for odometry estimation
 
     def forward(self, x):
         # Feature extractor layers
