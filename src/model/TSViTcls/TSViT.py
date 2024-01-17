@@ -71,16 +71,21 @@ class TSViTcls(nn.Module):
                                                 self.dim * self.scale_dim, self.dropout)
         self.space_token = nn.Parameter(torch.randn(1, self.num_classes, self.dim))
         self.space_pos_embedding = nn.Parameter(torch.randn(1, num_patches, self.dim))
-        print('space pos embedding: ', self.space_pos_embedding.shape)
+        # print('space pos embedding: ', self.space_pos_embedding.shape)
         self.space_token = nn.Parameter(torch.randn(1, 1, self.dim))
-        print('space token: ', self.space_token.shape)
+        # print('space token: ', self.space_token.shape)
         self.space_transformer = Transformer(self.dim, self.spatial_depth, self.heads, self.dim_head, self.dim * self.scale_dim, self.dropout)
         self.dropout = nn.Dropout(self.emb_dropout)
         self.mlp_head = nn.Sequential(
-            nn.LayerNorm(self.dim),
-            nn.Linear(self.dim, 1))
+            nn.Linear(self.dim*self.num_classes+6*self.num_frames, 256),
+            nn.ReLU(),
+            nn.Linear(256, 128),
+            nn.ReLU(),
+            nn.Linear(128, self.num_classes)
+        )
 
-    def forward(self, x):
+    def forward(self, depth_images, imu_data):
+        x = depth_images
         B, T, H, W = x.shape
         xt = x[:, :, 0, 0]
         # in the original paper, temporal embedding is the day of the year
@@ -103,9 +108,16 @@ class TSViTcls(nn.Module):
         x = self.dropout(x)
         cls_space_tokens = repeat(self.space_token, '() N d -> b N d', b=B * self.num_classes)
         x = torch.cat((cls_space_tokens, x), dim=1)
-        x = self.space_transformer(x)[:, 0]
-        x = self.mlp_head(x.reshape(-1, self.dim))
-        x = x.reshape(B, self.num_classes)
+        x = self.space_transformer(x)
+        print('x shape: ', x.shape)
+        x = x[:, 0]
+        print('x shape: ', x.shape)
+        x = x.reshape(B, self.dim*self.num_classes)
+        print('x shape: ', x.shape)
+        # concatenate x with imu data
+        imu_data = imu_data.reshape(B, 6*self.num_frames)
+        x = torch.cat((x, imu_data), dim=1)
+        x = self.mlp_head(x)
         return x
 
 
@@ -120,6 +132,7 @@ if __name__ == "__main__":
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
-    img = torch.rand((8, 4, res, res))
-    out = model(img)
+    depth_imgs = torch.rand((8, 4, res, res))
+    imu_data = torch.rand((8, 4, 6))
+    out = model(depth_imgs, imu_data)
     print("Shape of out :", out.shape)  # [B, num_classes]

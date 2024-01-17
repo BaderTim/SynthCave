@@ -33,6 +33,7 @@ def test_tsvitcls_forward_call():
                     'scale_dim': 4}
 
     model = TSViTcls(model_config)
-    img = torch.rand((8, 4, res, res))
-    out = model(img)
+    depth_img = torch.rand((8, 4, res, res))
+    imu_data = torch.rand((8, 4, 6))
+    out = model(depth_img, imu_data)
     assert out.shape == (8, 6)
