@@ -109,11 +109,8 @@ class TSViTcls(nn.Module):
         cls_space_tokens = repeat(self.space_token, '() N d -> b N d', b=B * self.num_classes)
         x = torch.cat((cls_space_tokens, x), dim=1)
         x = self.space_transformer(x)
-        print('x shape: ', x.shape)
         x = x[:, 0]
-        print('x shape: ', x.shape)
         x = x.reshape(B, self.dim*self.num_classes)
-        print('x shape: ', x.shape)
         # concatenate x with imu data
         imu_data = imu_data.reshape(B, 6*self.num_frames)
         x = torch.cat((x, imu_data), dim=1)
