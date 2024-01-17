@@ -41,6 +41,8 @@ class CNN(nn.Module):
         x = x.reshape(B, -1)
 
         # Concatenate IMU data
+        # concatenate x with imu data
+        imu_data = imu_data.reshape(B, 6*self.input_seq_len)
         x = torch.cat((x, imu_data), dim=1)
 
         # Fully connected layers
@@ -63,8 +65,8 @@ if __name__ == "__main__":
     print('Trainable Parameters: %.3fM' % parameters)
 
     # Example input tensor (replace with your actual data)
-    depth_images = torch.randn(32, 1, 64, 64*input_seq_len)  # Batch size of 32, 1 channel, 64x64 images
-    imu_data = torch.randn(32, 6*input_seq_len)  # Batch size of 32, 6 IMU measurements
+    depth_images = torch.randn(32, 1, 64, 64*input_seq_len)  
+    imu_data = torch.randn(32, input_seq_len, 6) 
 
     # Forward pass
     output = model(depth_images, imu_data)
