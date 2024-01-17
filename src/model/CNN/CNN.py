@@ -7,8 +7,10 @@ import torch.nn.functional as F
 import numpy as np
 
 class CNN(nn.Module):
-    def __init__(self):
+    def __init__(self, input_seq_len=2):
         super(CNN, self).__init__()
+
+        self.input_seq_len = input_seq_len
 
         # Feature extractor layers
         self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)
@@ -20,14 +22,15 @@ class CNN(nn.Module):
         self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
 
         # Fully connected layers
-        self.fc1 = nn.Linear(64 * 8 * 8 * 4, 256)
+        self.fc1 = nn.Linear(32768 + 6*self.input_seq_len, 256)
         self.fc2 = nn.Linear(256, 128)
         self.fc3 = nn.Linear(128, 32)
         self.fc4 = nn.Linear(32, 6)  # Assuming regression for odometry estimation
 
-    def forward(self, x):
+    def forward(self, depth_image, imu_data):
+        B, C, H, W = depth_image.shape
         # Feature extractor layers
-        x = F.relu(self.conv1(x))
+        x = F.relu(self.conv1(depth_image))
         x = F.relu(self.conv2(x))
         x = self.pool1(x)
         x = F.relu(self.conv3(x))
@@ -35,7 +38,10 @@ class CNN(nn.Module):
         x = self.pool2(x)
 
         # Flatten before fully connected layers
-        x = x.view(x.size(0), -1)
+        x = x.reshape(B, -1)
+
+        # Concatenate IMU data
+        x = torch.cat((x, imu_data), dim=1)
 
         # Fully connected layers
         x = F.relu(self.fc1(x))
@@ -48,15 +54,18 @@ class CNN(nn.Module):
 
 if __name__ == "__main__":
 
-    model = CNN()
+    input_seq_len = 2
+
+    model = CNN(input_seq_len=input_seq_len)
 
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
 
     # Example input tensor (replace with your actual data)
-    input_data = torch.randn(32, 1, 64, 64)  # Batch size of 32, 1 channel, 64x64 images
+    depth_images = torch.randn(32, 1, 64, 64*input_seq_len)  # Batch size of 32, 1 channel, 64x64 images
+    imu_data = torch.randn(32, 6*input_seq_len)  # Batch size of 32, 6 IMU measurements
 
     # Forward pass
-    output = model(input_data)
+    output = model(depth_images, imu_data)
     print("Shape of out :", output.shape)
