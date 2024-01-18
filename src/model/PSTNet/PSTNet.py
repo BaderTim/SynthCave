@@ -17,7 +17,7 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 sys.path.append(ROOT_DIR)
 sys.path.append(os.path.join(ROOT_DIR, 'src\model\PSTNet\modules'))
 
-from pst_convolutions import PSTConv
+from modules.pst_convolutions import PSTConv
 
 
 class NTU(nn.Module):
@@ -82,22 +82,34 @@ class NTU(nn.Module):
 
     def forward(self, xyzs):
 
+        print("initial shape of xyzs :", xyzs.shape)
         new_xys, new_features = self.conv1(xyzs, None)
         new_features = F.relu(new_features)
+        print("shape of new_features after conv1:", new_features.shape)
+        print("shape of new_xys after conv1:", new_xys.shape)
 
         new_xys, new_features = self.conv2a(new_xys, new_features)
         new_features = F.relu(new_features)
+        print("shape of new_features after conv2a:", new_features.shape)
+        print("shape of new_xys after conv2a:", new_xys.shape)
 
         new_xys, new_features = self.conv2b(new_xys, new_features)
         new_features = F.relu(new_features)
+        print("shape of new_features after conv2b:", new_features.shape)
+        print("shape of new_xys after conv2b:", new_xys.shape)
 
         new_xys, new_features = self.conv3a(new_xys, new_features)
         new_features = F.relu(new_features)
+        print("shape of new_features after conv3a:", new_features.shape)
+        print("shape of new_xys after conv3a:", new_xys.shape)
 
         new_xys, new_features = self.conv3b(new_xys, new_features)
         new_features = F.relu(new_features)
+        print("shape of new_features after conv3b:", new_features.shape)
+        print("shape of new_xys after conv3b:", new_xys.shape)
 
         new_xys, new_features = self.conv4(new_xys, new_features)               # (B, L, C, N)
+        print("shape of new_features after conv4:", new_features.shape)
 
         new_features = torch.mean(input=new_features, dim=-1, keepdim=False)    # (B, L, C)
 
@@ -109,14 +121,16 @@ class NTU(nn.Module):
 
 if __name__ == "__main__":
 
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print("Using device:", device)
 
-    model = NTU()
+    model = NTU().to(device)
 
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
 
-    x = torch.randn(32, 100, 10, 3)  # Batch size of 32, 100 time steps, 10 nodes, 3D coordinates
+    x = torch.randn(4, 5, 2048, 3).to(device) # (B, L, C, N)
 
     out = model(x)
 

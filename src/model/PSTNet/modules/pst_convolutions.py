@@ -17,7 +17,7 @@ import sys
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
-import pointnet2_utils
+import pointnet2_ops_lib.pointnet2_ops.pointnet2_utils as pointnet2_utils
 from typing import List
 
 def kaiming_uniform(tensor, size):
@@ -111,7 +111,7 @@ class PSTConv(nn.Module):
             features: torch.Tensor
                  (B, L, C, N) tensor of sequence of the features
         """
-        device = xyzs.get_device()
+        device = xyzs.device
 
         nframes = xyzs.size(1)  # L
         npoints = xyzs.size(2)  # N
