@@ -18,3 +18,6 @@ No manual installation required. Try to run `python src/model/ASTGCN/ASTGCN.py` 
 
 ### [TSViT](https://github.com/michaeltrs/DeepSatModels/tree/main?tab=readme-ov-file)
 No manual installation required. Try to run `python src/model/TSViT/TSViT.py` to see if a forward pass works.
+
+### [ICP](https://users.soe.ucsc.edu/~davis/papers/Mapping_IROS04/IROS04diebel.pdf)
+No manual installation required. Try to run `python src/model/ICP/ICP.py` to see if ICP iterations work.
