@@ -20,7 +20,7 @@ limitations under the License.
 """
 import numpy as np
 import time
-from ICP import icp
+from model.ICP.ICP import icp
 
 
 def test_icp():
