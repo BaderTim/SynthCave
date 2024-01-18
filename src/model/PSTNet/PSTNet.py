@@ -9,19 +9,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-import sys
-import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ROOT_DIR = os.path.dirname(BASE_DIR)
-sys.path.append(ROOT_DIR)
-sys.path.append(os.path.join(ROOT_DIR, 'src\model\PSTNet\modules'))
-
-from modules.pst_convolutions import PSTConv
+from model.PSTNet.modules.pst_convolutions import PSTConv
 
 
 class NTU(nn.Module):
-    def __init__(self, radius=0.1, nsamples=3*3, num_classes=20):
+    def __init__(self, radius=0.1, nsamples=3*3):
         super(NTU, self).__init__()
 
         self.conv1 =  PSTConv(in_planes=0,
@@ -40,7 +33,7 @@ class NTU(nn.Module):
                               temporal_kernel_size=3,
                               spatial_stride=2,
                               temporal_stride=2,
-                              temporal_padding=[0,0])
+                              temporal_padding=[1,2])
 
         self.conv2b = PSTConv(in_planes=128,
                               mid_planes=192,
@@ -49,7 +42,7 @@ class NTU(nn.Module):
                               temporal_kernel_size=3,
                               spatial_stride=1,
                               temporal_stride=1,
-                              temporal_padding=[0,0])
+                              temporal_padding=[1,2])
 
         self.conv3a = PSTConv(in_planes=256,
                               mid_planes=384,
@@ -58,7 +51,7 @@ class NTU(nn.Module):
                               temporal_kernel_size=3,
                               spatial_stride=2,
                               temporal_stride=2,
-                              temporal_padding=[0,0])
+                              temporal_padding=[1,2])
 
         self.conv3b = PSTConv(in_planes=512,
                               mid_planes=768,
@@ -67,7 +60,7 @@ class NTU(nn.Module):
                               temporal_kernel_size=3,
                               spatial_stride=1,
                               temporal_stride=1,
-                              temporal_padding=[0,0])
+                              temporal_padding=[1,2])
 
         self.conv4 =  PSTConv(in_planes=1024,
                               mid_planes=1536,
@@ -78,44 +71,40 @@ class NTU(nn.Module):
                               temporal_stride=1,
                               temporal_padding=[0,0])
 
-        self.fc = nn.Linear(2048, num_classes)
+        # MLP head
+        self.mlp_head = nn.Sequential(
+            nn.Linear(2048, 256),
+            nn.ReLU(),
+            nn.Linear(256, 128),
+            nn.ReLU(),
+            nn.Linear(128, 6)
+        )
+
 
     def forward(self, xyzs):
 
-        print("initial shape of xyzs :", xyzs.shape)
         new_xys, new_features = self.conv1(xyzs, None)
         new_features = F.relu(new_features)
-        print("shape of new_features after conv1:", new_features.shape)
-        print("shape of new_xys after conv1:", new_xys.shape)
 
         new_xys, new_features = self.conv2a(new_xys, new_features)
         new_features = F.relu(new_features)
-        print("shape of new_features after conv2a:", new_features.shape)
-        print("shape of new_xys after conv2a:", new_xys.shape)
 
         new_xys, new_features = self.conv2b(new_xys, new_features)
         new_features = F.relu(new_features)
-        print("shape of new_features after conv2b:", new_features.shape)
-        print("shape of new_xys after conv2b:", new_xys.shape)
 
         new_xys, new_features = self.conv3a(new_xys, new_features)
         new_features = F.relu(new_features)
-        print("shape of new_features after conv3a:", new_features.shape)
-        print("shape of new_xys after conv3a:", new_xys.shape)
 
         new_xys, new_features = self.conv3b(new_xys, new_features)
         new_features = F.relu(new_features)
-        print("shape of new_features after conv3b:", new_features.shape)
-        print("shape of new_xys after conv3b:", new_xys.shape)
 
         new_xys, new_features = self.conv4(new_xys, new_features)               # (B, L, C, N)
-        print("shape of new_features after conv4:", new_features.shape)
 
         new_features = torch.mean(input=new_features, dim=-1, keepdim=False)    # (B, L, C)
 
         new_feature = torch.max(input=new_features, dim=1, keepdim=False)[0]    # (B, C)
 
-        out = self.fc(new_feature)
+        out = self.mlp_head(new_feature)
 
         return out
 
@@ -130,7 +119,7 @@ if __name__ == "__main__":
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
 
-    x = torch.randn(4, 5, 2048, 3).to(device) # (B, L, C, N)
+    x = torch.randn(4, 4, 128, 3).to(device) # (B, L, C, N)
 
     out = model(x)
 
