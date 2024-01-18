@@ -10,5 +10,8 @@ python setup.py install
 ```
 To see if the compilation is successful, try to run `python src/model/PSTNet/modules/pst_convolutions.py` or `python src/model/PSTNet/PSTNet.py` to see if a forward pass works.
 
-### [ASTGCN](https://research.engr.oregonstate.edu/rdml/sites/research.engr.oregonstate.edu.rdml/files/final_deep_learning_lidar_odometry.pdf)
+### [CNN](https://research.engr.oregonstate.edu/rdml/sites/research.engr.oregonstate.edu.rdml/files/final_deep_learning_lidar_odometry.pdf)
 No manual installation required. Try to run `python src/model/CNN/CNN.py` to see if a forward pass works.
+
+### [ASTGCN](https://pytorch-geometric-temporal.readthedocs.io/en/latest/modules/root.html#temporal-graph-attention-layers)
+No manual installation required. Try to run `python src/model/ASTGCN/ASTGCN.py` to see if a forward pass works.
