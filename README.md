@@ -4,7 +4,8 @@
 
 1) **Install requirements:**
     ```
-    pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu118
+    pip install torch==2.0.1 --index-url https://download.pytorch.org/whl/cu118
+    pip install -r requirements.txt
     ```
 
 2) **Compile PointNet++ CUDA layers for
