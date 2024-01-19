@@ -25,11 +25,12 @@ jobs:
         pip install torch==2.0.1 --extra-index-url https://download.pytorch.org/whl/cu118
         pip install -r requirements.txt
 
-    - name: Compile PointNet++ CUDA layers for PSTNet
-      run: |
-        cd src/model/PSTNet/modules/pointnet2_ops_lib
-        python setup.py install
+    # only works on CUDA devices
+    # - name: Compile PointNet++ CUDA layers for PSTNet
+    #   run: |
+    #     cd src/model/PSTNet/modules/pointnet2_ops_lib
+    #     python setup.py install
 
     - name: Run tests
       run: |
-        pytest src/model
+        pytest src/model --ignore=test_pstnet.py
