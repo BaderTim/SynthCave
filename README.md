@@ -1,4 +1,4 @@
-# SynthCave 
+# SynthCave [![PyTest](https://github.com/BaderTim/SynthCave/actions/workflows/run_pytests.yml/badge.svg?branch=main)](https://github.com/BaderTim/SynthCave/actions/workflows/run_pytests.yml)
 
 ## Installation
 
