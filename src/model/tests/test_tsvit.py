@@ -26,14 +26,8 @@ def test_prenorm_local():
     assert output.shape == x.shape
 
 def test_tsvitcls_forward_call():
-    res = 24
-    model_config = {'img_res': res, 'patch_size': 3, 'patch_size_time': 1, 'patch_time': 2, 'num_classes': 6,
-                    'max_seq_len': 4, 'dim': 128, 'temporal_depth': 10, 'spatial_depth': 4, 'depth': 4,
-                    'heads': 3, 'pool': 'cls', 'num_channels': 1, 'dim_head': 64, 'dropout': 0., 'emb_dropout': 0.,
-                    'scale_dim': 4}
-
-    model = TSViTcls(model_config)
-    depth_img = torch.rand((8, 4, res, res))
+    model = TSViTcls(K=4)
+    depth_img = torch.rand((8, 4, 1, 80, 240))
     imu_data = torch.rand((8, 4, 6))
     out = model(depth_img, imu_data)
     assert out.shape == (8, 6)

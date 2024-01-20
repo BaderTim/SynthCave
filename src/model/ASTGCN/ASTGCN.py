@@ -6,14 +6,16 @@ from torch_geometric.nn import TopKPooling
 
 
 class ASTGCN(nn.Module):
-    def __init__(self, node_features=3, input_seq_length=4, node_count=100, blocks=3, pooling_ratio=1.0):
+    def __init__(self, K=4):
         super(ASTGCN, self).__init__()
 
-        self.pooling_ratio = pooling_ratio
-        self.node_features = node_features
-        self.input_seq_length = input_seq_length
-        self.node_count = int(node_count * pooling_ratio)
-        self.blocks = blocks
+        self.dataset_type = "graph"
+
+        self.pooling_ratio = 0.1
+        self.node_features = 3
+        self.K = K
+        self.node_count = int(19_200 * self.pooling_ratio)
+        self.blocks = 3
 
         self.time_strides = 1
 
@@ -30,7 +32,7 @@ class ASTGCN(nn.Module):
                     nb_time_filter=64,
                     time_strides=self.time_strides,
                     num_of_vertices=self.node_count,
-                    num_of_timesteps=self.input_seq_length
+                    num_of_timesteps=self.K
                 )
             ]
         )
@@ -43,7 +45,7 @@ class ASTGCN(nn.Module):
                     nb_time_filter=64,
                     time_strides=self.time_strides,
                     num_of_vertices=self.node_count,
-                    num_of_timesteps=self.input_seq_length
+                    num_of_timesteps=self.K
                 )
                 for _ in range(self.blocks-1)
             ]
@@ -54,7 +56,7 @@ class ASTGCN(nn.Module):
 
         # MLP head
         self.mlp_head = nn.Sequential(
-            nn.Linear(self.node_count + self.input_seq_length*6, 256),
+            nn.Linear(self.node_count + self.K*6, 256),
             nn.ReLU(),
             nn.Linear(256, 128),
             nn.ReLU(),
@@ -103,24 +105,23 @@ class ASTGCN(nn.Module):
 if __name__ == "__main__":
     # Initialize model with desired parameters
     node_features = 3
-    node_count = 5_000
+    node_count = 19_200
     batch_size = 2
-    input_seq_length = 4
-    pooling_ratio = 0.05
-    model = ASTGCN(node_features=node_features, input_seq_length=input_seq_length, node_count=node_count, blocks=3, pooling_ratio=pooling_ratio)
+    K = 4
+    model = ASTGCN(K=K)
 
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
 
     # Example input tensor and edge index
-    x = torch.rand((batch_size, node_count, node_features, input_seq_length))
+    x = torch.rand((batch_size, node_count, node_features, K))
     edge_index = torch.tensor([[[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
                             [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]],
                             [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
                             [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]]],
                             dtype=torch.long)
-    imu_data = torch.rand((batch_size, input_seq_length, 6))
+    imu_data = torch.rand((batch_size, K, 6))
     # Forward pass
     output = model(x, edge_index, imu_data)
     print("Shape of out :", output.shape)

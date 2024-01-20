@@ -14,8 +14,11 @@ from model.PSTNet.modules.pst_convolutions import PSTConv
 
 
 class NTU(nn.Module):
-    def __init__(self, radius=0.1, nsamples=3*3):
+    def __init__(self, radius=0.1, nsamples=3*3, K=4):
         super(NTU, self).__init__()
+
+        self.K = K
+        self.dataset_type = "point"
 
         self.conv1 =  PSTConv(in_planes=0,
                               mid_planes=45,
@@ -113,7 +116,7 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("Using device:", device)
 
-    model = NTU().to(device)
+    model = NTU(K=4).to(device)
 
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000

@@ -36,30 +36,25 @@ class TSViTcls(nn.Module):
     """
     Temporal-Spatial ViT for object classification (used in main results, section 4.3)
     """
-    def __init__(self, model_config):
+    def __init__(self, K=4):
         super().__init__()
-        self.image_size = model_config['img_res']
-        self.patch_size = model_config['patch_size']
+
+        self.dataset_type = "image"
+
+        self.image_size = 48
+        self.patch_size = 3
         self.num_patches_1d = self.image_size//self.patch_size
-        self.num_classes = model_config['num_classes']
-        self.num_frames = model_config['max_seq_len']
-        self.dim = model_config['dim']
-        if 'temporal_depth' in model_config:
-            self.temporal_depth = model_config['temporal_depth']
-        else:
-            self.temporal_depth = model_config['depth']
-        if 'spatial_depth' in model_config:
-            self.spatial_depth = model_config['spatial_depth']
-        else:
-            self.spatial_depth = model_config['depth']
-        # self.depth = model_config['depth']
-        self.heads = model_config['heads']
-        self.dim_head = model_config['dim_head']
-        self.dropout = model_config['dropout']
-        self.emb_dropout = model_config['emb_dropout']
-        self.pool = model_config['pool']
-        self.scale_dim = model_config['scale_dim']
-        assert self.pool in {'cls', 'mean'}, 'pool type must be either cls (cls token) or mean (mean pooling)'
+        self.num_classes = 6
+        self.num_frames = K
+        self.dim = 128
+        self.temporal_depth = 10
+        self.spatial_depth = 4
+        self.heads = 3
+        self.dim_head = 64
+        self.dropout = 0.
+        self.emb_dropout = 0.
+        self.pool = 'cls'
+        self.scale_dim = 4
         num_patches = self.num_patches_1d ** 2
         patch_dim = self.patch_size ** 2
         self.to_patch_embedding = nn.Sequential(
@@ -85,8 +80,14 @@ class TSViTcls(nn.Module):
         )
 
     def forward(self, depth_images, imu_data):
-        x = depth_images
-        B, T, H, W = x.shape
+        B, T, C, H_in, W_in = depth_images.shape
+        depth_images = depth_images.reshape(B, T, H_in, W_in)
+        x = torch.zeros((B, T, self.image_size, self.image_size), device=depth_images.device)
+        if H_in != self.image_size or W_in != self.image_size:
+            x = F.interpolate(depth_images, size=(self.image_size, self.image_size), mode='bilinear', align_corners=False)
+        _, _, H, W = x.shape
+        # -> B T H W
+        x = x.reshape(B, T, H, W)
         xt = x[:, :, 0, 0]
         # in the original paper, temporal embedding is the day of the year
         # here we use the frame number and don't slice away one channel
@@ -119,17 +120,11 @@ class TSViTcls(nn.Module):
 
 
 if __name__ == "__main__":
-    res = 24
-    model_config = {'img_res': res, 'patch_size': 3, 'patch_size_time': 1, 'patch_time': 4, 'num_classes': 6,
-                    'max_seq_len': 4, 'dim': 128, 'temporal_depth': 10, 'spatial_depth': 4, 'depth': 4,
-                    'heads': 3, 'pool': 'cls', 'num_channels': 1, 'dim_head': 64, 'dropout': 0., 'emb_dropout': 0.,
-                    'scale_dim': 4}
-
-    model = TSViTcls(model_config)
+    model = TSViTcls(K=4)
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
-    depth_imgs = torch.rand((8, 4, res, res))
+    depth_imgs = torch.rand((8, 4, 1, 240, 240))
     imu_data = torch.rand((8, 4, 6))
     out = model(depth_imgs, imu_data)
     print("Shape of out :", out.shape)  # [B, num_classes]

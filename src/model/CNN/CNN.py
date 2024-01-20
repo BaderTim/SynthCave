@@ -4,31 +4,38 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import math
 import numpy as np
 
 class CNN(nn.Module):
-    def __init__(self, input_seq_len=2):
+    def __init__(self, K=2):
         super(CNN, self).__init__()
 
-        self.input_seq_len = input_seq_len
+        self.dataset_type = "image"
 
-        # Feature extractor layers
+        self.K = K
+        self.height = 80
+        self.width = 240*self.K
+
+        # Feature extractor layers (R = Kernel size)
         self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)
         self.conv2 = nn.Conv2d(32, 32, kernel_size=3, stride=1, padding=1)
         self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
 
         self.conv3 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
         self.conv4 = nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1)
-        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
+        self.pool2 = nn.MaxPool2d(kernel_size=int(2+np.log(self.K)), stride=int(2+np.log(self.K)), padding=0)
 
         # Fully connected layers
-        self.fc1 = nn.Linear(32768 + 6*self.input_seq_len, 256)
+        self.fc1 = nn.Linear(int(self.height/(2*int(2+np.log(self.K)))) * int(self.width/(2*int(2+np.log(self.K)))) * 64 + 6*self.K, 256)
         self.fc2 = nn.Linear(256, 128)
         self.fc3 = nn.Linear(128, 32)
         self.fc4 = nn.Linear(32, 6)  # Assuming regression for odometry estimation
 
-    def forward(self, depth_image, imu_data):
-        B, C, H, W = depth_image.shape
+    def forward(self, depth_images, imu_data):
+        B, K, C, H, W = depth_images.shape
+        # -> B, C, H, W*K
+        depth_image = depth_images.reshape(B, C, H, W*K)
         # Feature extractor layers
         x = F.relu(self.conv1(depth_image))
         x = F.relu(self.conv2(x))
@@ -42,7 +49,7 @@ class CNN(nn.Module):
 
         # Concatenate IMU data
         # concatenate x with imu data
-        imu_data = imu_data.reshape(B, 6*self.input_seq_len)
+        imu_data = imu_data.reshape(B, 6*self.K)
         x = torch.cat((x, imu_data), dim=1)
 
         # Fully connected layers
@@ -56,17 +63,17 @@ class CNN(nn.Module):
 
 if __name__ == "__main__":
 
-    input_seq_len = 2
+    K = 16
 
-    model = CNN(input_seq_len=input_seq_len)
+    model = CNN(K=K)
 
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
 
     # Example input tensor (replace with your actual data)
-    depth_images = torch.randn(32, 1, 64, 64*input_seq_len)  
-    imu_data = torch.randn(32, input_seq_len, 6) 
+    depth_images = torch.randn(16, K, 1, 80, 240)  
+    imu_data = torch.randn(16, K, 6) 
 
     # Forward pass
     output = model(depth_images, imu_data)
