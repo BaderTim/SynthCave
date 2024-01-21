@@ -61,7 +61,7 @@ def get_diff(arr: np.array) -> np.array:
     """
     diff = np.zeros(len(arr))
     for i in range(1, len(arr)):
-        diff[i] = arr[i-1] - arr[i]
+        diff[i] = arr[i] - arr[i-1]
     return diff
 
 
