@@ -19,15 +19,7 @@ Date: January 21, 2024
 import numpy as np
 import argparse
 import json
-import math
 import os
-
-
-def to_spherical(x, y, z):
-    """Converts a cartesian coordinate (x, y, z) into a spherical one (theta, phi)."""
-    theta = math.atan2(math.sqrt(x * x + y * y), z)
-    phi = math.atan2(y, x)
-    return (theta, phi)
 
 
 def get_stats_for_section(C_lidar_gt: np.array, hz=5) -> dict:
@@ -37,7 +29,7 @@ def get_stats_for_section(C_lidar_gt: np.array, hz=5) -> dict:
     Arguments:
     ----------
     C_lidar_gt: Numpy array containing the LiDAR GT data in the shape N x 6.
-                like [['posX', 'posY', 'posZ', 'rotX', 'rotY', 'rotZ'], ...]
+                like [['posX', 'posY', 'posZ', 'rotX', 'rotY', 'rotZ', 'theta', 'phi'], ...]
 
     Returns:
     --------
@@ -53,14 +45,8 @@ def get_stats_for_section(C_lidar_gt: np.array, hz=5) -> dict:
     stats["x_rotation_total"] = np.sum(np.abs(C_lidar_gt[:, 3]))
     stats["y_rotation_total"] = np.sum(np.abs(C_lidar_gt[:, 4]))
     stats["z_rotation_total"] = np.sum(np.abs(C_lidar_gt[:, 5]))
-    phi_total = 0
-    theta_total = 0
-    for i in range(len(C_lidar_gt)):
-        theta, phi = to_spherical(x=C_lidar_gt[i, 3], y=C_lidar_gt[i, 5], z=C_lidar_gt[i, 4])
-        theta_total += abs(theta)
-        phi_total += abs(phi)
-    stats["phi_total"] = phi_total
-    stats["theta_total"] = theta_total
+    stats["theta_total"] = np.sum(np.abs(C_lidar_gt[:, 6]))
+    stats["phi_total"] = np.sum(np.abs(C_lidar_gt[:, 7]))
     return stats
 
 

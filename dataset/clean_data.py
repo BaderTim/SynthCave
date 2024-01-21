@@ -70,7 +70,7 @@ def to_spherical(x, y, z):
     """Converts a cartesian coordinate (x, y, z) into a spherical one (theta, phi)."""
     theta = math.atan2(math.sqrt(x * x + y * y), z)
     phi = math.atan2(y, x)
-    return (theta, phi)
+    return (math.degrees(theta), math.degrees(phi))
 
 
 def get_ground_truth(df: pd.DataFrame) -> np.array:
@@ -96,7 +96,7 @@ def get_ground_truth(df: pd.DataFrame) -> np.array:
     theta = np.zeros(len(pos_x))
     phi = np.zeros(len(pos_x))
     for i in range(len(pos_x)):
-        theta[i], phi[i] = to_spherical(pos_x[i], pos_z[i], pos_y[i])
+        theta[i], phi[i] = to_spherical(view_x[i], view_z[i], view_y[i])
     # calculate ground truth
     diff_pos_x = get_diff(pos_x)
     diff_pos_y = get_diff(pos_y)
