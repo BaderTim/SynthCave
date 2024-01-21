@@ -53,10 +53,10 @@ def ref(C_lidar: np.array, max_range=100, p_occ=0.2, occurence_range=100, max_le
             ref_field_v_end_index = ref_field_v_start_index + ref_v_length
             # Define the reflection: 
             # some values are 0, some are multiples of the actual distance to the object
-            nhv_slice = C_lidar[ref_field_n_start_index:ref_field_n_end_index, 
+            nhv_ref = C_lidar[ref_field_n_start_index:ref_field_n_end_index, 
                               ref_field_h_start_index:ref_field_h_end_index, 
                               ref_field_v_start_index:ref_field_v_end_index]
-            nhv_ref = nhv_slice[nhv_slice != max_range] * np.random.randint(0, 4, size=nhv_slice[nhv_slice != max_range].shape)
+            nhv_ref *= np.random.randint(0, 4, size=nhv_ref.shape)
             # cap the values by the maximum range of the LiDAR
             nhv_ref[nhv_ref > max_range] = max_range
             # Add the reflection to the 3D array
@@ -93,7 +93,7 @@ def tf(C_lidar: np.array, p_occ=0.01):
     return C_lidar_with_tf_noise
 
 
-def vol(C_lidar: np.array, max_range=100, p_occ=0.1, occurence_range=1000, max_length=200, hv_length=(60, 40), max_vol_impact=0.5):
+def vol(C_lidar: np.array, max_range=100, p_occ=0.1, occurence_range=100, max_length=100, hv_length=(40, 20), max_vol_impact=0.5):
     """
     Add different-volume-like noise to an input sequence of LiDAR distance scans. When a different volume is present, the distance scans
     tend to be larger than the actual distance to the object because in any other volume than air light travels slower through.
