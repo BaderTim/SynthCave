@@ -27,7 +27,7 @@ def to_spherical(x, y, z):
     """Converts a cartesian coordinate (x, y, z) into a spherical one (theta, phi)."""
     theta = math.atan2(math.sqrt(x * x + y * y), z)
     phi = math.atan2(y, x)
-    return (theta, phi)
+    return (math.degrees(theta), math.degrees(phi))
 
 
 def get_stats_for_section(C_lidar_gt: np.array, hz=5) -> dict:
