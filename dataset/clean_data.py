@@ -23,6 +23,7 @@ Date: January 21, 2024
 import numpy as np
 import pandas as pd
 import argparse
+import math
 import os
 
 
@@ -65,6 +66,13 @@ def get_diff(arr: np.array) -> np.array:
     return diff
 
 
+def to_spherical(x, y, z):
+    """Converts a cartesian coordinate (x, y, z) into a spherical one (theta, phi)."""
+    theta = math.atan2(math.sqrt(x * x + y * y), z)
+    phi = math.atan2(y, x)
+    return (theta, phi)
+
+
 def get_ground_truth(df: pd.DataFrame) -> np.array:
     """
     Get the ground truth from a dataframe.
@@ -85,6 +93,10 @@ def get_ground_truth(df: pd.DataFrame) -> np.array:
     view_x = np.array([float(x) for x in df['viewX']])
     view_y = np.array([float(x) for x in df['viewY']])
     view_z = np.array([float(x) for x in df['viewZ']])
+    theta = np.zeros(len(pos_x))
+    phi = np.zeros(len(pos_x))
+    for i in range(len(pos_x)):
+        theta[i], phi[i] = to_spherical(pos_x[i], pos_z[i], pos_y[i])
     # calculate ground truth
     diff_pos_x = get_diff(pos_x)
     diff_pos_y = get_diff(pos_y)
@@ -92,8 +104,10 @@ def get_ground_truth(df: pd.DataFrame) -> np.array:
     diff_view_x = get_diff(view_x)
     diff_view_y = get_diff(view_y)
     diff_view_z = get_diff(view_z)
+    diff_theta = get_diff(theta)
+    diff_phi = get_diff(phi)
     # put ground truth together
-    ground_truth = np.vstack((diff_pos_x, diff_pos_y, diff_pos_z, diff_view_x, diff_view_y, diff_view_z)).T
+    ground_truth = np.vstack((diff_pos_x, diff_pos_y, diff_pos_z, diff_view_x, diff_view_y, diff_view_z, diff_theta, diff_phi)).T
     return ground_truth
 
 
