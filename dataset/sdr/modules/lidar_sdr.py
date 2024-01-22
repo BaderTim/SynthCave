@@ -56,7 +56,7 @@ def ref(C_lidar: np.array, max_range=100, p_occ=0.2, occurence_range=100, max_le
             nhv_ref = C_lidar[ref_field_n_start_index:ref_field_n_end_index, 
                               ref_field_h_start_index:ref_field_h_end_index, 
                               ref_field_v_start_index:ref_field_v_end_index]
-            nhv_ref *= np.random.randint(0, 4, size=nhv_ref.shape)
+            nhv_ref = np.multiply(nhv_ref, np.random.randint(0, 4, size=nhv_ref.shape))
             # cap the values by the maximum range of the LiDAR
             nhv_ref[nhv_ref > max_range] = max_range
             # Add the reflection to the 3D array
@@ -146,9 +146,12 @@ def vol(C_lidar: np.array, max_range=100, p_occ=0.1, occurence_range=100, max_le
             vol_field_v_end_index = vol_field_v_start_index + vol_v_length
             # Define the volume: 
             # all values are larger multiplied by a constant than the actual distance to the object
+            slice = C_lidar_with_vol_noise[vol_field_n_start_index:vol_field_n_end_index, 
+                              vol_field_h_start_index:vol_field_h_end_index, 
+                              vol_field_v_start_index:vol_field_v_end_index]
             C_lidar_with_vol_noise[vol_field_n_start_index:vol_field_n_end_index, 
                               vol_field_h_start_index:vol_field_h_end_index, 
-                              vol_field_v_start_index:vol_field_v_end_index] *= random.uniform(1, 1+max_vol_impact)
+                              vol_field_v_start_index:vol_field_v_end_index] = np.multiply(slice, random.uniform(1, 1+max_vol_impact))
     # cap the values by the maximum range of the LiDAR
     C_lidar_with_vol_noise[C_lidar_with_vol_noise > max_range] = max_range
     return C_lidar_with_vol_noise
