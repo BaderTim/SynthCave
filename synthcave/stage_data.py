@@ -9,7 +9,7 @@ Example Usage:
 Assuming your LiDAR data is stored in CSV files, with corresponding ranges, horizontal 
 angles, and vertical angles, you can use the following command to transform the data:
 
-$ python dataset/stage_data.py --source=data/3_derived --target=data/4_staging --devices=data/devices.json --train=10 --val=4 --test=6
+$ python synthcave/stage_data.py --source=data/3_derived --target=data/4_staging --devices=data/devices.json --train=10 --val=4 --test=6
 
 Required Arguments:
 -------------------

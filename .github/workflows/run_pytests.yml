@@ -28,9 +28,9 @@ jobs:
     # only works on CUDA devices
     # - name: Compile PointNet++ CUDA layers for PSTNet
     #   run: |
-    #     cd src/model/PSTNet/modules/pointnet2_ops_lib
+    #     cd baselines/model/PSTNet/modules/pointnet2_ops_lib
     #     python setup.py install
 
     - name: Run tests
       run: |
-        pytest src/model --ignore=src/model/tests/test_pstnet.py
+        pytest baselines/model --ignore=baselines/model/tests/test_pstnet.py

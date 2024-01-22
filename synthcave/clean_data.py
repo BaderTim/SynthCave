@@ -10,7 +10,7 @@ Arguments:
 
 Example Usage:
 --------------
-python dataset/clean_data.py --source=data/1_raw --target=data/2_cleaning
+python synthcave/clean_data.py --source=data/1_raw --target=data/2_cleaning
 
 
 The function loops through subfolders in the source folder, reads the data, corrects the headers, and saves the data in the target folder.

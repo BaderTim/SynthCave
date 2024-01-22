@@ -11,7 +11,7 @@ Required Arguments:
 
 Example Usage:
 --------------
-python dataset/derive_data.py --source=data/2_cleaning --target=data/3_derived --devices=data/devices.json
+python synthcave/derive_data.py --source=data/2_cleaning --target=data/3_derived --devices=data/devices.json
 
 The script reads lidar and IMU data from the specified files, applies SDR, and saves the SDR-processed data to the output folder.
 

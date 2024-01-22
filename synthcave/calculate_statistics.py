@@ -9,7 +9,7 @@ Required Arguments:
 
 Example Usage:
 --------------
-python dataset/calculate_statistics.py --source=data/2_cleaning
+python synthcave/calculate_statistics.py --source=data/2_cleaning
 
 Author:
 -------
