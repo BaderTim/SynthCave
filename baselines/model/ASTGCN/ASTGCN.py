@@ -71,7 +71,7 @@ class ASTGCN(nn.Module):
                                        First row is the source nodes, second row is the target nodes.
             - imu_data (PyTorch Float Tensor) IMU data for T time periods, with shape (B, T, 6).
         Returns:
-            - x (B, 6) - Odometry prediction
+            - x (B, 5) - Odometry prediction
         """
         B, N_nodes, F_in, T = x.shape
         # Prepare edge index list for graph pooling
