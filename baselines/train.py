@@ -37,7 +37,7 @@ from model.CNN.CNN import CNN
 from model.PSTNet.PSTNet import NTU
 from model.TSViTcls.TSViT import TSViTcls
 
-from SynthCave import GraphDataset, ImageDataset, PointDataset
+from dataset.SynthCave import GraphDataset, ImageDataset, PointDataset
 
 
 # format logging
