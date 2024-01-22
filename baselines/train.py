@@ -53,6 +53,40 @@ torch.cuda.manual_seed_all(seed)
 generator = torch.Generator().manual_seed(seed)
 
 
+class EarlyStopping:
+    def __init__(self, patience=5):
+        """
+        Early stops the training if validation loss doesn't improve after a given patience.
+        
+        Parameters:
+        - patience: int, optional, number of epochs to wait if no improvement and then stop the training.
+        """
+        self.patience = patience
+        self.counter = 0
+        self.early_stop = False
+
+    def __call__(self, val_loss):
+        """
+        Call the early stopping function.
+        
+        Parameters:
+        - val_loss: float, validation loss.
+        
+        Returns:
+        - early_stop: bool, whether to stop the training or not.
+        """
+        if self.val_loss_min is None:
+            self.val_loss_min = val_loss
+        elif val_loss > self.val_loss_min:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.early_stop = True
+        else:
+            self.val_loss_min = val_loss
+            self.counter = 0
+        return self.early_stop
+
+
 def train_model():
     """
     Train a model on a dataset for a number of epochs and log the results to wandb.
@@ -119,7 +153,10 @@ def train_model():
     mse = MeanSquaredError().to(device)
 
     # instantiate scheduler
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'max', patience=int(epochs/5), verbose=True)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'max', patience=int(5), verbose=True, min_lr=1e-6)
+
+    # Early stopping
+    early_stopping = EarlyStopping(patience=10)
 
     # loop over epochs
     for epoch in range(epochs):
@@ -189,6 +226,11 @@ def train_model():
             "learning_rate": optimizer.param_groups[0]['lr'],
             "epoch": epoch+1
         })
+        if early_stopping(avg_mse_val):
+            log.info("Early stopping")
+            break
+    # save model
+    torch.save(model.state_dict(), f"models/{wandb.run.name}.pt")
 
 
 if __name__ == "__main__":
