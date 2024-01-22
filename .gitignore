@@ -1,1 +1,4 @@
-data/*
+data/1_raw/*
+data/2_cleaning/*
+data/3_derived/*
+data/4_staging/*
