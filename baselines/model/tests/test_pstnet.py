@@ -7,5 +7,6 @@ def test_pstnet_forward_call():
     assert device == torch.device("cuda"), "CUDA not available, PSTNet does not support CPU"
     model = NTU(K=4).to(device)
     x = torch.randn(4, 4, 128, 3).to(device) # (B, L, C, N)
-    out = model(x).to("cpu")
+    imu_data = torch.randn(4, 4, 6).to(device) # (B, 4, 6)
+    out = model(x, imu_data).to("cpu")
     assert out.shape == (4, 5)

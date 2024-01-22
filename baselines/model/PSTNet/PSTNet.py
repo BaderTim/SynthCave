@@ -76,7 +76,7 @@ class NTU(nn.Module):
 
         # MLP head
         self.mlp_head = nn.Sequential(
-            nn.Linear(2048, 256),
+            nn.Linear(2048 + 6*K, 256),
             nn.ReLU(),
             nn.Linear(256, 128),
             nn.ReLU(),
@@ -84,7 +84,9 @@ class NTU(nn.Module):
         )
 
 
-    def forward(self, xyzs):
+    def forward(self, xyzs, imu_data):
+
+        B, K, C, N = xyzs.shape
 
         new_xys, new_features = self.conv1(xyzs, None)
         new_features = F.relu(new_features)
@@ -107,7 +109,10 @@ class NTU(nn.Module):
 
         new_feature = torch.max(input=new_features, dim=1, keepdim=False)[0]    # (B, C)
 
-        out = self.mlp_head(new_feature)
+        imu_data = imu_data.reshape(B, 6*self.K)
+        x = torch.cat((new_feature, imu_data), dim=1)
+
+        out = self.mlp_head(x)
 
         return out
 
@@ -123,7 +128,8 @@ if __name__ == "__main__":
     print('Trainable Parameters: %.3fM' % parameters)
 
     x = torch.randn(4, 4, 128, 3).to(device) # (B, L, C, N)
+    imu_data = torch.randn(4, 4, 6).to(device) # (B, 6*K)
 
-    out = model(x)
+    out = model(x, imu_data)
 
     print("Shape of out :", out.shape) 
