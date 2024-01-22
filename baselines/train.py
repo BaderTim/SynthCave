@@ -97,7 +97,7 @@ def train_model():
         batch_size=batch_size,
         shuffle=True,
         pin_memory=True,
-        num_workers=2,
+        num_workers=4,
         generator=generator
     )
     val_dl = torch.utils.data.DataLoader(
@@ -105,7 +105,7 @@ def train_model():
         batch_size=batch_size,
         shuffle=True,
         pin_memory=True,
-        num_workers=2,
+        num_workers=4,
         generator=generator
     )
 
