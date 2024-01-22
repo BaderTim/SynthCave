@@ -31,6 +31,10 @@ jobs:
     #     cd baselines/model/PSTNet/modules/pointnet2_ops_lib
     #     python setup.py install
 
-    - name: Run tests
+    - name: Run baseline tests
       run: |
         pytest baselines/model --ignore=baselines/model/tests/test_pstnet.py
+
+    - name: Run synthcave tests
+      run: |
+        pytest synthcave

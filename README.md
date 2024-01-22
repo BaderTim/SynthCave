@@ -19,6 +19,7 @@
 3) **Test installation:**
     ```
     pytest baselines/model
+    pytest synthcave
     ```
  
  4) **(Optional)** Manually test the forward pass of every model:
