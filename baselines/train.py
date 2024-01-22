@@ -37,6 +37,8 @@ from model.CNN.CNN import CNN
 from model.PSTNet.PSTNet import NTU
 from model.TSViTcls.TSViT import TSViTcls
 
+from SynthCave import GraphDataset, ImageDataset, PointDataset
+
 
 # format logging
 logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(levelname)s: %(message)s")
@@ -80,14 +82,14 @@ def train_model():
 
     # instantiate dataset
     if model.dataset_type == "graph":
-        train_ds = SynthCaveGraph(graph_dataset_path+"/train")
-        val_ds = SynthCaveGraph(graph_dataset_path+"/val")
+        train_ds = GraphDataset(graph_dataset_path+"/train", frames=K)
+        val_ds = GraphDataset(graph_dataset_path+"/val", frames=K)
     elif model.dataset_type == "image":
-        train_ds = SynthCaveImage(image_dataset_path+"/train")
-        val_ds = SynthCaveImage(image_dataset_path+"/val")
+        train_ds = ImageDataset(image_dataset_path+"/train", frames=K)
+        val_ds = ImageDataset(image_dataset_path+"/val", frames=K)
     elif model.dataset_type == "point":
-        train_ds = SynthCavePoint(point_dataset_path+"/train")
-        val_ds = SynthCavePoint(point_dataset_path+"/val")
+        train_ds = PointDataset(point_dataset_path+"/train", frames=K)
+        val_ds = PointDataset(point_dataset_path+"/val", frames=K)
     
     # instantiate dataloaders
     train_dl = torch.utils.data.DataLoader(
@@ -118,39 +120,63 @@ def train_model():
 
     # instantiate scheduler
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'max', patience=int(epochs/5), verbose=True)
-    
+
     # loop over epochs
     for epoch in range(epochs):
 
-        # Training
-        model.train()
-        total_loss = 0.0
-        for inputs, targets in train_dl:
-            if inputs.size(0) == 1:
-                continue
-            inputs, targets = inputs.to(device).float(), targets.to(device)
-            optimizer.zero_grad()
-            outputs = model(inputs)
-            loss = criterion(outputs, targets)
-            loss.backward()
-            optimizer.step()
-            total_loss += loss.item()
-            mse.update(outputs, targets)
-        avg_loss = total_loss / len(train_dl)
-        avg_mse_train = mse.compute().item()
-        mse.reset()
-
-        # Validation
-        model.eval()
-        with torch.no_grad():
-            for inputs, targets in val_dl:
-                if inputs.size(0) == 1:
-                    continue
-                inputs, targets = inputs.to(device).float(), targets.to(device)
-                outputs = model(inputs)
-                mse.update(outputs, targets)
-        avg_mse_val = mse.compute().item()
-        mse.reset()
+        # for graph models, we need to unpack one more element from the dataloader
+        if model.dataset_type == "graph":
+            # Training
+            model.train()
+            total_loss = 0.0
+            for graph, edges, imu, gt in train_dl:
+                graph, edges, imu, gt = graph.to(device).float(), edges.to(device).float(), imu.to(device).float(), gt.to(device).float()
+                optimizer.zero_grad()
+                outputs = model(graph, edges, imu)
+                loss = criterion(outputs, gt)
+                loss.backward()
+                optimizer.step()
+                total_loss += loss.item()
+                mse.update(outputs, gt)
+            avg_loss = total_loss / len(train_dl)
+            avg_mse_train = mse.compute().item()
+            mse.reset()
+            # Validation
+            model.eval()
+            with torch.no_grad():
+                for graph, edges, imu, gt in val_dl:
+                    graph, edges, imu, gt = graph.to(device).float(), edges.to(device).float(), imu.to(device).float(), gt.to(device).float()
+                    outputs = model(graph, edges, imu)
+                    mse.update(outputs, gt)
+            avg_mse_val = mse.compute().item()
+            mse.reset()
+        
+        #  model.dataset_type == "image" or model.dataset_type == "point":
+        else:
+            # Training
+            model.train()
+            total_loss = 0.0
+            for content, imu, gt in train_dl:
+                content, imu, gt = content.to(device).float(), imu.to(device).float(), gt.to(device).float()
+                optimizer.zero_grad()
+                outputs = model(content, imu)
+                loss = criterion(outputs, gt)
+                loss.backward()
+                optimizer.step()
+                total_loss += loss.item()
+                mse.update(outputs, gt)
+            avg_loss = total_loss / len(train_dl)
+            avg_mse_train = mse.compute().item()
+            mse.reset()
+            # Validation
+            model.eval()
+            with torch.no_grad():
+                for content, imu, gt in val_dl:
+                    content, imu, gt = content.to(device).float(), imu.to(device).float(), gt.to(device).float()
+                    outputs = model(content, imu)
+                    mse.update(outputs, gt)
+            avg_mse_val = mse.compute().item()
+            mse.reset()
 
         # End of epoch
         scheduler.step(avg_mse_val)
