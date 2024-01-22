@@ -60,7 +60,7 @@ class ASTGCN(nn.Module):
             nn.ReLU(),
             nn.Linear(256, 128),
             nn.ReLU(),
-            nn.Linear(128, 6)
+            nn.Linear(128, 5)
         )
 
     def forward(self, x, edge_index, imu_data):
@@ -97,7 +97,7 @@ class ASTGCN(nn.Module):
         imu_data = imu_data.reshape(B, 6*T)
         # (B, N_nodes -> (B, N_nodex + 6*T)
         x = torch.cat((x, imu_data), dim=1)
-        # (B, N_nodex + 6*T) -> (B, 6)
+        # (B, N_nodex + 6*T) -> (B, 5)
         x = self.mlp_head(x)
         return x
 

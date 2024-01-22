@@ -30,7 +30,7 @@ class CNN(nn.Module):
         self.fc1 = nn.Linear(int(self.height/(2*int(2+np.log(self.K)))) * int(self.width/(2*int(2+np.log(self.K)))) * 64 + 6*self.K, 256)
         self.fc2 = nn.Linear(256, 128)
         self.fc3 = nn.Linear(128, 32)
-        self.fc4 = nn.Linear(32, 6)  # Assuming regression for odometry estimation
+        self.fc4 = nn.Linear(32, 5)  # Assuming regression for odometry estimation
 
     def forward(self, depth_images, imu_data):
         B, K, C, H, W = depth_images.shape

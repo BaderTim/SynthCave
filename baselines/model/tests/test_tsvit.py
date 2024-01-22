@@ -30,4 +30,4 @@ def test_tsvitcls_forward_call():
     depth_img = torch.rand((8, 4, 1, 80, 240))
     imu_data = torch.rand((8, 4, 6))
     out = model(depth_img, imu_data)
-    assert out.shape == (8, 6)
+    assert out.shape == (8, 5)

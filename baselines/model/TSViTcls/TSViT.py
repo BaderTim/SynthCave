@@ -44,7 +44,7 @@ class TSViTcls(nn.Module):
         self.image_size = 48
         self.patch_size = 3
         self.num_patches_1d = self.image_size//self.patch_size
-        self.num_classes = 6
+        self.num_classes = 5
         self.num_frames = K
         self.dim = 128
         self.temporal_depth = 10

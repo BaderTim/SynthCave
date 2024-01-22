@@ -16,4 +16,4 @@ def test_astgcn_forward_call():
                             dtype=torch.long)
     imu_data = torch.rand((batch_size, K, 6))
     output = model(x, edge_index, imu_data)
-    assert output.shape == (batch_size, 6)
+    assert output.shape == (batch_size, 5)

@@ -80,7 +80,7 @@ class NTU(nn.Module):
             nn.ReLU(),
             nn.Linear(256, 128),
             nn.ReLU(),
-            nn.Linear(128, 6)
+            nn.Linear(128, 5)
         )
 
 

@@ -8,4 +8,4 @@ def test_cnn_forward_pass():
     depth_images = torch.randn(4, K, 1, 80, 240) 
     imu_data = torch.randn(4, K, 6) 
     output = model(depth_images, imu_data)
-    assert output.shape == torch.Size([4, 6])
+    assert output.shape == torch.Size([4, 5])
