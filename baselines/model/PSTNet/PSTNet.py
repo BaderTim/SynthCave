@@ -10,7 +10,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 
-from model.PSTNet.modules.pst_convolutions import PSTConv
+from modules.pst_convolutions import PSTConv
 
 
 class NTU(nn.Module):
@@ -19,6 +19,8 @@ class NTU(nn.Module):
 
         self.K = K
         self.dataset_type = "point"
+
+        self.temporal_padding_for_b = [1, 2] if self.K > 2 else [1, 1]
 
         self.conv1 =  PSTConv(in_planes=0,
                               mid_planes=45,
@@ -45,7 +47,7 @@ class NTU(nn.Module):
                               temporal_kernel_size=3,
                               spatial_stride=1,
                               temporal_stride=1,
-                              temporal_padding=[1,2])
+                              temporal_padding=self.temporal_padding_for_b)
 
         self.conv3a = PSTConv(in_planes=256,
                               mid_planes=384,
@@ -63,7 +65,7 @@ class NTU(nn.Module):
                               temporal_kernel_size=3,
                               spatial_stride=1,
                               temporal_stride=1,
-                              temporal_padding=[1,2])
+                              temporal_padding=self.temporal_padding_for_b)
 
         self.conv4 =  PSTConv(in_planes=1024,
                               mid_planes=1536,
@@ -120,15 +122,15 @@ if __name__ == "__main__":
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("Using device:", device)
-
-    model = NTU(K=4).to(device)
+    K = 16
+    model = NTU(K=K).to(device)
 
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
 
-    x = torch.randn(4, 4, 128, 3).to(device) # (B, L, C, N)
-    imu_data = torch.randn(4, 4, 6).to(device) # (B, 6*K)
+    x = torch.randn(4, K, 128, 3).to(device) # (B, L, C, N)
+    imu_data = torch.randn(4, K, 6).to(device) # (B, 6*K)
 
     out = model(x, imu_data)
 
