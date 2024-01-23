@@ -31,8 +31,6 @@ class GraphDataset(Dataset):
                 self.index[self.samples] = sequence_id
                 self.samples += samples_in_graphs
                 del graphs, imus, gts
-        # remove variables from memory
-        del graph
         print(f"Dataset initialized with {self.samples} samples.")
     
 
