@@ -20,12 +20,16 @@ class GraphDataset(Dataset):
         # loop through folders
         for file in os.listdir(self.path):
             filename = os.fsdecode(file)
-            if filename.endswith("graph.npy"):
-                sequence_id = int(filename.split("_")[0])
-                graph = np.load(os.path.join(self.path, filename))
-                samples_in_graph = graph.shape[0] - self.frames + 1
-                self.index[self.samples] = sequence_id
-                self.samples += samples_in_graph
+            sequence_id = int(filename.split("_")[0])
+            graphs = np.load(os.path.join(self.path, f"{sequence_id}_graph.npy"))
+            imus = np.load(os.path.join(self.path, f"{sequence_id}_imu.npy"))
+            gts = np.load(os.path.join(self.path, f"{sequence_id}_gt.npy"))
+            if graphs.shape[0] != imus.shape[0] or graphs.shape[0] != gts.shape[0]:
+                raise Exception(f"In sequence {sequence_id}, the number of graphs ({graphs.shape[0]}), IMU ({imus.shape[0]}) and GT ({gts.shape[0]}) do not match.")
+            samples_in_graphs = graphs.shape[0] - self.frames + 1
+            self.index[self.samples] = sequence_id
+            self.samples += samples_in_graphs
+            del graphs, imus, gts
         # remove variables from memory
         del graph
         print(f"Dataset initialized with {self.samples} samples.")
@@ -100,14 +104,16 @@ class PointDataset(Dataset):
         # loop through folders
         for file in os.listdir(self.path):
             filename = os.fsdecode(file)
-            if filename.endswith("pc.npy"):
-                sequence_id = int(filename.split("_")[0])
-                pc = np.load(os.path.join(self.path, filename))
-                samples_in_pc = pc.shape[0] - self.frames + 1
-                self.index[self.samples] = sequence_id
-                self.samples += samples_in_pc
-        # remove variables from memory
-        del pc
+            sequence_id = int(filename.split("_")[0])
+            pcs = np.load(os.path.join(self.path, f"{sequence_id}_pc.npy"))
+            imus = np.load(os.path.join(self.path, f"{sequence_id}_imu.npy"))
+            gts = np.load(os.path.join(self.path, f"{sequence_id}_gt.npy"))
+            if pcs.shape[0] != imus.shape[0] or pcs.shape[0] != gts.shape[0]:
+                raise Exception(f"In sequence {sequence_id}, the number of point clouds ({pcs.shape[0]}), IMU ({imus.shape[0]}) and GT ({gts.shape[0]}) do not match.")
+            samples_in_pcs = pcs.shape[0] - self.frames + 1
+            self.index[self.samples] = sequence_id
+            self.samples += samples_in_pcs
+            del pcs, imus, gts
         print(f"Dataset initialized with {self.samples} samples.")
     
 
@@ -171,14 +177,16 @@ class ImageDataset(Dataset):
         # loop through folders
         for file in os.listdir(self.path):
             filename = os.fsdecode(file)
-            if filename.endswith("img.npy"):
-                sequence_id = int(filename.split("_")[0])
-                imgs = np.load(os.path.join(self.path, filename))
-                samples_in_imgs = imgs.shape[0] - self.frames + 1
-                self.index[self.samples] = sequence_id
-                self.samples += samples_in_imgs
-        # remove variables from memory
-        del imgs
+            sequence_id = int(filename.split("_")[0])
+            imgs = np.load(os.path.join(self.path, f"{sequence_id}_img.npy"))
+            imus = np.load(os.path.join(self.path, f"{sequence_id}_imu.npy"))
+            gts = np.load(os.path.join(self.path, f"{sequence_id}_gt.npy"))
+            if imgs.shape[0] != imus.shape[0] or imgs.shape[0] != gts.shape[0]:
+                raise Exception(f"In sequence {sequence_id}, the number of images ({imgs.shape[0]}), IMU ({imus.shape[0]}) and GT ({gts.shape[0]}) do not match.")
+            samples_in_imgs = imgs.shape[0] - self.frames + 1
+            self.index[self.samples] = sequence_id
+            self.samples += samples_in_imgs
+            del imgs, imus, gts
         print(f"Dataset initialized with {self.samples} samples.")
     
 
