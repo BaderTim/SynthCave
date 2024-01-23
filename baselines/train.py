@@ -218,7 +218,7 @@ def train_model():
             model.train()
             total_loss = 0.0
             for graph, edges, imu, gt in train_dl:
-                graph, edges, imu = graph.to(device).float(), edges.to(device).int64(), imu.to(device).float(), 
+                graph, edges, imu = graph.to(device).float(), edges.to(device).to(torch.int64), imu.to(device).float(), 
                 gt = cap_gt(gt, upper_limit=1, lower_limit=-1).to(device).float()
                 optimizer.zero_grad()
                 outputs = model(graph, edges, imu)
@@ -237,7 +237,7 @@ def train_model():
             model.eval()
             with torch.no_grad():
                 for graph, edges, imu, gt in val_dl:
-                    graph, edges, imu = graph.to(device).float(), edges.to(device).int64(), imu.to(device).float()
+                    graph, edges, imu = graph.to(device).float(), edges.to(device).to(torch.int64), imu.to(device).float()
                     gt = cap_gt(gt, upper_limit=1, lower_limit=-1).to(device).float()
                     outputs = model(graph, edges, imu)
                     pos_mse.update(outputs[0:3], gt[0:3])
@@ -320,7 +320,7 @@ if __name__ == "__main__":
         "metric": {"name": "val_mse", "goal": "maximize"},
         "method": "grid",
         "parameters": {
-            "model_name": {"values": ["CNN", "NTU", "ASTGCN", "TSViTcls"]},
+            "model_name": {"values": ["ASTGCN", "TSViTcls", "CNN", "NTU"]},
             "graph_dataset_path": {"values": [args.graph_dataset_path]},
             "image_dataset_path": {"values": [args.image_dataset_path]},
             "point_dataset_path": {"values": [args.point_dataset_path]},
