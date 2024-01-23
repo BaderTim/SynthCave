@@ -59,7 +59,7 @@ class GraphDataset(Dataset):
                 # return the sample
                 graph = torch.from_numpy(full_graph[idx_in_sequence:idx_in_sequence+self.frames]) # (T, N, F_in)
                 edges = torch.from_numpy(full_edges[idx_in_sequence:idx_in_sequence+self.frames]) # (T, E, 2)
-                imu = torch.from_numpy(full_imu[idx_in_sequence:idx_in_sequence+self.frames-1]) # (T, 6)
+                imu = torch.from_numpy(full_imu[idx_in_sequence:idx_in_sequence+self.frames]) # (T, 6)
                 gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames]) # (8,)
                 # remove variables from memory
                 del full_graph, full_edges, full_imu, full_gt
