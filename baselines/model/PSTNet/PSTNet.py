@@ -19,6 +19,11 @@ class NTU(nn.Module):
 
         self.K = K
         self.dataset_type = "point"
+        self.height = 80
+        self.width = 240
+        self.initial_points = self.height * self.width
+        self.reduction_factor = 10
+        assert self.initial_points % self.reduction_factor == 0, f"Reduction factor must be a factor of {self.initial_points}"
 
         self.temporal_padding_for_b = [1, 2] if self.K > 2 else [1, 1]
 
@@ -90,6 +95,11 @@ class NTU(nn.Module):
 
         B, K, C, N = xyzs.shape
 
+        # B, K, self.initial_points, N -> B, K, self.initial_points/self.reduction_factor, 3  (take every self.reduction_factor th point)
+        xyzs = xyzs.reshape(B, K, self.height, self.width, 3)
+        xyzs = xyzs[:, :, ::self.reduction_factor, ::self.reduction_factor, :]
+        xyzs = xyzs.reshape(B, K, -1, 3)
+
         new_xys, new_features = self.conv1(xyzs, None)
         new_features = F.relu(new_features)
 
@@ -129,8 +139,8 @@ if __name__ == "__main__":
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
 
-    x = torch.randn(4, K, 128, 3).to(device) # (B, L, C, N)
-    imu_data = torch.randn(4, K, 6).to(device) # (B, 6*K)
+    x = torch.randn(8, K, 19_200, 3).to(device) # (B, L, C, N)
+    imu_data = torch.randn(8, K, 6).to(device) # (B, 6*K)
 
     out = model(x, imu_data)
 
