@@ -36,16 +36,22 @@ from transform.modules.point_cloud_transform import distances_to_point_cloud
 from transform.modules.graph_transform import distances_to_graph
 
 
-def sync_imu_with_lidar(C_imu: np.array, imu: dict, lidar: dict) -> np.array:
+def sync_imu_with_lidar(C_lidar: np.array, C_imu: np.array, imu: dict, lidar: dict) -> np.array:
     """
     Synchronizes the frequency of the IMU data with the frequency of the LiDAR data.
 
     Parameters:
+    - C_lidar: 3D numpy float array, shape (N, H, W), where N is the number of time steps and M is the number of LiDAR measurements per time step.
     - C_imu: 2D numpy float array, shape (N, 6), where N is the number of time steps.
              Each inner list represents a set of IMU measurements for a specific time step, containing the following float values:
              [acceleration_X, acceleration_Y, acceleration_Z, rotation_rate_X, rotation_rate_Y, rotation_rate_Z]
     - imu: dict, while having other parameters, also contains frequency as int
     - lidar: dict, while having other parameters, also contains frequency as int
+
+    Returns:
+    - C_imu_downsampled: 2D numpy float array, shape (N, 6), where N is the number of time steps.
+                         Each inner list represents a set of IMU measurements for a specific time step, containing the following float values:
+                         [acceleration_X, acceleration_Y, acceleration_Z, rotation_rate_X, rotation_rate_Y, rotation_rate_Z]
     """
     imu_frequency = imu["frequency"]
     lidar_frequency = lidar["frequency"]
@@ -55,10 +61,16 @@ def sync_imu_with_lidar(C_imu: np.array, imu: dict, lidar: dict) -> np.array:
         # IMU frequency is higher than LiDAR frequency
         # -> IMU data needs to be downsampled by addition
         downsample_factor = imu_frequency // lidar_frequency
+        # special case: when upsampling lidar at same factor, one imu entry is missing
+        # -> add one imu entry at the end
+        if (len(C_imu) < len(C_lidar) * downsample_factor):
+            C_imu = np.vstack((C_imu, C_imu[-1]))
         C_imu_downsampled = np.zeros((len(C_imu)//downsample_factor, 6))
         # optionally truncate C_imu to be divisible by downsample_factor
         for i in range(0, len(C_imu) - len(C_imu) % downsample_factor, downsample_factor):
             C_imu_downsampled[i//downsample_factor] = np.sum(C_imu[i:i+downsample_factor], axis=0)
+        if len(C_imu_downsampled) != len(C_lidar):
+            print("Downsampled IMU data does not match LiDAR data")
         return C_imu_downsampled
     
 
@@ -162,13 +174,13 @@ if __name__ == "__main__":
             # read data
             C_imu1 = np.load(os.path.join(source_dir, "imu1.npy"))
             C_lidar1 = np.load(os.path.join(source_dir, "lidar1.npy"))
-            C_lidar1_imu1 = sync_imu_with_lidar(C_imu1, imu1, lidar1)
+            C_lidar1_imu1 = sync_imu_with_lidar(C_lidar1, C_imu1, imu1, lidar1)
             C_lidar1_gt = np.load(os.path.join(source_dir, "lidar1_gt.npy"))
             C_lidar2 = np.load(os.path.join(source_dir, "lidar2.npy"))
-            C_lidar2_imu1 = sync_imu_with_lidar(C_imu1, imu1, lidar2)
+            C_lidar2_imu1 = sync_imu_with_lidar(C_lidar1, C_imu1, imu1, lidar2)
             C_lidar2_gt = np.load(os.path.join(source_dir, "lidar2_gt.npy"))
             C_lidar3 = np.load(os.path.join(source_dir, "lidar3.npy"))
-            C_lidar3_imu1 = sync_imu_with_lidar(C_imu1, imu1, lidar3)
+            C_lidar3_imu1 = sync_imu_with_lidar(C_lidar1, C_imu1, imu1, lidar3)
             C_lidar3_gt = np.load(os.path.join(source_dir, "lidar3_gt.npy"))
 
             # build graphs
