@@ -11,7 +11,7 @@ class ASTGCN(nn.Module):
 
         self.dataset_type = "graph"
 
-        self.pooling_ratio = 0.1
+        self.pooling_ratio = 0.05
         self.node_features = 3
         self.K = K
         self.node_count = int(19_200 * self.pooling_ratio)
@@ -67,26 +67,25 @@ class ASTGCN(nn.Module):
         """
         Args:
             - x (PyTorch Float Tensor) Node features for T time periods, with shape (B, N_nodes, F_in, T).
-            - edge_index (LongTensor): Edge indices with shape (2, E), where E is the number of edges, with values in {0, 1, ..., N_nodes - 1}.
+            - edge_index (LongTensor): Edge indices with shape (B, 2, E), where E is the number of edges, with values in {0, 1, ..., N_nodes - 1}.
                                        First row is the source nodes, second row is the target nodes.
             - imu_data (PyTorch Float Tensor) IMU data for T time periods, with shape (B, T, 6).
         Returns:
             - x (B, 5) - Odometry prediction
         """
         B, N_nodes, F_in, T = x.shape
-        # Prepare edge index list for graph pooling
-        edge_index_list = [edge_index for _ in range(T)]
         # loop over batch dimension
         pooled_x = torch.zeros((B, int(N_nodes*self.pooling_ratio), F_in, T))
         for i in range(B):
             # loop over time dimension
             for j in range(T):
                 # in each iteration (1, N_nodes, F_in, T) -> (1, N_nodes_reduced, F_in, 1)
-                pooled_x[i, :, :, j], edge_index_list[i], _, _, _, _ = self.graph_pooling(x[i, :, :, j], edge_index[i])
-        x = pooled_x
+                pooled_x[i, :, :, j], edge_index_pooled, _, _, _, _ = self.graph_pooling(x[i, :, :, j], edge_index[i])
+        x = pooled_x.to(x.device)
+        edge_index_pooled = edge_index_pooled.to(x.device)
         # (B, N_nodes, F_in, T) -> (B, N_nodes, nb_time_filter, T) 
         for astgcn_block in self.feature_extractor:
-            x = astgcn_block(x, edge_index_list)
+            x = astgcn_block(x, edge_index_pooled)
         # (B, N_nodes, nb_time_filter, T) -> (B, T, N_nodes, nb_time_filter)
         x = x.permute(0, 3, 1, 2)
         # (B, T, N_nodes, nb_time_filter) -> (B, 1, N_nodes, nb_time_filter) -> (B, N_nodes, nb_time_filter)
