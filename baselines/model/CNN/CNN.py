@@ -24,10 +24,10 @@ class CNN(nn.Module):
 
         self.conv3 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
         self.conv4 = nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1)
-        self.pool2 = nn.MaxPool2d(kernel_size=int(2+np.log(self.K)), stride=int(2+np.log(self.K)), padding=0)
+        self.pool2 = nn.AdaptiveAvgPool2d((self.height//20, self.width//20))
 
         # Fully connected layers
-        self.fc1 = nn.Linear(int(self.height/(2*int(2+np.log(self.K)))) * int(self.width/(2*int(2+np.log(self.K)))) * 64 + 6*self.K, 256)
+        self.fc1 = nn.Linear(64*self.height//20*self.width//20 + 6*self.K, 256)
         self.fc2 = nn.Linear(256, 128)
         self.fc3 = nn.Linear(128, 32)
         self.fc4 = nn.Linear(32, 5)  # Assuming regression for odometry estimation
@@ -63,7 +63,7 @@ class CNN(nn.Module):
 
 if __name__ == "__main__":
 
-    K = 16
+    K = 2
 
     model = CNN(K=K)
 
