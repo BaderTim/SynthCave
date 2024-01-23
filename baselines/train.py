@@ -61,7 +61,7 @@ class EarlyStopping:
         """
         self.patience = patience
         self.counter = 0
-        self.early_stop = False
+        self.max_val_loss = np.Inf
 
     def __call__(self, val_loss):
         """
@@ -73,17 +73,14 @@ class EarlyStopping:
         Returns:
         - early_stop: bool, whether to stop the training or not.
         """
-        print(f"counter: {self.counter}")
-        if self.val_loss_min is None:
-            self.val_loss_min = val_loss
-        elif val_loss > self.val_loss_min:
+        if val_loss > self.max_val_loss:
             self.counter += 1
             if self.counter >= self.patience:
-                self.early_stop = True
+                return True
         else:
-            self.val_loss_min = val_loss
             self.counter = 0
-        return self.early_stop
+            self.max_val_loss = val_loss
+        return False
 
 
 def get_model_from_name(model_name, K):
