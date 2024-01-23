@@ -246,7 +246,6 @@ def train_model():
             mse.reset()
 
         # End of epoch
-        scheduler.step(avg_mse_val)
         # log data and rount to 3 decimal places
         log.info(f"Epoch {epoch+1}/{epochs} | Loss: {round(avg_loss, 3)} | Train MSE: {round(avg_mse_train, 3)} | Val MSE: {round(avg_mse_val, 3)} | LR: {optimizer.param_groups[0]['lr']}")
         wandb.log({
@@ -259,6 +258,7 @@ def train_model():
         if early_stopping(avg_mse_val):
             log.info("Early stopping")
             break
+        scheduler.step(avg_mse_val)
     # save model
     torch.save(model.state_dict(), f"models/{wandb.run.name}.pt")
 
