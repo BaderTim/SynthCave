@@ -61,25 +61,28 @@ class EarlyStopping:
         """
         self.patience = patience
         self.counter = 0
-        self.max_val_loss = np.Inf
+        self.max_val_pos_mse = np.Inf
+        self.max_val_rot_mse = np.Inf
 
-    def __call__(self, val_loss):
+    def __call__(self, val_pos_mse, val_rot_mse):
         """
         Call the early stopping function.
         
         Parameters:
-        - val_loss: float, validation loss.
+        - val_pos_mse: float, validation position MSE.
+        - val_rot_mse: float, validation rotation MSE.
         
         Returns:
         - early_stop: bool, whether to stop the training or not.
         """
-        if val_loss > self.max_val_loss:
+        if val_pos_mse >= self.max_val_pos_mse and val_rot_mse >= self.max_val_rot_mse:
             self.counter += 1
             if self.counter >= self.patience:
                 return True
         else:
             self.counter = 0
-            self.max_val_loss = val_loss
+            self.max_val_pos_mse = val_pos_mse
+            self.max_val_rot_mse = val_rot_mse
         return False
 
 
@@ -104,6 +107,23 @@ def get_model_from_name(model_name, K):
         return NTU(K=K)
     else:
         raise ValueError("Model name not supported")
+
+
+def cap_gt(gt, upper_limit=1, lower_limit=-1):
+    """
+    Cap ground truth values to an upper and lower limit.
+    
+    Parameters:
+    - gt: torch.Tensor, ground truth values.
+    - upper_limit: float, upper limit.
+    - lower_limit: float, lower limit.
+    
+    Returns:
+    - gt: torch.Tensor, capped ground truth values.
+    """
+    gt[gt > upper_limit] = upper_limit
+    gt[gt < lower_limit] = lower_limit
+    return gt
 
 
 def wandb_sweep():
@@ -180,7 +200,8 @@ def train_model():
     criterion = nn.MSELoss().to(device)
 
     # instantiate metrics
-    mse = MeanSquaredError().to(device)
+    pos_mse = MeanSquaredError().to(device)
+    rot_mse = MeanSquaredError().to(device)
 
     # instantiate scheduler
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'max', patience=int(5), verbose=True, min_lr=1e-6)
@@ -197,26 +218,34 @@ def train_model():
             model.train()
             total_loss = 0.0
             for graph, edges, imu, gt in train_dl:
-                graph, edges, imu, gt = graph.to(device).float(), edges.to(device).float(), imu.to(device).float(), gt.to(device).float()
+                graph, edges, imu = graph.to(device).float(), edges.to(device).int64(), imu.to(device).float(), 
+                gt = cap_gt(gt, upper_limit=1, lower_limit=-1).to(device).float()
                 optimizer.zero_grad()
                 outputs = model(graph, edges, imu)
                 loss = criterion(outputs, gt)
                 loss.backward()
                 optimizer.step()
                 total_loss += loss.item()
-                mse.update(outputs, gt)
+                pos_mse.update(outputs[0:3], gt[0:3])
+                rot_mse.update(outputs[3:5], gt[3:5])
             avg_loss = total_loss / len(train_dl)
-            avg_mse_train = mse.compute().item()
-            mse.reset()
+            avg_pos_mse_train = pos_mse.compute().item()
+            avg_rot_mse_train = rot_mse.compute().item()
+            pos_mse.reset()
+            rot_mse.reset()
             # Validation
             model.eval()
             with torch.no_grad():
                 for graph, edges, imu, gt in val_dl:
-                    graph, edges, imu, gt = graph.to(device).float(), edges.to(device).float(), imu.to(device).float(), gt.to(device).float()
+                    graph, edges, imu = graph.to(device).float(), edges.to(device).int64(), imu.to(device).float()
+                    gt = cap_gt(gt, upper_limit=1, lower_limit=-1).to(device).float()
                     outputs = model(graph, edges, imu)
-                    mse.update(outputs, gt)
-            avg_mse_val = mse.compute().item()
-            mse.reset()
+                    pos_mse.update(outputs[0:3], gt[0:3])
+                    rot_mse.update(outputs[3:5], gt[3:5])
+            avg_pos_mse_val = pos_mse.compute().item()
+            avg_rot_mse_val = rot_mse.compute().item()
+            pos_mse.reset()
+            rot_mse.reset()
         
         #  model.dataset_type == "image" or model.dataset_type == "point":
         else:
@@ -224,41 +253,53 @@ def train_model():
             model.train()
             total_loss = 0.0
             for content, imu, gt in train_dl:
-                content, imu, gt = content.to(device).float(), imu.to(device).float(), gt.to(device).float()
+                content, imu = content.to(device).float(), imu.to(device).float()
+                gt = cap_gt(gt, upper_limit=1, lower_limit=-1).to(device).float()
                 optimizer.zero_grad()
                 outputs = model(content, imu)
                 loss = criterion(outputs, gt)
                 loss.backward()
                 optimizer.step()
                 total_loss += loss.item()
-                mse.update(outputs, gt)
+                pos_mse.update(outputs[0:3], gt[0:3])
+                rot_mse.update(outputs[3:5], gt[3:5])
             avg_loss = total_loss / len(train_dl)
-            avg_mse_train = mse.compute().item()
-            mse.reset()
+            avg_pos_mse_train = pos_mse.compute().item()
+            avg_rot_mse_train = rot_mse.compute().item()
+            pos_mse.reset()
+            rot_mse.reset()
             # Validation
             model.eval()
             with torch.no_grad():
                 for content, imu, gt in val_dl:
-                    content, imu, gt = content.to(device).float(), imu.to(device).float(), gt.to(device).float()
+                    content, imu = content.to(device).float(), imu.to(device).float()
+                    gt = cap_gt(gt, upper_limit=1, lower_limit=-1).to(device).float()
                     outputs = model(content, imu)
-                    mse.update(outputs, gt)
-            avg_mse_val = mse.compute().item()
-            mse.reset()
+                    pos_mse.update(outputs[0:3], gt[0:3])
+                    rot_mse.update(outputs[3:5], gt[3:5])
+            avg_pos_mse_val = pos_mse.compute().item()
+            avg_rot_mse_val = rot_mse.compute().item()
+            pos_mse.reset()
+            rot_mse.reset()
 
         # End of epoch
         # log data and rount to 3 decimal places
-        log.info(f"Epoch {epoch+1}/{epochs} | Loss: {round(avg_loss, 3)} | Train MSE: {round(avg_mse_train, 3)} | Val MSE: {round(avg_mse_val, 3)} | LR: {optimizer.param_groups[0]['lr']}")
+        log.info(f"Epoch {epoch+1}/{epochs} | Loss: {round(avg_loss, 3)} | Learning rate: {round(optimizer.param_groups[0]['lr'], 6)}" +
+                 f" | Train pos MSE: {round(avg_pos_mse_train, 3)} | Train rot MSE: {round(avg_rot_mse_train, 3)}" +
+                 f" | Val pos MSE: {round(avg_pos_mse_val, 3)} | Val rot MSE: {round(avg_rot_mse_val, 3)}")
         wandb.log({
+            "epoch": epoch+1,
             "loss": avg_loss,
-            "train_mse": avg_mse_train,
-            "val_mse": avg_mse_val,
             "learning_rate": optimizer.param_groups[0]['lr'],
-            "epoch": epoch+1
+            "train_pos_mse": avg_pos_mse_train,
+            "train_rot_mse": avg_rot_mse_train,
+            "val_pos_mse": avg_pos_mse_val,
+            "val_rot_mse": avg_rot_mse_val
         })
-        if early_stopping(avg_mse_val):
+        if early_stopping(avg_pos_mse_val, avg_rot_mse_val):
             log.info("Early stopping")
             break
-        scheduler.step(avg_mse_val)
+        scheduler.step((avg_pos_mse_val + avg_rot_mse_val) / 2)
     # save model
     torch.save(model.state_dict(), f"models/{wandb.run.name}.pt")
 
@@ -279,7 +320,7 @@ if __name__ == "__main__":
         "metric": {"name": "val_mse", "goal": "maximize"},
         "method": "grid",
         "parameters": {
-            "model_name": {"values": ["CNN", "TSViTcls", "ASTGCN", "NTU"]},
+            "model_name": {"values": ["CNN", "NTU", "ASTGCN", "TSViTcls"]},
             "graph_dataset_path": {"values": [args.graph_dataset_path]},
             "image_dataset_path": {"values": [args.image_dataset_path]},
             "point_dataset_path": {"values": [args.point_dataset_path]},
