@@ -10,7 +10,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 
-from modules.pst_convolutions import PSTConv
+from model.PSTNet.modules.pst_convolutions import PSTConv
 
 
 class NTU(nn.Module):
