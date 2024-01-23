@@ -15,15 +15,13 @@ This script is intended to be run as a standalone program and requires the follo
 - `-p` or `--point_dataset_path`: Path to the point cloud dataset
 
 Example:
-    python src/train.py \
-        -wandb_project "synthcave" \
-        -graph_dataset_path "data/synthcave/graphs" \
-        -image_dataset_path "data/synthcave/images" \
-        -point_dataset_path "data/synthcave/points" 
+python baselines/train.py -w "synthcave" -g "C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph" -i "C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image" -p "C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud" 
     
 """
 import argparse
 import wandb
+import sys
+import traceback
 import logging
 import time
 import torch
@@ -75,6 +73,7 @@ class EarlyStopping:
         Returns:
         - early_stop: bool, whether to stop the training or not.
         """
+        print(f"counter: {self.counter}")
         if self.val_loss_min is None:
             self.val_loss_min = val_loss
         elif val_loss > self.val_loss_min:
@@ -87,6 +86,40 @@ class EarlyStopping:
         return self.early_stop
 
 
+def get_model_from_name(model_name, K):
+    """
+    Get a model from a string name.
+    
+    Parameters:
+    - model_name: str, name of the model.
+    - K: int, number of frames.
+    
+    Returns:
+    - model: PyTorch model.
+    """
+    if model_name == "CNN":
+        return CNN(K=K)
+    elif model_name == "TSViTcls":
+        return TSViTcls(K=K)
+    elif model_name == "ASTGCN":
+        return ASTGCN(K=K)
+    elif model_name == "NTU":
+        return NTU(K=K)
+    else:
+        raise ValueError("Model name not supported")
+
+
+def wandb_sweep():
+    """
+    WandB wrapper function for training.
+    """
+    try:
+        train_model()
+    except Exception as e:
+        log.error(traceback.print_exc(), file=sys.stderr)
+        raise e
+
+
 def train_model():
     """
     Train a model on a dataset for a number of epochs and log the results to wandb.
@@ -95,7 +128,7 @@ def train_model():
     wandb.init()
 
     # get hyperparameters
-    model = wandb.config.model
+    model_name = wandb.config.model_name
     graph_dataset_path = wandb.config.graph_dataset_path
     image_dataset_path = wandb.config.image_dataset_path
     point_dataset_path = wandb.config.point_dataset_path
@@ -106,7 +139,7 @@ def train_model():
     device = torch.device("cuda")
 
     # instantiate model
-    model = model(K=K)
+    model = get_model_from_name(model_name, K)
     assert model.dataset_type in ["graph", "image", "point"], "Model dataset type not supported"
     trainable_parameter_count = round(sum(p.numel() for p in model.parameters() if p.requires_grad) / 1e6, 3)
     model.to(device)
@@ -131,7 +164,7 @@ def train_model():
         batch_size=batch_size,
         shuffle=True,
         pin_memory=True,
-        num_workers=4,
+        num_workers=0,
         generator=generator
     )
     val_dl = torch.utils.data.DataLoader(
@@ -139,7 +172,7 @@ def train_model():
         batch_size=batch_size,
         shuffle=True,
         pin_memory=True,
-        num_workers=4,
+        num_workers=0,
         generator=generator
     )
 
@@ -243,24 +276,22 @@ if __name__ == "__main__":
 
     assert torch.cuda.is_available(), "CUDA is not available"
 
-    models = [NTU, TSViTcls, ASTGCN, CNN]
-
     sweep_configuration = {
         "project": args.wandb_project,
         "name": f"mv_sweep_{time.time()}",
         "metric": {"name": "val_mse", "goal": "maximize"},
         "method": "grid",
         "parameters": {
-            "model_name": {"values": models},
+            "model_name": {"values": ["CNN", "TSViTcls", "ASTGCN", "NTU"]},
             "graph_dataset_path": {"values": [args.graph_dataset_path]},
             "image_dataset_path": {"values": [args.image_dataset_path]},
             "point_dataset_path": {"values": [args.point_dataset_path]},
             "epochs": {"values": [30]},
             "batch_size": {"values": [8]},
             "K": {"values": [2, 4, 8, 16]}
-        },
+        }
     }
     sweep_id = wandb.sweep(sweep_configuration)
 
     # run the sweep
-    wandb.agent(sweep_id, function=train_model)
+    wandb.agent(sweep_id, function=wandb_sweep)
