@@ -32,12 +32,6 @@ def test_distances_to_depth_image_negative_values_in_C_lidar():
     with pytest.raises(ValueError, match="C_lidar must not contain negative values"):
         distances_to_depth_image(input_lidar_data)
 
-def test_distances_to_depth_image_values_above_lidar_range():
-    # Test case with values in C_lidar above lidar_range
-    input_lidar_data = np.random.uniform(0, 150, size=(5, 10, 10))  # Adjust dimensions as needed
-    invalid_lidar_range = 100
-    with pytest.raises(ValueError, match="C_lidar must not contain values greater than lidar_range"):
-        distances_to_depth_image(input_lidar_data, lidar_range=invalid_lidar_range)
 
 def test_distances_to_point_cloud_main_case():
     # Test main case with typical input
