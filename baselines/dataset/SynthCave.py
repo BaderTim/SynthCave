@@ -52,11 +52,11 @@ class GraphDataset(Dataset):
                 full_imu = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_imu.npy"))
                 full_gt = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_gt.npy"))
                 # get the index of the sample in the sequence
-                idx_in_sequence = idx - key
+                idx_in_sequence = idx - keys[i-1]
                 # return the sample
                 graph = torch.from_numpy(full_graph[idx_in_sequence:idx_in_sequence+self.frames]) # (T, N, F_in)
                 edges = torch.from_numpy(full_edges[idx_in_sequence:idx_in_sequence+self.frames]) # (T, E, 2)
-                imu = torch.from_numpy(full_imu[idx_in_sequence:idx_in_sequence+self.frames]) # (T, 6)
+                imu = torch.from_numpy(full_imu[idx_in_sequence:idx_in_sequence+self.frames-1]) # (T, 6)
                 gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames]) # (8,)
                 # remove variables from memory
                 del full_graph, full_edges, full_imu, full_gt
@@ -75,7 +75,7 @@ class GraphDataset(Dataset):
         graph = torch.from_numpy(full_graph[idx_in_sequence:idx_in_sequence+self.frames]) # (T, N, F_in)
         edges = torch.from_numpy(full_edges[idx_in_sequence:idx_in_sequence+self.frames]) # (T, E, 2)
         imu = torch.from_numpy(full_imu[idx_in_sequence:idx_in_sequence+self.frames]) # (T, 6)
-        gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames]) # (8,)
+        gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames-1]) # (8,)
         del full_graph, full_edges, full_imu, full_gt
         graph = graph.permute(1, 2, 0)
         edges = edges[0].permute(1, 0)
@@ -130,11 +130,11 @@ class PointDataset(Dataset):
                 full_imu = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_imu.npy"))
                 full_gt = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_gt.npy"))
                 # get the index of the sample in the sequence
-                idx_in_sequence = idx - key
+                idx_in_sequence = idx - keys[i-1]
                 # return the sample
                 pc = torch.from_numpy(full_pc[idx_in_sequence:idx_in_sequence+self.frames]) # (T, P, 3)
                 imu = torch.from_numpy(full_imu[idx_in_sequence:idx_in_sequence+self.frames]) # (T, 6)
-                gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames]) # (8,)
+                gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames-1]) # (8,)
                 # remove variables from memory
                 del full_pc, full_imu, full_gt
                 gt = torch.tensor([gt[0], gt[1], gt[2], gt[6], gt[7]])
@@ -148,7 +148,7 @@ class PointDataset(Dataset):
         # return the sample
         pc = torch.from_numpy(full_pc[idx_in_sequence:idx_in_sequence+self.frames]) # (T, P, 3)
         imu = torch.from_numpy(full_imu[idx_in_sequence:idx_in_sequence+self.frames]) # (T, 6)
-        gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames]) # (8,)
+        gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames-1]) # (8,)
         del full_pc, full_imu, full_gt
         gt = torch.tensor([gt[0], gt[1], gt[2], gt[6], gt[7]])
         return pc, imu, gt
@@ -201,11 +201,11 @@ class ImageDataset(Dataset):
                 full_imu = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_imu.npy"))
                 full_gt = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_gt.npy"))
                 # get the index of the sample in the sequence
-                idx_in_sequence = idx - key
+                idx_in_sequence = idx - keys[i-1]
                 # return the sample
                 imgs = torch.from_numpy(full_imgs[idx_in_sequence:idx_in_sequence+self.frames].astype(np.float32)) # (T, H, V)
                 imu = torch.from_numpy(full_imu[idx_in_sequence:idx_in_sequence+self.frames]) # (T, 6)
-                gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames]) # (8,)
+                gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames-1]) # (8,)
                 # remove variables from memory
                 del full_imgs, full_imu, full_gt
                 imgs = imgs.permute(0, 2, 1).unsqueeze(1) # (T, 1, V, H)
@@ -220,7 +220,7 @@ class ImageDataset(Dataset):
         # return the sample
         imgs = torch.from_numpy(full_imgs[idx_in_sequence:idx_in_sequence+self.frames].astype(np.float32)) # (T, H, V)
         imu = torch.from_numpy(full_imu[idx_in_sequence:idx_in_sequence+self.frames]) # (T, 6)
-        gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames]) # (8,)
+        gt = torch.from_numpy(full_gt[idx_in_sequence+self.frames-1]) # (8,)
         del full_imgs, full_imu, full_gt
         imgs = imgs.permute(0, 2, 1).unsqueeze(1)  # (T, 1, V, H)
         gt = torch.tensor([gt[0], gt[1], gt[2], gt[6], gt[7]])
