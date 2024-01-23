@@ -1,5 +1,6 @@
 __pycache__
 wandb
+models/*
 data/1_raw/*
 data/2_cleaning/*
 data/3_derived/*
