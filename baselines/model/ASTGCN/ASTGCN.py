@@ -32,7 +32,8 @@ class ASTGCN(nn.Module):
                     nb_time_filter=64,
                     time_strides=self.time_strides,
                     num_of_vertices=self.node_count,
-                    num_of_timesteps=self.K
+                    num_of_timesteps=self.K,
+                    normalization="sym"
                 )
             ]
         )
@@ -45,7 +46,8 @@ class ASTGCN(nn.Module):
                     nb_time_filter=64,
                     time_strides=self.time_strides,
                     num_of_vertices=self.node_count,
-                    num_of_timesteps=self.K
+                    num_of_timesteps=self.K,
+                    normalization="sym"
                 )
                 for _ in range(self.blocks-1)
             ]
