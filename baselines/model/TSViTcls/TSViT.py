@@ -41,7 +41,7 @@ class TSViTcls(nn.Module):
 
         self.dataset_type = "image"
 
-        self.image_size = 48
+        self.image_size = 24 # 48
         self.patch_size = 3
         self.num_patches_1d = self.image_size//self.patch_size
         self.num_classes = 5
@@ -88,12 +88,11 @@ class TSViTcls(nn.Module):
         _, _, H, W = x.shape
         # -> B T H W
         x = x.reshape(B, T, H, W)
-        xt = x[:, :, 0, 0]
         # in the original paper, temporal embedding is the day of the year
         # here we use the frame number and don't slice away one channel
         # more info: https://github.com/michaeltrs/DeepSatModels/issues/4
-        xt = (xt * T+0.0001).to(torch.int64)
-        xt = F.one_hot(xt, num_classes=T).to(torch.float32)
+        raw_temp_embedding = torch.stack([reversed(torch.arange(0,5)) for i in range(4)]).to(depth_images.device)
+        xt = F.one_hot(raw_temp_embedding, num_classes=T).to(torch.float32)
         xt = xt.reshape(-1, T)
         temporal_pos_embedding = self.to_temporal_embedding_input(xt).reshape(B, T, self.dim)
         x = self.to_patch_embedding(x)
@@ -120,11 +119,13 @@ class TSViTcls(nn.Module):
 
 
 if __name__ == "__main__":
-    model = TSViTcls(K=4)
+    K=2
+    device = "cuda" # "cuda" or "cpu"
+    model = TSViTcls(K=K).to(device)
     parameters = filter(lambda p: p.requires_grad, model.parameters())
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
-    depth_imgs = torch.rand((8, 4, 1, 240, 240))
-    imu_data = torch.rand((8, 4, 6))
+    depth_imgs = torch.rand((16, K, 1, 240, 80)).to(device)
+    imu_data = torch.rand((16, K, 6)).to(device)
     out = model(depth_imgs, imu_data)
     print("Shape of out :", out.shape)  # [B, num_classes]
