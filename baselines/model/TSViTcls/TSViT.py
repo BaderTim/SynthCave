@@ -41,7 +41,7 @@ class TSViTcls(nn.Module):
 
         self.dataset_type = "image"
 
-        self.image_size = 24 # 48
+        self.image_size = 48
         self.patch_size = 3
         self.num_patches_1d = self.image_size//self.patch_size
         self.num_classes = 5
@@ -91,7 +91,7 @@ class TSViTcls(nn.Module):
         # in the original paper, temporal embedding is the day of the year
         # here we use the frame number and don't slice away one channel
         # more info: https://github.com/michaeltrs/DeepSatModels/issues/4
-        raw_temp_embedding = torch.stack([reversed(torch.arange(0,5)) for i in range(4)]).to(depth_images.device)
+        raw_temp_embedding = torch.stack([reversed(torch.arange(0,T)) for _ in range(B)]).to(depth_images.device)
         xt = F.one_hot(raw_temp_embedding, num_classes=T).to(torch.float32)
         xt = xt.reshape(-1, T)
         temporal_pos_embedding = self.to_temporal_embedding_input(xt).reshape(B, T, self.dim)
