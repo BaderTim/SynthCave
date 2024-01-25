@@ -81,7 +81,56 @@ class EarlyStopping:
             self.counter = 0
             self.val_mse = val_mse
         return False
+    
 
+class DynamicWeightedMSELoss(nn.Module):
+    def __init__(self, dataset):
+        super(DynamicWeightedMSELoss, self).__init__()
+        self.theta_steps, self.theta_counts = dataset.theta_rounded_hist # steps, counts
+        self.total_thetas = sum(self.theta_counts) # total number of thetas
+        self.phi_steps, self.phi_counts = dataset.phi_rounded_hist
+        self.total_phis = sum(self.phi_counts)
+        self.x_steps, self.x_counts = dataset.x_rounded_hist
+        self.total_xs = sum(self.x_counts)
+        self.y_steps, self.y_counts = dataset.y_rounded_hist
+        self.total_ys = sum(self.y_counts)
+        self.z_steps, self.z_counts = dataset.z_rounded_hist
+        self.total_zs = sum(self.z_counts)
+
+    def forward(self, input, target):
+        # Calculate weights based on input values
+        weights = self.calculate_weights(input)
+        # Ensure that weights, input and target are the same size
+        assert weights.size() == input.size() == target.size()
+        # Calculate the weighted MSE loss
+        loss = weights * (input - target) ** 2
+        return loss.mean()
+
+    def calculate_weights(self, input):
+        B, _ = input.size()
+        x_weight = torch.zeros(B)
+        y_weight = torch.zeros(B)
+        z_weight = torch.zeros(B)
+        theta_weight = torch.zeros(B)
+        phi_weight = torch.zeros(B)
+        for i in range(B):
+            x_weight[i] = self.calculate_single_weight(input[i][0], self.x_steps, self.x_counts, self.total_xs)
+            y_weight[i] = self.calculate_single_weight(input[i][1], self.y_steps, self.y_counts, self.total_ys)
+            z_weight[i] = self.calculate_single_weight(input[i][2], self.z_steps, self.z_counts, self.total_zs)
+            theta_weight[i] = self.calculate_single_weight(input[i][3], self.theta_steps, self.theta_counts, self.total_thetas)
+            phi_weight[i] = self.calculate_single_weight(input[i][4], self.phi_steps, self.phi_counts, self.total_phis)
+        weights = torch.stack([x_weight, y_weight, z_weight, theta_weight, phi_weight], dim=1)
+        weights.to(input.device)
+        return weights
+
+    def calculate_single_weight(self, input, steps, counts, total):
+        rounded_input = torch.round(input, 1)
+        if rounded_input in steps:
+            index = steps.index(rounded_input)
+            return torch.tensor(1 - counts[index] / total)
+        else:
+            return torch.tensor(1)
+        
 
 def get_model_from_name(model_name, K):
     """
@@ -194,7 +243,7 @@ def train_model():
     optimizer = AdamW(model.parameters(), lr=0.001)
 
     # instantiate loss function
-    criterion = nn.MSELoss().to(device)
+    criterion = DynamicWeightedMSELoss(train_ds).to(device)
 
     # instantiate metrics
     pos_mse = MeanSquaredError().to(device)
