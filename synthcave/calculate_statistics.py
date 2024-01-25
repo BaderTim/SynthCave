@@ -47,6 +47,11 @@ def get_stats_for_section(C_lidar_gt: np.array, hz=5) -> dict:
     stats["z_rotation_total"] = np.sum(np.abs(C_lidar_gt[:, 5]))
     stats["theta_total"] = np.sum(np.abs(C_lidar_gt[:, 6]))
     stats["phi_total"] = np.sum(np.abs(C_lidar_gt[:, 7]))
+    stats["theta_rad_rounded"] = [round(np.deg2rad(theta), 1) for theta in C_lidar_gt[:, 6]]
+    stats["phi_rad_rounded"] = [round(np.deg2rad(phi), 1) for phi in C_lidar_gt[:, 7]]
+    stats["x_rounded"] = [round(x, 1) for x in C_lidar_gt[:, 0]]
+    stats["y_rounded"] = [round(y, 1) for y in C_lidar_gt[:, 1]]
+    stats["z_rounded"] = [round(z, 1) for z in C_lidar_gt[:, 2]]
     return stats
 
 
@@ -83,6 +88,11 @@ if __name__ == "__main__":
                 abs_stats[section]["z_rotation_list"] = [stats["z_rotation_total"]]
                 abs_stats[section]["phi_list"] = [stats["phi_total"]]
                 abs_stats[section]["theta_list"] = [stats["theta_total"]]
+                abs_stats[section]["phi_rad_rounded"] = stats["phi_rad_rounded"]
+                abs_stats[section]["theta_rad_rounded"] = stats["theta_rad_rounded"]
+                abs_stats[section]["x_rounded"] = stats["x_rounded"]
+                abs_stats[section]["y_rounded"] = stats["y_rounded"]
+                abs_stats[section]["z_rounded"] = stats["z_rounded"]
             else: # add on top as array
                 abs_stats[section]["frames_list"].append(stats["frames"])
                 abs_stats[section]["duration_list"].append(stats["duration"])
@@ -95,6 +105,11 @@ if __name__ == "__main__":
                 abs_stats[section]["z_rotation_list"].append(stats["z_rotation_total"])
                 abs_stats[section]["phi_list"].append(stats["phi_total"])
                 abs_stats[section]["theta_list"].append(stats["theta_total"])
+                abs_stats[section]["phi_rad_rounded"] += stats["phi_rad_rounded"]
+                abs_stats[section]["theta_rad_rounded"] += stats["theta_rad_rounded"]
+                abs_stats[section]["x_rounded"] += stats["x_rounded"]
+                abs_stats[section]["y_rounded"] += stats["y_rounded"]
+                abs_stats[section]["z_rounded"] += stats["z_rounded"]
 
 
     # calculate total and median values for all sections
@@ -128,6 +143,34 @@ if __name__ == "__main__":
     tot_stats["z_rotation_per_second"] = tot_stats["z_rotation_total"] / tot_stats["duration_total"]
     tot_stats["phi_per_second"] = tot_stats["phi_total"] / tot_stats["duration_total"]
     tot_stats["theta_per_second"] = tot_stats["theta_total"] / tot_stats["duration_total"]
+
+    theta_rad_rounded = np.concatenate([abs_stats[key]["theta_rad_rounded"] for key in abs_stats])
+    phi_rad_rounded = np.concatenate([abs_stats[key]["phi_rad_rounded"] for key in abs_stats])
+    x_rounded = np.concatenate([abs_stats[key]["x_rounded"] for key in abs_stats])
+    y_rounded = np.concatenate([abs_stats[key]["y_rounded"] for key in abs_stats])
+    z_rounded = np.concatenate([abs_stats[key]["z_rounded"] for key in abs_stats])
+    theta_rad_rounded_hist = np.unique(theta_rad_rounded, return_counts=True)
+    phi_rad_rounded_hist = np.unique(phi_rad_rounded, return_counts=True)
+    x_rounded_hist = np.unique(x_rounded, return_counts=True)
+    y_rounded_hist = np.unique(y_rounded, return_counts=True)
+    z_rounded_hist = np.unique(z_rounded, return_counts=True)
+    upper_limit = 1
+    lower_limit = -1
+    theta_rad_rounded_hist = (theta_rad_rounded_hist[0][np.where((theta_rad_rounded_hist[0] >= lower_limit) & (theta_rad_rounded_hist[0] <= upper_limit))], theta_rad_rounded_hist[1][np.where((theta_rad_rounded_hist[0] >= lower_limit) & (theta_rad_rounded_hist[0] <= upper_limit))])
+    phi_rad_rounded_hist = (phi_rad_rounded_hist[0][np.where((phi_rad_rounded_hist[0] >= lower_limit) & (phi_rad_rounded_hist[0] <= upper_limit))], phi_rad_rounded_hist[1][np.where((phi_rad_rounded_hist[0] >= lower_limit) & (phi_rad_rounded_hist[0] <= upper_limit))])
+    x_rounded_hist = (x_rounded_hist[0][np.where((x_rounded_hist[0] >= lower_limit) & (x_rounded_hist[0] <= upper_limit))], x_rounded_hist[1][np.where((x_rounded_hist[0] >= lower_limit) & (x_rounded_hist[0] <= upper_limit))])
+    y_rounded_hist = (y_rounded_hist[0][np.where((y_rounded_hist[0] >= lower_limit) & (y_rounded_hist[0] <= upper_limit))], y_rounded_hist[1][np.where((y_rounded_hist[0] >= lower_limit) & (y_rounded_hist[0] <= upper_limit))])
+    z_rounded_hist = (z_rounded_hist[0][np.where((z_rounded_hist[0] >= lower_limit) & (z_rounded_hist[0] <= upper_limit))], z_rounded_hist[1][np.where((z_rounded_hist[0] >= lower_limit) & (z_rounded_hist[0] <= upper_limit))])
+    tot_stats["theta_rad_rounded_hist"] = (np.round(theta_rad_rounded_hist[0], 1), theta_rad_rounded_hist[1])
+    tot_stats["theta_rad_rounded_hist_out_of_range"] = np.abs(len(theta_rad_rounded) - np.sum(theta_rad_rounded_hist[1]))
+    tot_stats["phi_rad_rounded_hist"] = (np.round(phi_rad_rounded_hist[0], 1), phi_rad_rounded_hist[1])
+    tot_stats["phi_rad_rounded_hist_out_of_range"] = np.abs(len(phi_rad_rounded) - np.sum(phi_rad_rounded_hist[1]))
+    tot_stats["x_rounded_hist"] = (np.round(x_rounded_hist[0], 1), x_rounded_hist[1])
+    tot_stats["x_rounded_hist_out_of_range"] = np.abs(len(x_rounded) - np.sum(x_rounded_hist[1]))
+    tot_stats["y_rounded_hist"] = (np.round(y_rounded_hist[0], 1), y_rounded_hist[1])
+    tot_stats["y_rounded_hist_out_of_range"] = np.abs(len(y_rounded) - np.sum(y_rounded_hist[1]))
+    tot_stats["z_rounded_hist"] = (np.round(z_rounded_hist[0], 1), z_rounded_hist[1])
+    tot_stats["z_rounded_hist_out_of_range"] = np.abs(len(z_rounded) - np.sum(z_rounded_hist[1]))
 
     # calculate additional total and median values per section
     for key in abs_stats:
@@ -173,6 +216,11 @@ if __name__ == "__main__":
         del abs_stats[key]["z_rotation_list"]
         del abs_stats[key]["phi_list"]
         del abs_stats[key]["theta_list"]
+        del abs_stats[key]["phi_rad_rounded"]
+        del abs_stats[key]["theta_rad_rounded"]
+        del abs_stats[key]["x_rounded"]
+        del abs_stats[key]["y_rounded"]
+        del abs_stats[key]["z_rounded"]
 
     abs_stats["total"] = tot_stats
 
