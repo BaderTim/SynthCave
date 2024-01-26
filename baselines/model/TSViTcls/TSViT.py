@@ -41,7 +41,7 @@ class TSViTcls(nn.Module):
 
         self.dataset_type = "image"
 
-        self.image_size = 96
+        self.image_size = 24
         self.patch_size = 3
         self.num_patches_1d = self.image_size//self.patch_size
         self.num_classes = 5
