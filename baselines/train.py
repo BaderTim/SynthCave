@@ -99,7 +99,7 @@ class DynamicWeightedMSELoss(nn.Module):
 
     def forward(self, input, target):
         # Calculate weights based on input values
-        weights = self.calculate_weights(input)
+        weights = self.calculate_weights(input).to(input.device)
         # Ensure that weights, input and target are the same size
         assert weights.size() == input.size() == target.size()
         # Calculate the weighted MSE loss
@@ -120,11 +120,10 @@ class DynamicWeightedMSELoss(nn.Module):
             theta_weight[i] = self.calculate_single_weight(input[i][3], self.theta_steps, self.theta_counts, self.total_thetas)
             phi_weight[i] = self.calculate_single_weight(input[i][4], self.phi_steps, self.phi_counts, self.total_phis)
         weights = torch.stack([x_weight, y_weight, z_weight, theta_weight, phi_weight], dim=1)
-        weights.to(input.device)
         return weights
 
     def calculate_single_weight(self, input, steps, counts, total):
-        rounded_input = torch.round(input, 1)
+        rounded_input = torch.round(input, decimals=1)
         if rounded_input in steps:
             index = steps.index(rounded_input)
             return torch.tensor(1 - counts[index] / total)
@@ -153,23 +152,6 @@ def get_model_from_name(model_name, K):
         return NTU(K=K)
     else:
         raise ValueError("Model name not supported")
-
-
-def cap_gt(gt, upper_limit=1, lower_limit=-1):
-    """
-    Cap ground truth values to an upper and lower limit.
-    
-    Parameters:
-    - gt: torch.Tensor, ground truth values.
-    - upper_limit: float, upper limit.
-    - lower_limit: float, lower limit.
-    
-    Returns:
-    - gt: torch.Tensor, capped ground truth values.
-    """
-    gt[gt > upper_limit] = upper_limit
-    gt[gt < lower_limit] = lower_limit
-    return gt
 
 
 def wandb_sweep():
@@ -246,8 +228,11 @@ def train_model():
     criterion = DynamicWeightedMSELoss(train_ds).to(device)
 
     # instantiate metrics
-    pos_mse = MeanSquaredError().to(device)
-    rot_mse = MeanSquaredError().to(device)
+    x_mse = MeanSquaredError().to(device)
+    y_mse = MeanSquaredError().to(device)
+    z_mse = MeanSquaredError().to(device)
+    theta_mse = MeanSquaredError().to(device)
+    phi_mse = MeanSquaredError().to(device)
 
     # instantiate scheduler
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'max', patience=int(5), verbose=True, min_lr=1e-6)
@@ -265,34 +250,50 @@ def train_model():
             model.train()
             total_loss = 0.0
             for graph, edges, imu, gt in train_dl:
-                graph, edges, imu = graph.to(device).float(), edges.to(device).to(torch.int64), imu.to(device).float(), 
-                gt = cap_gt(gt, upper_limit=1, lower_limit=-1).to(device).float()
+                graph, edges, imu, gt = graph.to(device).float(), edges.to(device).to(torch.int64), imu.to(device).float(), gt.to(device).float()
                 optimizer.zero_grad()
                 outputs = model(graph, edges, imu)
                 loss = criterion(outputs, gt)
                 loss.backward()
                 optimizer.step()
                 total_loss += loss.item()
-                pos_mse.update(outputs[0:3], gt[0:3])
-                rot_mse.update(outputs[3:5], gt[3:5])
+                x_mse.update(outputs[:, 0], gt[:, 0])
+                y_mse.update(outputs[:, 1], gt[:, 1])
+                z_mse.update(outputs[:, 2], gt[:, 2])
+                theta_mse.update(outputs[:, 3], gt[:, 3])
+                phi_mse.update(outputs[:, 4], gt[:, 4])
             avg_loss = total_loss / len(train_dl)
-            avg_pos_mse_train = pos_mse.compute().item()
-            avg_rot_mse_train = rot_mse.compute().item()
-            pos_mse.reset()
-            rot_mse.reset()
+            avg_x_mse_train = x_mse.compute().item()
+            avg_y_mse_train = y_mse.compute().item()
+            avg_z_mse_train = z_mse.compute().item()
+            avg_theta_mse_train = theta_mse.compute().item()
+            avg_phi_mse_train = phi_mse.compute().item()
+            x_mse.reset()
+            y_mse.reset()
+            z_mse.reset()
+            theta_mse.reset()
+            phi_mse.reset()
             # Validation
             model.eval()
             with torch.no_grad():
                 for graph, edges, imu, gt in val_dl:
-                    graph, edges, imu = graph.to(device).float(), edges.to(device).to(torch.int64), imu.to(device).float()
-                    gt = cap_gt(gt, upper_limit=1, lower_limit=-1).to(device).float()
+                    graph, edges, imu, gt = graph.to(device).float(), edges.to(device).to(torch.int64), imu.to(device).float(), gt.to(device).float()
                     outputs = model(graph, edges, imu)
-                    pos_mse.update(outputs[0:3], gt[0:3])
-                    rot_mse.update(outputs[3:5], gt[3:5])
-            avg_pos_mse_val = pos_mse.compute().item()
-            avg_rot_mse_val = rot_mse.compute().item()
-            pos_mse.reset()
-            rot_mse.reset()
+                    x_mse.update(outputs[:, 0], gt[:, 0])
+                    y_mse.update(outputs[:, 1], gt[:, 1])
+                    z_mse.update(outputs[:, 2], gt[:, 2])
+                    theta_mse.update(outputs[:, 3], gt[:, 3])
+                    phi_mse.update(outputs[:, 4], gt[:, 4])
+            avg_x_mse_val = x_mse.compute().item()
+            avg_y_mse_val = y_mse.compute().item()
+            avg_z_mse_val = z_mse.compute().item()
+            avg_theta_mse_val = theta_mse.compute().item()
+            avg_phi_mse_val = phi_mse.compute().item()
+            x_mse.reset()
+            y_mse.reset()
+            z_mse.reset()
+            theta_mse.reset()
+            phi_mse.reset()
         
         #  model.dataset_type == "image" or model.dataset_type == "point":
         else:
@@ -300,50 +301,78 @@ def train_model():
             model.train()
             total_loss = 0.0
             for content, imu, gt in train_dl:
-                content, imu = content.to(device).float(), imu.to(device).float()
-                gt = cap_gt(gt, upper_limit=1, lower_limit=-1).to(device).float()
+                content, imu, gt = content.to(device).float(), imu.to(device).float(), gt.to(device).float()
                 optimizer.zero_grad()
                 outputs = model(content, imu)
                 loss = criterion(outputs, gt)
                 loss.backward()
                 optimizer.step()
                 total_loss += loss.item()
-                pos_mse.update(outputs[0:3], gt[0:3])
-                rot_mse.update(outputs[3:5], gt[3:5])
+                x_mse.update(outputs[:, 0], gt[:, 0])
+                y_mse.update(outputs[:, 1], gt[:, 1])
+                z_mse.update(outputs[:, 2], gt[:, 2])
+                theta_mse.update(outputs[:, 3], gt[:, 3])
+                phi_mse.update(outputs[:, 4], gt[:, 4])
             avg_loss = total_loss / len(train_dl)
-            avg_pos_mse_train = pos_mse.compute().item()
-            avg_rot_mse_train = rot_mse.compute().item()
-            pos_mse.reset()
-            rot_mse.reset()
+            avg_x_mse_train = x_mse.compute().item()
+            avg_y_mse_train = y_mse.compute().item()
+            avg_z_mse_train = z_mse.compute().item()
+            avg_theta_mse_train = theta_mse.compute().item()
+            avg_phi_mse_train = phi_mse.compute().item()
+            x_mse.reset()
+            y_mse.reset()
+            z_mse.reset()
+            theta_mse.reset()
+            phi_mse.reset()
             # Validation
             model.eval()
             with torch.no_grad():
                 for content, imu, gt in val_dl:
-                    content, imu = content.to(device).float(), imu.to(device).float()
-                    gt = cap_gt(gt, upper_limit=1, lower_limit=-1).to(device).float()
+                    content, imu, gt = content.to(device).float(), imu.to(device).float(), gt.to(device).float()
                     outputs = model(content, imu)
-                    pos_mse.update(outputs[0:3], gt[0:3])
-                    rot_mse.update(outputs[3:5], gt[3:5])
-            avg_pos_mse_val = pos_mse.compute().item()
-            avg_rot_mse_val = rot_mse.compute().item()
-            pos_mse.reset()
-            rot_mse.reset()
+                    x_mse.update(outputs[:, 0], gt[:, 0])
+                    y_mse.update(outputs[:, 1], gt[:, 1])
+                    z_mse.update(outputs[:, 2], gt[:, 2])
+                    theta_mse.update(outputs[:, 3], gt[:, 3])
+                    phi_mse.update(outputs[:, 4], gt[:, 4])
+            avg_x_mse_val = x_mse.compute().item()
+            avg_y_mse_val = y_mse.compute().item()
+            avg_z_mse_val = z_mse.compute().item()
+            avg_theta_mse_val = theta_mse.compute().item()
+            avg_phi_mse_val = phi_mse.compute().item()
+            x_mse.reset()
+            y_mse.reset()
+            z_mse.reset()
+            theta_mse.reset()
+            phi_mse.reset()
 
         # End of epoch
         # log data and rount to 3 decimal places
         log.info(f"Epoch {epoch+1}/{epochs} | Loss: {round(avg_loss, 3)} | Learning rate: {round(optimizer.param_groups[0]['lr'], 6)}" +
-                 f" | Train pos MSE: {round(avg_pos_mse_train, 3)} | Train rot MSE: {round(avg_rot_mse_train, 3)}" +
-                 f" | Val pos MSE: {round(avg_pos_mse_val, 3)} | Val rot MSE: {round(avg_rot_mse_val, 3)}")
+                 f" | Train X MSE: {round(avg_x_mse_train, 3)} | Train Y MSE: {round(avg_y_mse_train, 3)} | Train Z MSE: {round(avg_z_mse_train, 3)}" +
+                 f" | Train Theta MSE: {round(avg_theta_mse_train, 3)} | Train Phi MSE: {round(avg_phi_mse_train, 3)}" +
+                 f" | AVG Pos MSE Train: {round((avg_x_mse_train+avg_y_mse_train+avg_z_mse_train)/3, 3)} | AVG Rot MSE Train: {round((avg_theta_mse_train+avg_phi_mse_train)/2, 3)}" +
+                 f" | Val X MSE: {round(avg_x_mse_val, 3)} | Val Y MSE: {round(avg_y_mse_val, 3)} | Val Z MSE: {round(avg_z_mse_val, 3)}" + 
+                 f" | Val Theta MSE: {round(avg_theta_mse_val, 3)} | Val Phi MSE: {round(avg_phi_mse_val, 3)}" + 
+                 f" | AVG Pos MSE Val: {round((avg_x_mse_val+avg_y_mse_val+avg_z_mse_val)/3, 3)} | AVG Rot MSE Val: {round((avg_theta_mse_val+avg_phi_mse_val)/2, 3)}")
         wandb.log({
             "epoch": epoch+1,
             "loss": avg_loss,
             "learning_rate": optimizer.param_groups[0]['lr'],
-            "train_pos_mse": avg_pos_mse_train,
-            "train_rot_mse": avg_rot_mse_train,
-            "val_pos_mse": avg_pos_mse_val,
-            "val_rot_mse": avg_rot_mse_val
+            "train_x_mse": avg_x_mse_train,
+            "train_y_mse": avg_y_mse_train,
+            "train_z_mse": avg_z_mse_train,
+            "train_theta_mse": avg_theta_mse_train,
+            "train_phi_mse": avg_phi_mse_train,
+            "train_avg_pos_mse": (avg_x_mse_train+avg_y_mse_train+avg_z_mse_train)/3,
+            "train_avg_rot_mse": (avg_theta_mse_train+avg_phi_mse_train)/2,
+            "val_x_mse": avg_x_mse_val,
+            "val_y_mse": avg_y_mse_val,
+            "val_z_mse": avg_z_mse_val,
+            "val_theta_mse": avg_theta_mse_val,
+            "val_phi_mse": avg_phi_mse_val
         })
-        avg_val_mse = (avg_pos_mse_val + avg_rot_mse_val)/2
+        avg_val_mse = (avg_x_mse_val+avg_y_mse_val+avg_z_mse_val+avg_theta_mse_val+avg_phi_mse_val)/5
         # save model
         if avg_val_mse < lowest_val_mse:
             torch.save(model.state_dict(), f"models/{wandb.run.name}.pt")
@@ -367,10 +396,10 @@ if __name__ == "__main__":
     sweep_configuration = {
         "project": args.wandb_project,
         "name": f"mv_sweep_{time.time()}",
-        "metric": {"name": "val_mse", "goal": "maximize"},
+        "metric": {"name": "val_mse", "goal": "minimize"},
         "method": "grid",
         "parameters": {
-            "model_name": {"values": ["TSViTcls", "CNN", "NTU", "ASTGCN"]},
+            "model_name": {"values": ["CNN", "TSViTcls", "ASTGCN", "NTU"]},
             "graph_dataset_path": {"values": [args.graph_dataset_path]},
             "image_dataset_path": {"values": [args.image_dataset_path]},
             "point_dataset_path": {"values": [args.point_dataset_path]},
