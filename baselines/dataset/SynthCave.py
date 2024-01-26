@@ -39,11 +39,23 @@ class GraphDataset(Dataset):
                 samples_in_graphs = graphs.shape[0] - self.frames + 1
                 self.index[self.samples] = sequence_id
                 self.samples += samples_in_graphs
-                self.x_rounded_hist += np.clip(np.round(gts[:, 0], 1), self.gt_limit[0], self.gt_limit[1])
-                self.y_rounded_hist += np.clip(np.round(gts[:, 1], 1), self.gt_limit[0], self.gt_limit[1])
-                self.z_rounded_hist += np.clip(np.round(gts[:, 2], 1), self.gt_limit[0], self.gt_limit[1])
-                self.theta_rounded_hist += np.clip(np.round(np.deg2rad(gts[:, 6]) if self.gt_as_rad else gts[:, 6], 1), self.gt_limit[0], self.gt_limit[1])
-                self.phi_rounded_hist += np.clip(np.round(np.deg2rad(gts[:, 7]) if self.gt_as_rad else gts[:, 7], 1), self.gt_limit[0], self.gt_limit[1])
+                # collect histogram data
+                temp_x_rounded_hist = np.round(gts[:, 0], 1)
+                temp_y_rounded_hist = np.round(gts[:, 1], 1)
+                temp_z_rounded_hist = np.round(gts[:, 2], 1)
+                temp_theta_rounded_hist = np.round(np.deg2rad(gts[:, 6]) if self.gt_as_rad else gts[:, 6], 1)
+                temp_phi_rounded_hist = np.round(np.deg2rad(gts[:, 7]) if self.gt_as_rad else gts[:, 7], 1)
+                if self.gt_limit is not None:
+                    temp_x_rounded_hist = np.clip(temp_x_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_y_rounded_hist = np.clip(temp_y_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_z_rounded_hist = np.clip(temp_z_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_theta_rounded_hist = np.clip(temp_theta_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_phi_rounded_hist = np.clip(temp_phi_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                self.x_rounded_hist += temp_x_rounded_hist.tolist()
+                self.y_rounded_hist += temp_y_rounded_hist.tolist()
+                self.z_rounded_hist += temp_z_rounded_hist.tolist()
+                self.theta_rounded_hist += temp_theta_rounded_hist.tolist()
+                self.phi_rounded_hist += temp_phi_rounded_hist.tolist()
                 del graphs, imus, gts
         # create histograms
         self.x_rounded_hist = np.unique(self.x_rounded_hist, return_counts=True)
@@ -161,11 +173,23 @@ class PointDataset(Dataset):
                 samples_in_pcs = pcs.shape[0] - self.frames + 1
                 self.index[self.samples] = sequence_id
                 self.samples += samples_in_pcs
-                self.x_rounded_hist += np.clip(np.round(gts[:, 0], 1), self.gt_limit[0], self.gt_limit[1])
-                self.y_rounded_hist += np.clip(np.round(gts[:, 1], 1), self.gt_limit[0], self.gt_limit[1])
-                self.z_rounded_hist += np.clip(np.round(gts[:, 2], 1), self.gt_limit[0], self.gt_limit[1])
-                self.theta_rounded_hist += np.clip(np.round(np.deg2rad(gts[:, 6]) if self.gt_as_rad else gts[:, 6], 1), self.gt_limit[0], self.gt_limit[1])
-                self.phi_rounded_hist += np.clip(np.round(np.deg2rad(gts[:, 7]) if self.gt_as_rad else gts[:, 7], 1), self.gt_limit[0], self.gt_limit[1])
+                # collect histogram data
+                temp_x_rounded_hist = np.round(gts[:, 0], 1)
+                temp_y_rounded_hist = np.round(gts[:, 1], 1)
+                temp_z_rounded_hist = np.round(gts[:, 2], 1)
+                temp_theta_rounded_hist = np.round(np.deg2rad(gts[:, 6]) if self.gt_as_rad else gts[:, 6], 1)
+                temp_phi_rounded_hist = np.round(np.deg2rad(gts[:, 7]) if self.gt_as_rad else gts[:, 7], 1)
+                if self.gt_limit is not None:
+                    temp_x_rounded_hist = np.clip(temp_x_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_y_rounded_hist = np.clip(temp_y_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_z_rounded_hist = np.clip(temp_z_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_theta_rounded_hist = np.clip(temp_theta_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_phi_rounded_hist = np.clip(temp_phi_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                self.x_rounded_hist += temp_x_rounded_hist.tolist()
+                self.y_rounded_hist += temp_y_rounded_hist.tolist()
+                self.z_rounded_hist += temp_z_rounded_hist.tolist()
+                self.theta_rounded_hist += temp_theta_rounded_hist.tolist()
+                self.phi_rounded_hist += temp_phi_rounded_hist.tolist()
                 del pcs, imus, gts
         # create histograms
         self.x_rounded_hist = np.unique(self.x_rounded_hist, return_counts=True)
@@ -269,13 +293,26 @@ class ImageDataset(Dataset):
                 if imgs.shape[0] != imus.shape[0] or imgs.shape[0] != gts.shape[0]:
                     raise Exception(f"In sequence {sequence_id}, the number of images ({imgs.shape[0]}), IMU ({imus.shape[0]}) and GT ({gts.shape[0]}) do not match.")
                 samples_in_imgs = imgs.shape[0] - self.frames + 1
+                # add the sequence to the index
                 self.index[self.samples] = sequence_id
                 self.samples += samples_in_imgs
-                self.x_rounded_hist += np.clip(np.round(gts[:, 0], 1), self.gt_limit[0], self.gt_limit[1])
-                self.y_rounded_hist += np.clip(np.round(gts[:, 1], 1), self.gt_limit[0], self.gt_limit[1])
-                self.z_rounded_hist += np.clip(np.round(gts[:, 2], 1), self.gt_limit[0], self.gt_limit[1])
-                self.theta_rounded_hist += np.clip(np.round(np.deg2rad(gts[:, 6]) if self.gt_as_rad else gts[:, 6], 1), self.gt_limit[0], self.gt_limit[1])
-                self.phi_rounded_hist += np.clip(np.round(np.deg2rad(gts[:, 7]) if self.gt_as_rad else gts[:, 7], 1), self.gt_limit[0], self.gt_limit[1])
+                # collect histogram data
+                temp_x_rounded_hist = np.round(gts[:, 0], 1)
+                temp_y_rounded_hist = np.round(gts[:, 1], 1)
+                temp_z_rounded_hist = np.round(gts[:, 2], 1)
+                temp_theta_rounded_hist = np.round(np.deg2rad(gts[:, 6]) if self.gt_as_rad else gts[:, 6], 1)
+                temp_phi_rounded_hist = np.round(np.deg2rad(gts[:, 7]) if self.gt_as_rad else gts[:, 7], 1)
+                if self.gt_limit is not None:
+                    temp_x_rounded_hist = np.clip(temp_x_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_y_rounded_hist = np.clip(temp_y_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_z_rounded_hist = np.clip(temp_z_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_theta_rounded_hist = np.clip(temp_theta_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                    temp_phi_rounded_hist = np.clip(temp_phi_rounded_hist, self.gt_limit[0], self.gt_limit[1])
+                self.x_rounded_hist += temp_x_rounded_hist.tolist()
+                self.y_rounded_hist += temp_y_rounded_hist.tolist()
+                self.z_rounded_hist += temp_z_rounded_hist.tolist()
+                self.theta_rounded_hist += temp_theta_rounded_hist.tolist()
+                self.phi_rounded_hist += temp_phi_rounded_hist.tolist()
                 del imgs, imus, gts
         # create histograms
         self.x_rounded_hist = np.unique(self.x_rounded_hist, return_counts=True)
@@ -347,26 +384,26 @@ class ImageDataset(Dataset):
         return torch.tensor([gt[0], gt[1], gt[2], np.rad2deg(gt[3]), np.rad2deg(gt[4])])
     
 
-ds = ImageDataset("C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train", 2)
+# ds = ImageDataset("C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train", 2)
 
-max_phi, max_theta = 0, 0
+# max_phi, max_theta = 0, 0
 
-phis, thetas = [], []
+# phis, thetas = [], []
 
-for i in range(len(ds)):
-    _, _, gt = ds[i]
-    phi, theta = gt[3].item(), gt[4].item()
-    if phi > max_phi:
-        max_phi = phi
-    if theta > max_theta:
-        max_theta = theta
+# for i in range(len(ds)):
+#     _, _, gt = ds[i]
+#     phi, theta = gt[3].item(), gt[4].item()
+#     if phi > max_phi:
+#         max_phi = phi
+#     if theta > max_theta:
+#         max_theta = theta
 
-    phis.append(round(phi, 1))
-    thetas.append(round(theta, 1))
-print(max_phi, max_theta)
-# plot histogram
-import matplotlib.pyplot as plt
-plt.hist(phis, bins=100)
-plt.show()
-plt.hist(thetas, bins=100)
-plt.show()
+#     phis.append(round(phi, 1))
+#     thetas.append(round(theta, 1))
+# print(max_phi, max_theta)
+# # plot histogram
+# import matplotlib.pyplot as plt
+# plt.hist(phis, bins=100)
+# plt.show()
+# plt.hist(thetas, bins=100)
+# plt.show()
