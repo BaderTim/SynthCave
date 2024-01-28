@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import numpy as np
+from scipy.spatial.transform import Rotation as Rot
 
 from baselines.model.ICP.module import icp
 
@@ -13,7 +14,7 @@ class ICP(nn.Module):
 
     def forward(self, xyzs, imu_data=None):
         B, K, C, N = xyzs.shape
-        res = np.zeros((B, 5))
+        res = torch.zeros((B, 5))
         # Perform ICP
         for b in range(B):
             prev_point_cloud = xyzs[b, 0, :, :].cpu().numpy()
@@ -24,7 +25,8 @@ class ICP(nn.Module):
             R = T[:3, :3]  # rotation matrix
             t = T[:3, 3]   # translation vector
             # Convert the rotation matrix to Euler angles
-            thetaX, thetaY, thetaZ = np.linalg.euler_from_matrix(R, 'sxyz')
+            r = Rot.from_matrix(R)
+            thetaX, thetaY, thetaZ = r.as_euler('xyz')
             # Switch y and z
             thetaY, thetaZ = thetaZ, thetaY
             # Convert Euler angles (roll, pitch, yaw) to spherical coordinates (theta, phi)
@@ -47,7 +49,7 @@ if __name__ == "__main__":
     parameters = sum([np.prod(p.size()) for p in parameters]) / 1_000_000
     print('Trainable Parameters: %.3fM' % parameters)
 
-    x = torch.randn(8, K, 19_200, 3) # (B, L, C, N)
+    x = torch.randn(8, K, 50_200, 3) # (B, L, C, N)
 
     out = model(x)
 
