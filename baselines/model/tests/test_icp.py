@@ -20,10 +20,12 @@ limitations under the License.
 """
 import numpy as np
 import time
+import torch
+from baselines.model.ICP.ICP import ICP
 from baselines.model.ICP.module import icp
 
 
-def test_icp():
+def test_icp_module():
 
     # Constants
     N = 10                                    # number of random points in the dataset
@@ -80,3 +82,10 @@ def test_icp():
         assert np.mean(distances) < 6*noise_sigma                   # mean error should be small
         assert np.allclose(T[0:3,0:3].T, R, atol=6*noise_sigma)     # T and R should be inverses
         assert np.allclose(-T[0:3,3], t, atol=6*noise_sigma)        # T and t should be inverses
+
+def test_icp_model():
+    K = 2
+    model = ICP(K=K)
+    x = torch.randn(8, K, 50_200, 3) # (B, L, C, N)
+    out = model(x)
+    assert out.shape == (8, 5)
