@@ -1,6 +1,6 @@
 import torch
 
-from baselines.model.RANDOM.RANDOM import RANDOM
+from model.RANDOM.RANDOM import RANDOM
 
 def test_random_forward_pass():
     K = 2

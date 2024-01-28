@@ -21,8 +21,8 @@ limitations under the License.
 import numpy as np
 import time
 import torch
-from baselines.model.ICP.ICP import ICP
-from baselines.model.ICP.module import icp
+from model.ICP.ICP import ICP
+from model.ICP.module import icp
 
 
 def test_icp_module():

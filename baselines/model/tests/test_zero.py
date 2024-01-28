@@ -1,6 +1,6 @@
 import torch
 
-from baselines.model.ZERO.ZERO import ZERO
+from model.ZERO.ZERO import ZERO
 
 def test_zero_forward_pass():
     K = 2
