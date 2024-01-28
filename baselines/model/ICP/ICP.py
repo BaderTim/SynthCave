@@ -3,7 +3,7 @@ import torch.nn as nn
 import numpy as np
 from scipy.spatial.transform import Rotation as Rot
 
-from baselines.model.ICP.module import icp
+from model.ICP.module import icp
 
 class ICP(nn.Module):
     def __init__(self, K=2):
