@@ -5,4 +5,5 @@ data/1_raw/*
 data/2_cleaning/*
 data/3_derived/*
 data/4_staging/*
+data/4_staging_named/*
 data/4_staging_no_sdr/*

@@ -190,30 +190,30 @@ if __name__ == "__main__":
                 lidar_v_angle=lidar1["vertical_fov"],
                 lidar_range=lidar1["range"]
             )
-            np.save(os.path.join(args.target, f"lidar1/graph/{path_end}/{index}_graph.npy"), C_lidar1_graph)
-            np.save(os.path.join(args.target, f"lidar1/graph/{path_end}/{index}_edges.npy"), C_lidar1_edges)
-            np.save(os.path.join(args.target, f"lidar1/graph/{path_end}/{index}_imu.npy"), C_lidar1_imu1)
-            shutil.copy(os.path.join(source_dir, f"lidar1_gt.npy"), os.path.join(args.target, f"lidar1/graph/{path_end}/{index}_gt.npy"))
+            np.save(os.path.join(args.target, f"lidar1/graph/{path_end}/{index}_{section_name}_graph.npy"), C_lidar1_graph)
+            np.save(os.path.join(args.target, f"lidar1/graph/{path_end}/{index}_{section_name}_edges.npy"), C_lidar1_edges)
+            np.save(os.path.join(args.target, f"lidar1/graph/{path_end}/{index}_{section_name}_imu.npy"), C_lidar1_imu1)
+            shutil.copy(os.path.join(source_dir, f"lidar1_gt.npy"), os.path.join(args.target, f"lidar1/graph/{path_end}/{index}_{section_name}_gt.npy"))
             C_lidar2_graph, C_lidar2_edges = distances_to_graph(
                 C_lidar=C_lidar2,
                 lidar_h_angle=lidar2["horizontal_fov"],
                 lidar_v_angle=lidar2["vertical_fov"],
                 lidar_range=lidar2["range"]
             )
-            np.save(os.path.join(args.target, f"lidar2/graph/{path_end}/{index}_graph.npy"), C_lidar2_graph)
-            np.save(os.path.join(args.target, f"lidar2/graph/{path_end}/{index}_edges.npy"), C_lidar2_edges)
-            np.save(os.path.join(args.target, f"lidar2/graph/{path_end}/{index}_imu.npy"), C_lidar2_imu1)
-            shutil.copy(os.path.join(source_dir, f"lidar2_gt.npy"), os.path.join(args.target, f"lidar2/graph/{path_end}/{index}_gt.npy"))
+            np.save(os.path.join(args.target, f"lidar2/graph/{path_end}/{index}_{section_name}_graph.npy"), C_lidar2_graph)
+            np.save(os.path.join(args.target, f"lidar2/graph/{path_end}/{index}_{section_name}_edges.npy"), C_lidar2_edges)
+            np.save(os.path.join(args.target, f"lidar2/graph/{path_end}/{index}_{section_name}_imu.npy"), C_lidar2_imu1)
+            shutil.copy(os.path.join(source_dir, f"lidar2_gt.npy"), os.path.join(args.target, f"lidar2/graph/{path_end}/{index}_{section_name}_gt.npy"))
             C_lidar3_graph, C_lidar3_edges = distances_to_graph(
                 C_lidar=C_lidar3,
                 lidar_h_angle=lidar3["horizontal_fov"],
                 lidar_v_angle=lidar3["vertical_fov"],
                 lidar_range=lidar3["range"]
             )
-            np.save(os.path.join(args.target, f"lidar3/graph/{path_end}/{index}_graph.npy"), C_lidar3_graph)
-            np.save(os.path.join(args.target, f"lidar3/graph/{path_end}/{index}_edges.npy"), C_lidar3_edges)
-            np.save(os.path.join(args.target, f"lidar3/graph/{path_end}/{index}_imu.npy"), C_lidar3_imu1)
-            shutil.copy(os.path.join(source_dir, f"lidar3_gt.npy"), os.path.join(args.target, f"lidar3/graph/{path_end}/{index}_gt.npy"))
+            np.save(os.path.join(args.target, f"lidar3/graph/{path_end}/{index}_{section_name}_graph.npy"), C_lidar3_graph)
+            np.save(os.path.join(args.target, f"lidar3/graph/{path_end}/{index}_{section_name}_edges.npy"), C_lidar3_edges)
+            np.save(os.path.join(args.target, f"lidar3/graph/{path_end}/{index}_{section_name}_imu.npy"), C_lidar3_imu1)
+            shutil.copy(os.path.join(source_dir, f"lidar3_gt.npy"), os.path.join(args.target, f"lidar3/graph/{path_end}/{index}_{section_name}_gt.npy"))
 
             # build point clouds
             C_lidar1_point_cloud = distances_to_point_cloud(
@@ -222,47 +222,47 @@ if __name__ == "__main__":
                 lidar_v_angle=lidar1["vertical_fov"],
                 lidar_range=lidar1["range"]
             )
-            np.save(os.path.join(args.target, f"lidar1/point_cloud/{path_end}/{index}_pc.npy"), C_lidar1_point_cloud)
-            np.save(os.path.join(args.target, f"lidar1/point_cloud/{path_end}/{index}_imu.npy"), C_lidar1_imu1)
-            shutil.copy(os.path.join(source_dir, f"lidar1_gt.npy"), os.path.join(args.target, f"lidar1/point_cloud/{path_end}/{index}_gt.npy"))
+            np.save(os.path.join(args.target, f"lidar1/point_cloud/{path_end}/{index}_{section_name}_pc.npy"), C_lidar1_point_cloud)
+            np.save(os.path.join(args.target, f"lidar1/point_cloud/{path_end}/{index}_{section_name}_imu.npy"), C_lidar1_imu1)
+            shutil.copy(os.path.join(source_dir, f"lidar1_gt.npy"), os.path.join(args.target, f"lidar1/point_cloud/{path_end}/{index}_{section_name}_gt.npy"))
             C_lidar2_point_cloud = distances_to_point_cloud(
                 C_lidar=C_lidar2,
                 lidar_h_angle=lidar2["horizontal_fov"],
                 lidar_v_angle=lidar2["vertical_fov"],
                 lidar_range=lidar2["range"]
             )
-            np.save(os.path.join(args.target, f"lidar2/point_cloud/{path_end}/{index}_pc.npy"), C_lidar2_point_cloud)
-            np.save(os.path.join(args.target, f"lidar2/point_cloud/{path_end}/{index}_imu.npy"), C_lidar2_imu1)
-            shutil.copy(os.path.join(source_dir, f"lidar2_gt.npy"), os.path.join(args.target, f"lidar2/point_cloud/{path_end}/{index}_gt.npy"))
+            np.save(os.path.join(args.target, f"lidar2/point_cloud/{path_end}/{index}_{section_name}_pc.npy"), C_lidar2_point_cloud)
+            np.save(os.path.join(args.target, f"lidar2/point_cloud/{path_end}/{index}_{section_name}_imu.npy"), C_lidar2_imu1)
+            shutil.copy(os.path.join(source_dir, f"lidar2_gt.npy"), os.path.join(args.target, f"lidar2/point_cloud/{path_end}/{index}_{section_name}_gt.npy"))
             C_lidar3_point_cloud = distances_to_point_cloud(
                 C_lidar=C_lidar3,
                 lidar_h_angle=lidar3["horizontal_fov"],
                 lidar_v_angle=lidar3["vertical_fov"],
                 lidar_range=lidar3["range"]
             )
-            np.save(os.path.join(args.target, f"lidar3/point_cloud/{path_end}/{index}_pc.npy"), C_lidar3_point_cloud)
-            np.save(os.path.join(args.target, f"lidar3/point_cloud/{path_end}/{index}_imu.npy"), C_lidar3_imu1)
-            shutil.copy(os.path.join(source_dir, f"lidar3_gt.npy"), os.path.join(args.target, f"lidar3/point_cloud/{path_end}/{index}_gt.npy"))
+            np.save(os.path.join(args.target, f"lidar3/point_cloud/{path_end}/{index}_{section_name}_pc.npy"), C_lidar3_point_cloud)
+            np.save(os.path.join(args.target, f"lidar3/point_cloud/{path_end}/{index}_{section_name}_imu.npy"), C_lidar3_imu1)
+            shutil.copy(os.path.join(source_dir, f"lidar3_gt.npy"), os.path.join(args.target, f"lidar3/point_cloud/{path_end}/{index}_{section_name}_gt.npy"))
 
             # build depth images
             C_lidar1_depth_image = distances_to_depth_image(
                 C_lidar=C_lidar1,
                 lidar_range=lidar1["range"]
             )
-            np.save(os.path.join(args.target, f"lidar1/depth_image/{path_end}/{index}_img.npy"), C_lidar1_depth_image)
-            np.save(os.path.join(args.target, f"lidar1/depth_image/{path_end}/{index}_imu.npy"), C_lidar1_imu1)
-            shutil.copy(os.path.join(source_dir, f"lidar1_gt.npy"), os.path.join(args.target, f"lidar1/depth_image/{path_end}/{index}_gt.npy"))
+            np.save(os.path.join(args.target, f"lidar1/depth_image/{path_end}/{index}_{section_name}_img.npy"), C_lidar1_depth_image)
+            np.save(os.path.join(args.target, f"lidar1/depth_image/{path_end}/{index}_{section_name}_imu.npy"), C_lidar1_imu1)
+            shutil.copy(os.path.join(source_dir, f"lidar1_gt.npy"), os.path.join(args.target, f"lidar1/depth_image/{path_end}/{index}_{section_name}_gt.npy"))
             C_lidar2_depth_image = distances_to_depth_image(
                 C_lidar=C_lidar2,
                 lidar_range=lidar2["range"]
             )
-            np.save(os.path.join(args.target, f"lidar2/depth_image/{path_end}/{index}_img.npy"), C_lidar2_depth_image)
-            np.save(os.path.join(args.target, f"lidar2/depth_image/{path_end}/{index}_imu.npy"), C_lidar2_imu1)
-            shutil.copy(os.path.join(source_dir, f"lidar2_gt.npy"), os.path.join(args.target, f"lidar2/depth_image/{path_end}/{index}_gt.npy"))
+            np.save(os.path.join(args.target, f"lidar2/depth_image/{path_end}/{index}_{section_name}_img.npy"), C_lidar2_depth_image)
+            np.save(os.path.join(args.target, f"lidar2/depth_image/{path_end}/{index}_{section_name}_imu.npy"), C_lidar2_imu1)
+            shutil.copy(os.path.join(source_dir, f"lidar2_gt.npy"), os.path.join(args.target, f"lidar2/depth_image/{path_end}/{index}_{section_name}_gt.npy"))
             C_lidar3_depth_image = distances_to_depth_image(
                 C_lidar=C_lidar3,
                 lidar_range=lidar3["range"]
             )
-            np.save(os.path.join(args.target, f"lidar3/depth_image/{path_end}/{index}_img.npy"), C_lidar3_depth_image)
-            np.save(os.path.join(args.target, f"lidar3/depth_image/{path_end}/{index}_imu.npy"), C_lidar3_imu1)
-            shutil.copy(os.path.join(source_dir, f"lidar3_gt.npy"), os.path.join(args.target, f"lidar3/depth_image/{path_end}/{index}_gt.npy"))
+            np.save(os.path.join(args.target, f"lidar3/depth_image/{path_end}/{index}_{section_name}_img.npy"), C_lidar3_depth_image)
+            np.save(os.path.join(args.target, f"lidar3/depth_image/{path_end}/{index}_{section_name}_imu.npy"), C_lidar3_imu1)
+            shutil.copy(os.path.join(source_dir, f"lidar3_gt.npy"), os.path.join(args.target, f"lidar3/depth_image/{path_end}/{index}_{section_name}_gt.npy"))
