@@ -1,0 +1,268 @@
+Microsoft Windows [Version 10.0.19045.3930]
+(c) Microsoft Corporation. Alle Rechte vorbehalten.
+
+C:\Users\bader>cd C:\Users\bader\Desktop\SynthCave
+
+C:\Users\bader\Desktop\SynthCave>python baselines/eval.py
+C:\Users\bader\AppData\Local\Programs\Python\Python310\lib\site-packages\torchaudio\backend\utils.py:74: UserWarning: No audio backend is available.
+  warnings.warn("No audio backend is available.")
+Create sweep with ID: 9qe8p0lc
+Sweep URL: https://wandb.ai/badertim/synthcave/sweeps/9qe8p0lc
+[2024-01-29 11:17:43,706] INFO: Starting sweep agent: entity=None, project=None, count=None
+wandb: Agent Starting Run: v2nl2i7i with config:
+wandb:  batch_size: 1
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_config: {'K': 2, 'model_name': 'ICP', 'path': ''}
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: Currently logged in as: badertim. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240129_111746-v2nl2i7i
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run stilted-sweep-1
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/9qe8p0lc
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/v2nl2i7i
+[2024-01-29 11:17:47,237] INFO: Model: ICP | Trainable parameters: 0.0M | Dataset type: point
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud/test'...
+Dataset initialized with 5066 samples.
+[2024-01-29 11:20:11,727] INFO: water: 0.438
+curvy_path_downwards: 0.3561
+mineshaft: 0.343
+shaft_downwards: 0.5449
+entrance: 0.3718
+curvy_path_even: 0.3158
+curvy_path_upwards: 0.388
+shaft_upwards: 0.4124
+path_upwards: 0.3766
+path_even: 0.338
+path_downwards: 0.3798
+avg: 0.3877
+
+wandb: Waiting for W&B process to finish... (success).
+wandb:  View run stilted-sweep-1 at: https://wandb.ai/badertim/synthcave/runs/v2nl2i7i
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzNDc3ODg0Nw==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240129_111746-v2nl2i7i\logs
+wandb: Agent Starting Run: 6cs9hrxe with config:
+wandb:  batch_size: 1
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_config: {'K': -1, 'model_name': 'RANDOM', 'path': ''}
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240129_112022-6cs9hrxe
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run crisp-sweep-2
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/9qe8p0lc
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/6cs9hrxe
+[2024-01-29 11:20:23,043] INFO: Model: RANDOM | Trainable parameters: 0.0M | Dataset type: image
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/test'...
+Dataset initialized with 5264 samples.
+[2024-01-29 11:21:03,655] INFO: shaft_upwards: 0.4378
+path_even: 0.3715
+water: 0.4736
+path_upwards: 0.386
+curvy_path_even: 0.3887
+shaft_downwards: 0.551
+curvy_path_downwards: 0.3848
+entrance: 0.3858
+curvy_path_upwards: 0.3886
+mineshaft: 0.3753
+path_downwards: 0.3883
+avg: 0.4119
+
+wandb: Waiting for W&B process to finish... (success).
+wandb:  View run crisp-sweep-2 at: https://wandb.ai/badertim/synthcave/runs/6cs9hrxe
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzNDc3ODg0Nw==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240129_112022-6cs9hrxe\logs
+wandb: Agent Starting Run: mh74xu2g with config:
+wandb:  batch_size: 1
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_config: {'K': -1, 'model_name': 'ZERO', 'path': ''}
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240129_112119-mh74xu2g
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run denim-sweep-3
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/9qe8p0lc
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/mh74xu2g
+[2024-01-29 11:21:20,710] INFO: Model: ZERO | Trainable parameters: 0.0M | Dataset type: image
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/test'...
+Dataset initialized with 5264 samples.
+[2024-01-29 11:22:05,035] INFO: shaft_downwards: 0.2202
+mineshaft: 0.0416
+path_even: 0.0347
+curvy_path_even: 0.0382
+curvy_path_downwards: 0.0513
+path_upwards: 0.0626
+curvy_path_upwards: 0.0607
+shaft_upwards: 0.1095
+water: 0.1264
+path_downwards: 0.0551
+entrance: 0.0612
+avg: 0.0783
+
+wandb: Waiting for W&B process to finish... (success).
+wandb:  View run denim-sweep-3 at: https://wandb.ai/badertim/synthcave/runs/mh74xu2g
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzNDc3ODg0Nw==/version_details/v16
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240129_112119-mh74xu2g\logs
+wandb: Agent Starting Run: het3o619 with config:
+wandb:  batch_size: 1
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_config: {'K': 4, 'model_name': 'TSViTcls', 'path': 'C:/Users/bader/Desktop/SynthCave/models/worthy-sweep-9.pt'}
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240129_112224-het3o619
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run smart-sweep-4
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/9qe8p0lc
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/het3o619
+[2024-01-29 11:22:25,552] INFO: Model: TSViTcls | Trainable parameters: 3.444M | Dataset type: image
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/test'...
+Dataset initialized with 4934 samples.
+[2024-01-29 11:24:04,793] INFO: path_even: 0.0169
+water: 0.0932
+path_upwards: 0.0253
+curvy_path_downwards: 0.0289
+entrance: 0.0475
+path_downwards: 0.0231
+mineshaft: 0.0247
+curvy_path_upwards: 0.0199
+curvy_path_even: 0.0167
+shaft_upwards: 0.0737
+shaft_downwards: 0.1427
+avg: 0.0466
+
+wandb: Waiting for W&B process to finish... (success).
+wandb:  View run smart-sweep-4 at: https://wandb.ai/badertim/synthcave/runs/het3o619
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzNDc3ODg0Nw==/version_details/v17
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240129_112224-het3o619\logs
+wandb: Agent Starting Run: emlvicii with config:
+wandb:  batch_size: 1
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_config: {'K': 2, 'model_name': 'CNN', 'path': 'C:/Users/bader/Desktop/SynthCave/models/worthy-sweep-14.pt'}
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240129_112419-emlvicii
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run daily-sweep-5
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/9qe8p0lc
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/emlvicii
+[2024-01-29 11:24:20,284] INFO: Model: CNN | Trainable parameters: 1.678M | Dataset type: image
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/test'...
+Dataset initialized with 5066 samples.
+[2024-01-29 11:25:10,904] INFO: path_even: 0.0164
+water: 0.093
+shaft_downwards: 0.1509
+mineshaft: 0.0226
+curvy_path_even: 0.0171
+curvy_path_upwards: 0.02
+entrance: 0.052
+shaft_upwards: 0.0825
+path_downwards: 0.0308
+curvy_path_downwards: 0.0304
+path_upwards: 0.0313
+avg: 0.0497
+
+wandb: Waiting for W&B process to finish... (success).
+wandb:  View run daily-sweep-5 at: https://wandb.ai/badertim/synthcave/runs/emlvicii
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzNDc3ODg0Nw==/version_details/v18
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240129_112419-emlvicii\logs
+wandb: Agent Starting Run: fpmyaa18 with config:
+wandb:  batch_size: 1
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_config: {'K': 4, 'model_name': 'ASTGCN', 'path': 'C:/Users/bader/Desktop/SynthCave/models/swift-sweep-11.pt'}
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240129_112527-fpmyaa18
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run stoic-sweep-6
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/9qe8p0lc
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/fpmyaa18
+[2024-01-29 11:25:28,630] INFO: Model: ASTGCN | Trainable parameters: 6.016M | Dataset type: graph
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph/test'...
+Dataset initialized with 4934 samples.
+[2024-01-29 11:38:10,121] INFO: water: 0.0949
+curvy_path_even: 0.0168
+shaft_upwards: 0.0747
+path_upwards: 0.0254
+curvy_path_upwards: 0.0194
+mineshaft: 0.0243
+path_even: 0.0186
+entrance: 0.0451
+path_downwards: 0.0251
+curvy_path_downwards: 0.0271
+shaft_downwards: 0.1407
+avg: 0.0466
+
+wandb: Waiting for W&B process to finish... (success).
+wandb:  View run stoic-sweep-6 at: https://wandb.ai/badertim/synthcave/runs/fpmyaa18
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzNDc3ODg0Nw==/version_details/v19
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240129_112527-fpmyaa18\logs
+wandb: Agent Starting Run: yjc9zrf0 with config:
+wandb:  batch_size: 1
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_config: {'K': 4, 'model_name': 'NTU', 'path': 'C:/Users/bader/Desktop/SynthCave/models/likely-sweep-12.pt'}
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240129_113824-yjc9zrf0
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run dulcet-sweep-7
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/9qe8p0lc
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/yjc9zrf0
+[2024-01-29 11:38:25,639] INFO: Model: NTU | Trainable parameters: 8.962M | Dataset type: point
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud/test'...
+Dataset initialized with 4934 samples.
+[2024-01-29 11:42:01,549] INFO: curvy_path_upwards: 0.0212
+path_even: 0.02
+path_downwards: 0.024
+water: 0.0954
+path_upwards: 0.0239
+entrance: 0.0488
+curvy_path_even: 0.0183
+shaft_upwards: 0.0782
+mineshaft: 0.0258
+curvy_path_downwards: 0.0308
+shaft_downwards: 0.1484
+avg: 0.0486
+
+wandb: Waiting for W&B process to finish... (success).
+wandb:  View run dulcet-sweep-7 at: https://wandb.ai/badertim/synthcave/runs/yjc9zrf0
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzNDc3ODg0Nw==/version_details/v20
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240129_113824-yjc9zrf0\logs
+wandb: Sweep Agent: Waiting for job.
+wandb: Sweep Agent: Exiting.
+
+C:\Users\bader\Desktop\SynthCave>
