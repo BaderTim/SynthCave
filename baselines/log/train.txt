@@ -1,0 +1,1443 @@
+Microsoft Windows [Version 10.0.19045.3930]
+(c) Microsoft Corporation. Alle Rechte vorbehalten.
+
+C:\Users\bader>cd C:\Users\bader\Desktop\SynthCave
+
+C:\Users\bader\Desktop\SynthCave>python baselines/train.py -w "synthcave" -g "C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph" -i "C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image" -p "C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud"
+C:\Users\bader\AppData\Local\Programs\Python\Python310\lib\site-packages\torchaudio\backend\utils.py:74: UserWarning: No audio backend is available.
+  warnings.warn("No audio backend is available.")
+Create sweep with ID: e8r2kwh0
+Sweep URL: https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+[2024-01-26 13:14:07,487] INFO: Starting sweep agent: entity=None, project=None, count=None
+wandb: Agent Starting Run: 6jvbszw6 with config:
+wandb:  K: 16
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: TSViTcls
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: Currently logged in as: badertim. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240126_131410-6jvbszw6
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run vibrant-sweep-1
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/6jvbszw6
+[2024-01-26 13:14:11,362] INFO: Model: TSViTcls | Trainable parameters: 3.464M | Dataset type: image
+[2024-01-26 13:14:11,363] INFO: K: 16 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train'...
+Dataset initialized with 7967 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/val'...
+Dataset initialized with 2804 samples.
+[2024-01-26 13:15:49,228] INFO: Epoch 1/30 | Loss: 0.065 | Learning rate: 0.001 | Train X MSE: 0.08 | Train Y MSE: 0.096 | Train Z MSE: 0.065 | Train Theta MSE: 0.024 | Train Phi MSE: 0.059 | AVG Pos MSE Train: 0.08 | AVG Rot MSE Train: 0.042 | Val X MSE: 0.09 | Val Y MSE: 0.137 | Val Z MSE: 0.069 | Val Theta MSE: 0.012 | Val Phi MSE: 0.053 | AVG Pos MSE Val: 0.099 | AVG Rot MSE Val: 0.033
+[2024-01-26 13:17:21,982] INFO: Epoch 2/30 | Loss: 0.044 | Learning rate: 0.001 | Train X MSE: 0.049 | Train Y MSE: 0.067 | Train Z MSE: 0.049 | Train Theta MSE: 0.007 | Train Phi MSE: 0.048 | AVG Pos MSE Train: 0.055 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.061 | Val Y MSE: 0.172 | Val Z MSE: 0.098 | Val Theta MSE: 0.013 | Val Phi MSE: 0.054 | AVG Pos MSE Val: 0.11 | AVG Rot MSE Val: 0.034
+[2024-01-26 13:18:56,187] INFO: Epoch 3/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.044 | Train Y MSE: 0.062 | Train Z MSE: 0.043 | Train Theta MSE: 0.007 | Train Phi MSE: 0.047 | AVG Pos MSE Train: 0.05 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.072 | Val Y MSE: 0.211 | Val Z MSE: 0.134 | Val Theta MSE: 0.014 | Val Phi MSE: 0.052 | AVG Pos MSE Val: 0.139 | AVG Rot MSE Val: 0.033
+[2024-01-26 13:20:31,697] INFO: Epoch 4/30 | Loss: 0.039 | Learning rate: 0.001 | Train X MSE: 0.042 | Train Y MSE: 0.059 | Train Z MSE: 0.042 | Train Theta MSE: 0.007 | Train Phi MSE: 0.046 | AVG Pos MSE Train: 0.048 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.046 | Val Y MSE: 0.107 | Val Z MSE: 0.068 | Val Theta MSE: 0.011 | Val Phi MSE: 0.05 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.03
+[2024-01-26 13:22:06,099] INFO: Epoch 5/30 | Loss: 0.037 | Learning rate: 0.001 | Train X MSE: 0.04 | Train Y MSE: 0.055 | Train Z MSE: 0.039 | Train Theta MSE: 0.007 | Train Phi MSE: 0.045 | AVG Pos MSE Train: 0.044 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.057 | Val Y MSE: 0.114 | Val Z MSE: 0.075 | Val Theta MSE: 0.011 | Val Phi MSE: 0.048 | AVG Pos MSE Val: 0.082 | AVG Rot MSE Val: 0.029
+[2024-01-26 13:23:40,413] INFO: Epoch 6/30 | Loss: 0.036 | Learning rate: 0.001 | Train X MSE: 0.038 | Train Y MSE: 0.053 | Train Z MSE: 0.037 | Train Theta MSE: 0.007 | Train Phi MSE: 0.044 | AVG Pos MSE Train: 0.043 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.057 | Val Y MSE: 0.14 | Val Z MSE: 0.055 | Val Theta MSE: 0.011 | Val Phi MSE: 0.05 | AVG Pos MSE Val: 0.084 | AVG Rot MSE Val: 0.03
+[2024-01-26 13:25:14,692] INFO: Epoch 7/30 | Loss: 0.034 | Learning rate: 0.001 | Train X MSE: 0.035 | Train Y MSE: 0.051 | Train Z MSE: 0.034 | Train Theta MSE: 0.007 | Train Phi MSE: 0.044 | AVG Pos MSE Train: 0.04 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.06 | Val Y MSE: 0.135 | Val Z MSE: 0.073 | Val Theta MSE: 0.011 | Val Phi MSE: 0.048 | AVG Pos MSE Val: 0.089 | AVG Rot MSE Val: 0.029
+[2024-01-26 13:26:48,853] INFO: Epoch 8/30 | Loss: 0.034 | Learning rate: 0.001 | Train X MSE: 0.035 | Train Y MSE: 0.051 | Train Z MSE: 0.034 | Train Theta MSE: 0.007 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.04 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.051 | Val Y MSE: 0.118 | Val Z MSE: 0.063 | Val Theta MSE: 0.011 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.077 | AVG Rot MSE Val: 0.029
+[2024-01-26 13:28:23,178] INFO: Epoch 9/30 | Loss: 0.032 | Learning rate: 0.001 | Train X MSE: 0.032 | Train Y MSE: 0.047 | Train Z MSE: 0.033 | Train Theta MSE: 0.007 | Train Phi MSE: 0.042 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.045 | Val Y MSE: 0.111 | Val Z MSE: 0.057 | Val Theta MSE: 0.012 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.029
+Epoch 00009: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-26 13:29:57,959] INFO: Epoch 10/30 | Loss: 0.026 | Learning rate: 0.0001 | Train X MSE: 0.025 | Train Y MSE: 0.036 | Train Z MSE: 0.026 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.029 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.045 | Val Y MSE: 0.116 | Val Z MSE: 0.056 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.073 | AVG Rot MSE Val: 0.029
+[2024-01-26 13:31:32,324] INFO: Epoch 11/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.021 | Train Y MSE: 0.029 | Train Z MSE: 0.023 | Train Theta MSE: 0.006 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.045 | Val Y MSE: 0.121 | Val Z MSE: 0.058 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.028
+[2024-01-26 13:33:06,346] INFO: Epoch 12/30 | Loss: 0.022 | Learning rate: 0.0001 | Train X MSE: 0.02 | Train Y MSE: 0.027 | Train Z MSE: 0.021 | Train Theta MSE: 0.006 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.044 | Val Y MSE: 0.121 | Val Z MSE: 0.058 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.028
+[2024-01-26 13:34:40,687] INFO: Epoch 13/30 | Loss: 0.021 | Learning rate: 0.0001 | Train X MSE: 0.018 | Train Y MSE: 0.025 | Train Z MSE: 0.02 | Train Theta MSE: 0.006 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.045 | Val Y MSE: 0.122 | Val Z MSE: 0.061 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.028
+[2024-01-26 13:36:14,897] INFO: Epoch 14/30 | Loss: 0.02 | Learning rate: 0.0001 | Train X MSE: 0.018 | Train Y MSE: 0.023 | Train Z MSE: 0.019 | Train Theta MSE: 0.006 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.02 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.046 | Val Y MSE: 0.131 | Val Z MSE: 0.06 | Val Theta MSE: 0.011 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.079 | AVG Rot MSE Val: 0.028
+[2024-01-26 13:37:49,601] INFO: Epoch 15/30 | Loss: 0.019 | Learning rate: 0.0001 | Train X MSE: 0.017 | Train Y MSE: 0.022 | Train Z MSE: 0.018 | Train Theta MSE: 0.006 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.019 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.045 | Val Y MSE: 0.127 | Val Z MSE: 0.06 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.077 | AVG Rot MSE Val: 0.028
+Epoch 00015: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-26 13:39:23,681] INFO: Epoch 16/30 | Loss: 0.018 | Learning rate: 1e-05 | Train X MSE: 0.016 | Train Y MSE: 0.02 | Train Z MSE: 0.017 | Train Theta MSE: 0.006 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.018 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.045 | Val Y MSE: 0.127 | Val Z MSE: 0.06 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.077 | AVG Rot MSE Val: 0.028
+[2024-01-26 13:40:57,804] INFO: Epoch 17/30 | Loss: 0.018 | Learning rate: 1e-05 | Train X MSE: 0.016 | Train Y MSE: 0.02 | Train Z MSE: 0.016 | Train Theta MSE: 0.006 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.045 | Val Y MSE: 0.127 | Val Z MSE: 0.061 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.077 | AVG Rot MSE Val: 0.028
+[2024-01-26 13:42:32,144] INFO: Epoch 18/30 | Loss: 0.018 | Learning rate: 1e-05 | Train X MSE: 0.016 | Train Y MSE: 0.02 | Train Z MSE: 0.016 | Train Theta MSE: 0.006 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.045 | Val Y MSE: 0.127 | Val Z MSE: 0.061 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.078 | AVG Rot MSE Val: 0.028
+[2024-01-26 13:44:06,383] INFO: Epoch 19/30 | Loss: 0.018 | Learning rate: 1e-05 | Train X MSE: 0.015 | Train Y MSE: 0.019 | Train Z MSE: 0.016 | Train Theta MSE: 0.006 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.045 | Val Y MSE: 0.128 | Val Z MSE: 0.061 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.078 | AVG Rot MSE Val: 0.028
+[2024-01-26 13:44:06,384] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▃▃▃▄▄▅▅▅▆▆▆▇▇██
+wandb:     learning_rate █████████▂▂▂▂▂▂▁▁▁▁
+wandb:              loss █▅▄▄▄▄▃▃▃▂▂▂▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▅▅▄▄▄▄▄▃▂▂▂▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▃▃▃▃▃▃▃▂▂▂▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▅▅▄▄▄▄▃▃▂▂▂▂▁▁▁▁▁▁
+wandb:   train_theta_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▅▄▄▄▃▃▃▃▂▂▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▅▅▅▄▄▄▄▃▃▂▂▁▁▁▁▁▁▁
+wandb:       train_z_mse █▆▅▅▄▄▄▄▃▂▂▂▁▁▁▁▁▁▁
+wandb:       val_phi_mse ▇█▆▅▃▅▃▂▃▂▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse ▅▇█▂▃▂▂▃▃▁▁▁▁▂▁▁▁▁▁
+wandb:         val_x_mse █▄▅▁▃▃▃▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_y_mse ▃▅█▁▁▃▃▂▁▂▂▂▂▃▂▂▂▂▂
+wandb:         val_z_mse ▂▅█▂▃▁▃▂▁▁▁▁▂▁▂▂▂▂▂
+wandb:
+wandb: Run summary:
+wandb:             epoch 19
+wandb:     learning_rate 1e-05
+wandb:              loss 0.0181
+wandb: train_avg_pos_mse 0.01702
+wandb: train_avg_rot_mse 0.01973
+wandb:     train_phi_mse 0.03377
+wandb:   train_theta_mse 0.0057
+wandb:       train_x_mse 0.01546
+wandb:       train_y_mse 0.01943
+wandb:       train_z_mse 0.01617
+wandb:       val_phi_mse 0.04563
+wandb:     val_theta_mse 0.01039
+wandb:         val_x_mse 0.04499
+wandb:         val_y_mse 0.12799
+wandb:         val_z_mse 0.06066
+wandb:
+wandb:  View run vibrant-sweep-1 at: https://wandb.ai/badertim/synthcave/runs/6jvbszw6
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240126_131410-6jvbszw6\logs
+wandb: Agent Starting Run: 2kfirtpv with config:
+wandb:  K: 16
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: CNN
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240126_134421-2kfirtpv
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run polished-sweep-2
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/2kfirtpv
+[2024-01-26 13:44:22,664] INFO: Model: CNN | Trainable parameters: 12.71M | Dataset type: image
+[2024-01-26 13:44:22,665] INFO: K: 16 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train'...
+Dataset initialized with 7967 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/val'...
+Dataset initialized with 2804 samples.
+[2024-01-26 13:46:28,405] INFO: Epoch 1/30 | Loss: 65.954 | Learning rate: 0.001 | Train X MSE: 96.001 | Train Y MSE: 83.54 | Train Z MSE: 19.565 | Train Theta MSE: 124.47 | Train Phi MSE: 6.237 | AVG Pos MSE Train: 66.368 | AVG Rot MSE Train: 65.354 | Val X MSE: 0.076 | Val Y MSE: 0.12 | Val Z MSE: 0.091 | Val Theta MSE: 0.023 | Val Phi MSE: 0.056 | AVG Pos MSE Val: 0.096 | AVG Rot MSE Val: 0.04
+[2024-01-26 13:48:32,555] INFO: Epoch 2/30 | Loss: 0.045 | Learning rate: 0.001 | Train X MSE: 0.052 | Train Y MSE: 0.069 | Train Z MSE: 0.048 | Train Theta MSE: 0.01 | Train Phi MSE: 0.047 | AVG Pos MSE Train: 0.056 | AVG Rot MSE Train: 0.028 | Val X MSE: 0.062 | Val Y MSE: 0.119 | Val Z MSE: 0.079 | Val Theta MSE: 0.015 | Val Phi MSE: 0.052 | AVG Pos MSE Val: 0.087 | AVG Rot MSE Val: 0.034
+[2024-01-26 13:50:37,018] INFO: Epoch 3/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.047 | Train Y MSE: 0.061 | Train Z MSE: 0.043 | Train Theta MSE: 0.009 | Train Phi MSE: 0.046 | AVG Pos MSE Train: 0.051 | AVG Rot MSE Train: 0.028 | Val X MSE: 0.07 | Val Y MSE: 0.131 | Val Z MSE: 0.075 | Val Theta MSE: 0.018 | Val Phi MSE: 0.054 | AVG Pos MSE Val: 0.092 | AVG Rot MSE Val: 0.036
+[2024-01-26 13:52:41,871] INFO: Epoch 4/30 | Loss: 0.04 | Learning rate: 0.001 | Train X MSE: 0.042 | Train Y MSE: 0.062 | Train Z MSE: 0.039 | Train Theta MSE: 0.009 | Train Phi MSE: 0.045 | AVG Pos MSE Train: 0.048 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.069 | Val Y MSE: 0.109 | Val Z MSE: 0.073 | Val Theta MSE: 0.02 | Val Phi MSE: 0.051 | AVG Pos MSE Val: 0.084 | AVG Rot MSE Val: 0.036
+[2024-01-26 13:54:50,064] INFO: Epoch 5/30 | Loss: 0.037 | Learning rate: 0.001 | Train X MSE: 0.04 | Train Y MSE: 0.056 | Train Z MSE: 0.038 | Train Theta MSE: 0.009 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.044 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.066 | Val Y MSE: 0.117 | Val Z MSE: 0.081 | Val Theta MSE: 0.015 | Val Phi MSE: 0.053 | AVG Pos MSE Val: 0.088 | AVG Rot MSE Val: 0.034
+[2024-01-26 13:56:58,188] INFO: Epoch 6/30 | Loss: 0.034 | Learning rate: 0.001 | Train X MSE: 0.036 | Train Y MSE: 0.051 | Train Z MSE: 0.035 | Train Theta MSE: 0.009 | Train Phi MSE: 0.042 | AVG Pos MSE Train: 0.041 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.058 | Val Y MSE: 0.114 | Val Z MSE: 0.074 | Val Theta MSE: 0.017 | Val Phi MSE: 0.049 | AVG Pos MSE Val: 0.082 | AVG Rot MSE Val: 0.033
+[2024-01-26 13:59:06,801] INFO: Epoch 7/30 | Loss: 0.034 | Learning rate: 0.001 | Train X MSE: 0.035 | Train Y MSE: 0.05 | Train Z MSE: 0.033 | Train Theta MSE: 0.009 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.053 | Val Y MSE: 0.124 | Val Z MSE: 0.07 | Val Theta MSE: 0.017 | Val Phi MSE: 0.048 | AVG Pos MSE Val: 0.082 | AVG Rot MSE Val: 0.032
+Epoch 00007: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-26 14:01:14,534] INFO: Epoch 8/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.026 | Train Y MSE: 0.041 | Train Z MSE: 0.025 | Train Theta MSE: 0.008 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.049 | Val Y MSE: 0.114 | Val Z MSE: 0.069 | Val Theta MSE: 0.016 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.077 | AVG Rot MSE Val: 0.031
+[2024-01-26 14:03:22,670] INFO: Epoch 9/30 | Loss: 0.024 | Learning rate: 0.0001 | Train X MSE: 0.022 | Train Y MSE: 0.034 | Train Z MSE: 0.022 | Train Theta MSE: 0.007 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.026 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.048 | Val Y MSE: 0.113 | Val Z MSE: 0.065 | Val Theta MSE: 0.014 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.03
+[2024-01-26 14:05:29,950] INFO: Epoch 10/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.02 | Train Y MSE: 0.031 | Train Z MSE: 0.02 | Train Theta MSE: 0.007 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.049 | Val Y MSE: 0.112 | Val Z MSE: 0.067 | Val Theta MSE: 0.014 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.03
+[2024-01-26 14:07:31,660] INFO: Epoch 11/30 | Loss: 0.021 | Learning rate: 0.0001 | Train X MSE: 0.019 | Train Y MSE: 0.028 | Train Z MSE: 0.019 | Train Theta MSE: 0.006 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.048 | Val Y MSE: 0.116 | Val Z MSE: 0.066 | Val Theta MSE: 0.014 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.03
+[2024-01-26 14:09:31,830] INFO: Epoch 12/30 | Loss: 0.02 | Learning rate: 0.0001 | Train X MSE: 0.018 | Train Y MSE: 0.026 | Train Z MSE: 0.017 | Train Theta MSE: 0.006 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.02 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.047 | Val Y MSE: 0.107 | Val Z MSE: 0.062 | Val Theta MSE: 0.013 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.03
+[2024-01-26 14:11:35,598] INFO: Epoch 13/30 | Loss: 0.019 | Learning rate: 0.0001 | Train X MSE: 0.017 | Train Y MSE: 0.025 | Train Z MSE: 0.016 | Train Theta MSE: 0.006 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.019 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.049 | Val Y MSE: 0.115 | Val Z MSE: 0.064 | Val Theta MSE: 0.012 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.029
+Epoch 00013: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-26 14:13:39,218] INFO: Epoch 14/30 | Loss: 0.018 | Learning rate: 1e-05 | Train X MSE: 0.015 | Train Y MSE: 0.022 | Train Z MSE: 0.015 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.047 | Val Y MSE: 0.114 | Val Z MSE: 0.063 | Val Theta MSE: 0.013 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.029
+[2024-01-26 14:15:39,011] INFO: Epoch 15/30 | Loss: 0.017 | Learning rate: 1e-05 | Train X MSE: 0.014 | Train Y MSE: 0.021 | Train Z MSE: 0.014 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.047 | Val Y MSE: 0.115 | Val Z MSE: 0.063 | Val Theta MSE: 0.013 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.029
+[2024-01-26 14:17:37,044] INFO: Epoch 16/30 | Loss: 0.017 | Learning rate: 1e-05 | Train X MSE: 0.014 | Train Y MSE: 0.021 | Train Z MSE: 0.014 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.016 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.047 | Val Y MSE: 0.115 | Val Z MSE: 0.063 | Val Theta MSE: 0.013 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.029
+[2024-01-26 14:19:35,963] INFO: Epoch 17/30 | Loss: 0.017 | Learning rate: 1e-05 | Train X MSE: 0.014 | Train Y MSE: 0.021 | Train Z MSE: 0.014 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.016 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.047 | Val Y MSE: 0.115 | Val Z MSE: 0.062 | Val Theta MSE: 0.013 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.029
+[2024-01-26 14:21:40,276] INFO: Epoch 18/30 | Loss: 0.017 | Learning rate: 1e-05 | Train X MSE: 0.014 | Train Y MSE: 0.02 | Train Z MSE: 0.014 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.016 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.047 | Val Y MSE: 0.113 | Val Z MSE: 0.062 | Val Theta MSE: 0.013 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.029
+[2024-01-26 14:23:39,586] INFO: Epoch 19/30 | Loss: 0.017 | Learning rate: 1e-05 | Train X MSE: 0.014 | Train Y MSE: 0.02 | Train Z MSE: 0.014 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.016 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.047 | Val Y MSE: 0.115 | Val Z MSE: 0.062 | Val Theta MSE: 0.013 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.029
+Epoch 00019: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-26 14:25:39,847] INFO: Epoch 20/30 | Loss: 0.017 | Learning rate: 1e-06 | Train X MSE: 0.014 | Train Y MSE: 0.02 | Train Z MSE: 0.013 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.016 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.047 | Val Y MSE: 0.115 | Val Z MSE: 0.062 | Val Theta MSE: 0.013 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.029
+[2024-01-26 14:27:40,175] INFO: Epoch 21/30 | Loss: 0.016 | Learning rate: 1e-06 | Train X MSE: 0.014 | Train Y MSE: 0.02 | Train Z MSE: 0.013 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.016 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.047 | Val Y MSE: 0.115 | Val Z MSE: 0.062 | Val Theta MSE: 0.013 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.029
+[2024-01-26 14:29:40,906] INFO: Epoch 22/30 | Loss: 0.016 | Learning rate: 1e-06 | Train X MSE: 0.014 | Train Y MSE: 0.02 | Train Z MSE: 0.013 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.015 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.047 | Val Y MSE: 0.115 | Val Z MSE: 0.062 | Val Theta MSE: 0.013 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.029
+[2024-01-26 14:29:40,907] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▃▃▃▄▄▄▅▅▅▆▆▆▇▇▇██
+wandb:     learning_rate ███████▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:              loss █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse █▆▇▅▆▃▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse █▃▅▆▂▄▄▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse █▅▇▆▆▄▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_y_mse ▅▅█▂▄▃▆▃▃▃▄▁▃▃▃▃▃▃▃▃▃▃
+wandb:         val_z_mse █▅▄▄▆▄▃▃▂▂▂▁▂▁▁▁▁▁▁▁▁▁
+wandb:
+wandb: Run summary:
+wandb:             epoch 22
+wandb:     learning_rate 0.0
+wandb:              loss 0.01648
+wandb: train_avg_pos_mse 0.01549
+wandb: train_avg_rot_mse 0.01796
+wandb:     train_phi_mse 0.03067
+wandb:   train_theta_mse 0.00526
+wandb:       train_x_mse 0.01359
+wandb:       train_y_mse 0.01951
+wandb:       train_z_mse 0.01338
+wandb:       val_phi_mse 0.04626
+wandb:     val_theta_mse 0.01269
+wandb:         val_x_mse 0.04744
+wandb:         val_y_mse 0.11479
+wandb:         val_z_mse 0.06222
+wandb:
+wandb:  View run polished-sweep-2 at: https://wandb.ai/badertim/synthcave/runs/2kfirtpv
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240126_134421-2kfirtpv\logs
+wandb: Agent Starting Run: 8jus79rr with config:
+wandb:  K: 16
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: ASTGCN
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240126_142953-8jus79rr
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run lyric-sweep-3
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/8jus79rr
+[2024-01-26 14:29:54,693] INFO: Model: ASTGCN | Trainable parameters: 6.038M | Dataset type: graph
+[2024-01-26 14:29:54,693] INFO: K: 16 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph/train'...
+Dataset initialized with 7967 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph/val'...
+Dataset initialized with 2804 samples.
+[2024-01-26 15:33:24,545] INFO: Epoch 1/30 | Loss: 0.058 | Learning rate: 0.001 | Train X MSE: 0.066 | Train Y MSE: 0.087 | Train Z MSE: 0.069 | Train Theta MSE: 0.012 | Train Phi MSE: 0.057 | AVG Pos MSE Train: 0.074 | AVG Rot MSE Train: 0.035 | Val X MSE: 0.055 | Val Y MSE: 0.114 | Val Z MSE: 0.076 | Val Theta MSE: 0.011 | Val Phi MSE: 0.053 | AVG Pos MSE Val: 0.082 | AVG Rot MSE Val: 0.032
+[2024-01-26 16:37:31,735] INFO: Epoch 2/30 | Loss: 0.044 | Learning rate: 0.001 | Train X MSE: 0.049 | Train Y MSE: 0.07 | Train Z MSE: 0.05 | Train Theta MSE: 0.006 | Train Phi MSE: 0.047 | AVG Pos MSE Train: 0.056 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.057 | Val Y MSE: 0.123 | Val Z MSE: 0.072 | Val Theta MSE: 0.011 | Val Phi MSE: 0.053 | AVG Pos MSE Val: 0.084 | AVG Rot MSE Val: 0.032
+[2024-01-26 17:42:39,086] INFO: Epoch 3/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.043 | Train Y MSE: 0.063 | Train Z MSE: 0.045 | Train Theta MSE: 0.006 | Train Phi MSE: 0.047 | AVG Pos MSE Train: 0.05 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.057 | Val Y MSE: 0.12 | Val Z MSE: 0.076 | Val Theta MSE: 0.011 | Val Phi MSE: 0.049 | AVG Pos MSE Val: 0.084 | AVG Rot MSE Val: 0.03
+[2024-01-26 18:45:04,216] INFO: Epoch 4/30 | Loss: 0.039 | Learning rate: 0.001 | Train X MSE: 0.041 | Train Y MSE: 0.06 | Train Z MSE: 0.042 | Train Theta MSE: 0.006 | Train Phi MSE: 0.046 | AVG Pos MSE Train: 0.047 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.052 | Val Y MSE: 0.146 | Val Z MSE: 0.078 | Val Theta MSE: 0.011 | Val Phi MSE: 0.048 | AVG Pos MSE Val: 0.092 | AVG Rot MSE Val: 0.03
+[2024-01-26 19:46:36,614] INFO: Epoch 5/30 | Loss: 0.037 | Learning rate: 0.001 | Train X MSE: 0.039 | Train Y MSE: 0.056 | Train Z MSE: 0.039 | Train Theta MSE: 0.007 | Train Phi MSE: 0.045 | AVG Pos MSE Train: 0.045 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.056 | Val Y MSE: 0.112 | Val Z MSE: 0.07 | Val Theta MSE: 0.011 | Val Phi MSE: 0.048 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+[2024-01-26 20:48:11,449] INFO: Epoch 6/30 | Loss: 0.036 | Learning rate: 0.001 | Train X MSE: 0.037 | Train Y MSE: 0.054 | Train Z MSE: 0.037 | Train Theta MSE: 0.007 | Train Phi MSE: 0.044 | AVG Pos MSE Train: 0.043 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.047 | Val Y MSE: 0.11 | Val Z MSE: 0.069 | Val Theta MSE: 0.011 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.029
+[2024-01-26 21:49:43,562] INFO: Epoch 7/30 | Loss: 0.035 | Learning rate: 0.001 | Train X MSE: 0.036 | Train Y MSE: 0.055 | Train Z MSE: 0.035 | Train Theta MSE: 0.007 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.042 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.052 | Val Y MSE: 0.109 | Val Z MSE: 0.063 | Val Theta MSE: 0.012 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.029
+[2024-01-26 22:51:16,060] INFO: Epoch 8/30 | Loss: 0.032 | Learning rate: 0.001 | Train X MSE: 0.034 | Train Y MSE: 0.047 | Train Z MSE: 0.032 | Train Theta MSE: 0.007 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.038 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.051 | Val Y MSE: 0.104 | Val Z MSE: 0.067 | Val Theta MSE: 0.012 | Val Phi MSE: 0.048 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.03
+[2024-01-26 23:52:51,079] INFO: Epoch 9/30 | Loss: 0.031 | Learning rate: 0.001 | Train X MSE: 0.031 | Train Y MSE: 0.043 | Train Z MSE: 0.031 | Train Theta MSE: 0.007 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.035 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.056 | Val Y MSE: 0.111 | Val Z MSE: 0.072 | Val Theta MSE: 0.012 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+[2024-01-27 00:56:26,004] INFO: Epoch 10/30 | Loss: 0.03 | Learning rate: 0.001 | Train X MSE: 0.031 | Train Y MSE: 0.043 | Train Z MSE: 0.03 | Train Theta MSE: 0.006 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.035 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.049 | Val Y MSE: 0.108 | Val Z MSE: 0.076 | Val Theta MSE: 0.011 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.078 | AVG Rot MSE Val: 0.028
+Epoch 00010: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-27 01:58:01,673] INFO: Epoch 11/30 | Loss: 0.025 | Learning rate: 0.0001 | Train X MSE: 0.025 | Train Y MSE: 0.033 | Train Z MSE: 0.024 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.027 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.047 | Val Y MSE: 0.11 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.028
+[2024-01-27 02:59:35,879] INFO: Epoch 12/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.022 | Train Y MSE: 0.028 | Train Z MSE: 0.021 | Train Theta MSE: 0.006 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.05 | Val Y MSE: 0.11 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.028
+[2024-01-27 04:01:12,150] INFO: Epoch 13/30 | Loss: 0.022 | Learning rate: 0.0001 | Train X MSE: 0.021 | Train Y MSE: 0.025 | Train Z MSE: 0.02 | Train Theta MSE: 0.006 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.049 | Val Y MSE: 0.112 | Val Z MSE: 0.062 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.028
+[2024-01-27 05:02:46,794] INFO: Epoch 14/30 | Loss: 0.021 | Learning rate: 0.0001 | Train X MSE: 0.02 | Train Y MSE: 0.023 | Train Z MSE: 0.019 | Train Theta MSE: 0.006 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.051 | Val Y MSE: 0.113 | Val Z MSE: 0.066 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.077 | AVG Rot MSE Val: 0.028
+[2024-01-27 06:04:24,946] INFO: Epoch 15/30 | Loss: 0.02 | Learning rate: 0.0001 | Train X MSE: 0.019 | Train Y MSE: 0.021 | Train Z MSE: 0.019 | Train Theta MSE: 0.006 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.02 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.05 | Val Y MSE: 0.109 | Val Z MSE: 0.063 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.028
+[2024-01-27 07:05:58,286] INFO: Epoch 16/30 | Loss: 0.02 | Learning rate: 0.0001 | Train X MSE: 0.018 | Train Y MSE: 0.02 | Train Z MSE: 0.018 | Train Theta MSE: 0.006 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.019 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.051 | Val Y MSE: 0.113 | Val Z MSE: 0.063 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.028
+Epoch 00016: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-27 08:07:34,192] INFO: Epoch 17/30 | Loss: 0.019 | Learning rate: 1e-05 | Train X MSE: 0.017 | Train Y MSE: 0.018 | Train Z MSE: 0.017 | Train Theta MSE: 0.006 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.018 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.051 | Val Y MSE: 0.113 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.027
+[2024-01-27 09:09:08,245] INFO: Epoch 18/30 | Loss: 0.019 | Learning rate: 1e-05 | Train X MSE: 0.017 | Train Y MSE: 0.018 | Train Z MSE: 0.017 | Train Theta MSE: 0.006 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.051 | Val Y MSE: 0.113 | Val Z MSE: 0.063 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.027
+[2024-01-27 10:10:41,743] INFO: Epoch 19/30 | Loss: 0.019 | Learning rate: 1e-05 | Train X MSE: 0.017 | Train Y MSE: 0.018 | Train Z MSE: 0.017 | Train Theta MSE: 0.006 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.051 | Val Y MSE: 0.113 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.027
+[2024-01-27 11:12:44,124] INFO: Epoch 20/30 | Loss: 0.018 | Learning rate: 1e-05 | Train X MSE: 0.017 | Train Y MSE: 0.018 | Train Z MSE: 0.017 | Train Theta MSE: 0.006 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.052 | Val Y MSE: 0.113 | Val Z MSE: 0.063 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.027
+[2024-01-27 12:14:35,475] INFO: Epoch 21/30 | Loss: 0.018 | Learning rate: 1e-05 | Train X MSE: 0.017 | Train Y MSE: 0.018 | Train Z MSE: 0.017 | Train Theta MSE: 0.006 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.052 | Val Y MSE: 0.114 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.027
+[2024-01-27 12:14:35,476] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▃▃▃▄▄▅▅▅▆▆▆▇▇▇██
+wandb:     learning_rate ██████████▂▂▂▂▂▂▁▁▁▁▁
+wandb:              loss █▆▅▅▄▄▄▃▃▃▂▂▂▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▅▅▄▄▄▄▃▃▂▂▂▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▄▄▄▄▃▃▃▃▃▂▂▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▅▅▄▄▄▄▄▃▃▂▂▂▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▆▅▄▄▄▄▃▃▃▂▂▂▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▆▆▅▅▅▅▄▄▄▃▂▂▂▁▁▁▁▁▁▁
+wandb:       train_z_mse █▅▅▄▄▄▃▃▃▃▂▂▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse ██▅▄▄▃▃▄▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse ▇▇▄▆▂▃███▃▁▂▂▁▂▂▁▁▁▁▁
+wandb:         val_x_mse ▇██▅█▁▄▄▇▂▁▃▃▃▃▄▄▄▄▄▄
+wandb:         val_y_mse ▃▄▄█▂▂▂▁▂▂▂▂▂▂▂▃▂▂▂▂▃
+wandb:         val_z_mse ▇▅▇█▄▄▂▃▅▇▂▂▁▃▁▁▂▂▂▂▂
+wandb:
+wandb: Run summary:
+wandb:             epoch 21
+wandb:     learning_rate 1e-05
+wandb:              loss 0.01839
+wandb: train_avg_pos_mse 0.01713
+wandb: train_avg_rot_mse 0.02027
+wandb:     train_phi_mse 0.03478
+wandb:   train_theta_mse 0.00575
+wandb:       train_x_mse 0.01706
+wandb:       train_y_mse 0.01758
+wandb:       train_z_mse 0.01676
+wandb:       val_phi_mse 0.04477
+wandb:     val_theta_mse 0.01023
+wandb:         val_x_mse 0.05173
+wandb:         val_y_mse 0.11377
+wandb:         val_z_mse 0.06365
+wandb:
+wandb:  View run lyric-sweep-3 at: https://wandb.ai/badertim/synthcave/runs/8jus79rr
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240126_142953-8jus79rr\logs
+wandb: Agent Starting Run: eagz1bt5 with config:
+wandb:  K: 16
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: NTU
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240127_121449-eagz1bt5
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run wild-sweep-4
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/eagz1bt5
+[2024-01-27 12:14:50,846] INFO: Model: NTU | Trainable parameters: 8.981M | Dataset type: point
+[2024-01-27 12:14:50,846] INFO: K: 16 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud/train'...
+Dataset initialized with 7967 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud/val'...
+Dataset initialized with 2804 samples.
+[2024-01-27 12:20:18,660] INFO: Epoch 1/30 | Loss: 0.059 | Learning rate: 0.001 | Train X MSE: 0.072 | Train Y MSE: 0.096 | Train Z MSE: 0.063 | Train Theta MSE: 0.011 | Train Phi MSE: 0.053 | AVG Pos MSE Train: 0.077 | AVG Rot MSE Train: 0.032 | Val X MSE: 0.069 | Val Y MSE: 0.136 | Val Z MSE: 0.088 | Val Theta MSE: 0.017 | Val Phi MSE: 0.058 | AVG Pos MSE Val: 0.098 | AVG Rot MSE Val: 0.037
+[2024-01-27 12:25:42,090] INFO: Epoch 2/30 | Loss: 0.047 | Learning rate: 0.001 | Train X MSE: 0.053 | Train Y MSE: 0.074 | Train Z MSE: 0.053 | Train Theta MSE: 0.007 | Train Phi MSE: 0.048 | AVG Pos MSE Train: 0.06 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.071 | Val Y MSE: 0.129 | Val Z MSE: 0.075 | Val Theta MSE: 0.013 | Val Phi MSE: 0.051 | AVG Pos MSE Val: 0.092 | AVG Rot MSE Val: 0.032
+[2024-01-27 12:31:05,406] INFO: Epoch 3/30 | Loss: 0.043 | Learning rate: 0.001 | Train X MSE: 0.046 | Train Y MSE: 0.066 | Train Z MSE: 0.047 | Train Theta MSE: 0.006 | Train Phi MSE: 0.047 | AVG Pos MSE Train: 0.053 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.074 | Val Y MSE: 0.125 | Val Z MSE: 0.133 | Val Theta MSE: 0.011 | Val Phi MSE: 0.051 | AVG Pos MSE Val: 0.111 | AVG Rot MSE Val: 0.031
+[2024-01-27 12:36:33,503] INFO: Epoch 4/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.045 | Train Y MSE: 0.064 | Train Z MSE: 0.045 | Train Theta MSE: 0.006 | Train Phi MSE: 0.047 | AVG Pos MSE Train: 0.051 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.058 | Val Y MSE: 0.139 | Val Z MSE: 0.079 | Val Theta MSE: 0.012 | Val Phi MSE: 0.054 | AVG Pos MSE Val: 0.092 | AVG Rot MSE Val: 0.033
+[2024-01-27 12:41:56,056] INFO: Epoch 5/30 | Loss: 0.039 | Learning rate: 0.001 | Train X MSE: 0.041 | Train Y MSE: 0.061 | Train Z MSE: 0.041 | Train Theta MSE: 0.007 | Train Phi MSE: 0.047 | AVG Pos MSE Train: 0.048 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.054 | Val Y MSE: 0.137 | Val Z MSE: 0.074 | Val Theta MSE: 0.011 | Val Phi MSE: 0.051 | AVG Pos MSE Val: 0.089 | AVG Rot MSE Val: 0.031
+[2024-01-27 12:47:16,267] INFO: Epoch 6/30 | Loss: 0.037 | Learning rate: 0.001 | Train X MSE: 0.038 | Train Y MSE: 0.054 | Train Z MSE: 0.038 | Train Theta MSE: 0.006 | Train Phi MSE: 0.046 | AVG Pos MSE Train: 0.044 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.063 | Val Y MSE: 0.108 | Val Z MSE: 0.07 | Val Theta MSE: 0.012 | Val Phi MSE: 0.051 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.031
+[2024-01-27 12:52:38,126] INFO: Epoch 7/30 | Loss: 0.035 | Learning rate: 0.001 | Train X MSE: 0.036 | Train Y MSE: 0.052 | Train Z MSE: 0.037 | Train Theta MSE: 0.006 | Train Phi MSE: 0.045 | AVG Pos MSE Train: 0.042 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.054 | Val Y MSE: 0.121 | Val Z MSE: 0.069 | Val Theta MSE: 0.011 | Val Phi MSE: 0.054 | AVG Pos MSE Val: 0.081 | AVG Rot MSE Val: 0.032
+[2024-01-27 12:57:59,478] INFO: Epoch 8/30 | Loss: 0.034 | Learning rate: 0.001 | Train X MSE: 0.035 | Train Y MSE: 0.049 | Train Z MSE: 0.035 | Train Theta MSE: 0.007 | Train Phi MSE: 0.045 | AVG Pos MSE Train: 0.04 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.053 | Val Y MSE: 0.12 | Val Z MSE: 0.065 | Val Theta MSE: 0.011 | Val Phi MSE: 0.05 | AVG Pos MSE Val: 0.079 | AVG Rot MSE Val: 0.03
+[2024-01-27 13:03:21,894] INFO: Epoch 9/30 | Loss: 0.034 | Learning rate: 0.001 | Train X MSE: 0.034 | Train Y MSE: 0.049 | Train Z MSE: 0.034 | Train Theta MSE: 0.007 | Train Phi MSE: 0.044 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.059 | Val Y MSE: 0.113 | Val Z MSE: 0.084 | Val Theta MSE: 0.011 | Val Phi MSE: 0.05 | AVG Pos MSE Val: 0.085 | AVG Rot MSE Val: 0.031
+Epoch 00009: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-27 13:08:43,361] INFO: Epoch 10/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.027 | Train Y MSE: 0.037 | Train Z MSE: 0.028 | Train Theta MSE: 0.006 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.052 | Val Y MSE: 0.119 | Val Z MSE: 0.072 | Val Theta MSE: 0.011 | Val Phi MSE: 0.048 | AVG Pos MSE Val: 0.081 | AVG Rot MSE Val: 0.029
+[2024-01-27 13:14:03,826] INFO: Epoch 11/30 | Loss: 0.026 | Learning rate: 0.0001 | Train X MSE: 0.025 | Train Y MSE: 0.033 | Train Z MSE: 0.025 | Train Theta MSE: 0.006 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.051 | Val Y MSE: 0.118 | Val Z MSE: 0.071 | Val Theta MSE: 0.011 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+[2024-01-27 13:19:24,773] INFO: Epoch 12/30 | Loss: 0.025 | Learning rate: 0.0001 | Train X MSE: 0.023 | Train Y MSE: 0.031 | Train Z MSE: 0.024 | Train Theta MSE: 0.006 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.026 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.049 | Val Y MSE: 0.121 | Val Z MSE: 0.075 | Val Theta MSE: 0.011 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.082 | AVG Rot MSE Val: 0.029
+[2024-01-27 13:24:45,301] INFO: Epoch 13/30 | Loss: 0.024 | Learning rate: 0.0001 | Train X MSE: 0.022 | Train Y MSE: 0.029 | Train Z MSE: 0.023 | Train Theta MSE: 0.006 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.025 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.051 | Val Y MSE: 0.112 | Val Z MSE: 0.074 | Val Theta MSE: 0.011 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.079 | AVG Rot MSE Val: 0.029
+[2024-01-27 13:30:05,383] INFO: Epoch 14/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.021 | Train Y MSE: 0.028 | Train Z MSE: 0.022 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.051 | Val Y MSE: 0.112 | Val Z MSE: 0.072 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.078 | AVG Rot MSE Val: 0.029
+[2024-01-27 13:35:27,489] INFO: Epoch 15/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.021 | Train Y MSE: 0.027 | Train Z MSE: 0.021 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.05 | Val Y MSE: 0.114 | Val Z MSE: 0.074 | Val Theta MSE: 0.011 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+Epoch 00015: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-27 13:40:47,811] INFO: Epoch 16/30 | Loss: 0.022 | Learning rate: 1e-05 | Train X MSE: 0.02 | Train Y MSE: 0.025 | Train Z MSE: 0.02 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.051 | Val Y MSE: 0.114 | Val Z MSE: 0.074 | Val Theta MSE: 0.011 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+[2024-01-27 13:46:08,322] INFO: Epoch 17/30 | Loss: 0.022 | Learning rate: 1e-05 | Train X MSE: 0.02 | Train Y MSE: 0.025 | Train Z MSE: 0.02 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.051 | Val Y MSE: 0.113 | Val Z MSE: 0.074 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.079 | AVG Rot MSE Val: 0.029
+[2024-01-27 13:51:30,060] INFO: Epoch 18/30 | Loss: 0.022 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.025 | Train Z MSE: 0.02 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.05 | Val Y MSE: 0.114 | Val Z MSE: 0.074 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+[2024-01-27 13:56:51,534] INFO: Epoch 19/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.025 | Train Z MSE: 0.02 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.051 | Val Y MSE: 0.115 | Val Z MSE: 0.075 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+[2024-01-27 14:02:14,297] INFO: Epoch 20/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.024 | Train Z MSE: 0.02 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.051 | Val Y MSE: 0.113 | Val Z MSE: 0.075 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+[2024-01-27 14:07:36,873] INFO: Epoch 21/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.024 | Train Z MSE: 0.02 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.052 | Val Y MSE: 0.113 | Val Z MSE: 0.075 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+Epoch 00021: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-27 14:12:56,825] INFO: Epoch 22/30 | Loss: 0.021 | Learning rate: 1e-06 | Train X MSE: 0.019 | Train Y MSE: 0.024 | Train Z MSE: 0.019 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.052 | Val Y MSE: 0.113 | Val Z MSE: 0.075 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+[2024-01-27 14:18:17,371] INFO: Epoch 23/30 | Loss: 0.021 | Learning rate: 1e-06 | Train X MSE: 0.019 | Train Y MSE: 0.024 | Train Z MSE: 0.02 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.051 | Val Y MSE: 0.115 | Val Z MSE: 0.075 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+[2024-01-27 14:23:39,356] INFO: Epoch 24/30 | Loss: 0.021 | Learning rate: 1e-06 | Train X MSE: 0.019 | Train Y MSE: 0.024 | Train Z MSE: 0.019 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.051 | Val Y MSE: 0.113 | Val Z MSE: 0.075 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.029
+[2024-01-27 14:23:39,356] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▃▃▃▃▄▄▄▅▅▅▆▆▆▆▇▇▇██
+wandb:     learning_rate █████████▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:              loss █▆▅▅▄▄▄▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▅▅▄▄▄▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▅▄▄▄▄▄▄▃▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▆▅▅▅▅▅▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▅▅▄▄▄▃▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▆▅▅▅▄▄▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▆▆▅▅▄▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse █▄▃▆▃▄▅▃▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse █▄▂▃▂▃▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse ▇▇█▃▃▅▃▂▄▂▂▁▂▂▁▂▂▁▂▂▂▂▂▂
+wandb:         val_y_mse ▇▆▅██▁▄▄▂▄▃▄▂▂▂▂▂▃▃▂▂▂▃▂
+wandb:         val_z_mse ▃▂█▂▂▁▁▁▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+wandb:
+wandb: Run summary:
+wandb:             epoch 24
+wandb:     learning_rate 0.0
+wandb:              loss 0.02121
+wandb: train_avg_pos_mse 0.02088
+wandb: train_avg_rot_mse 0.02169
+wandb:     train_phi_mse 0.03762
+wandb:   train_theta_mse 0.00577
+wandb:       train_x_mse 0.01907
+wandb:       train_y_mse 0.02412
+wandb:       train_z_mse 0.01946
+wandb:       val_phi_mse 0.04674
+wandb:     val_theta_mse 0.01045
+wandb:         val_x_mse 0.05141
+wandb:         val_y_mse 0.11332
+wandb:         val_z_mse 0.07528
+wandb:
+wandb:  View run wild-sweep-4 at: https://wandb.ai/badertim/synthcave/runs/eagz1bt5
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240127_121449-eagz1bt5\logs
+wandb: Agent Starting Run: ysrld1k4 with config:
+wandb:  K: 8
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: TSViTcls
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240127_142351-ysrld1k4
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run glorious-sweep-5
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/ysrld1k4
+[2024-01-27 14:23:52,720] INFO: Model: TSViTcls | Trainable parameters: 3.451M | Dataset type: image
+[2024-01-27 14:23:52,720] INFO: K: 8 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train'...
+Dataset initialized with 8847 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/val'...
+Dataset initialized with 3156 samples.
+[2024-01-27 14:25:15,494] INFO: Epoch 1/30 | Loss: 0.057 | Learning rate: 0.001 | Train X MSE: 0.064 | Train Y MSE: 0.094 | Train Z MSE: 0.061 | Train Theta MSE: 0.012 | Train Phi MSE: 0.053 | AVG Pos MSE Train: 0.073 | AVG Rot MSE Train: 0.033 | Val X MSE: 0.047 | Val Y MSE: 0.115 | Val Z MSE: 0.069 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.077 | AVG Rot MSE Val: 0.029
+[2024-01-27 14:26:36,718] INFO: Epoch 2/30 | Loss: 0.045 | Learning rate: 0.001 | Train X MSE: 0.049 | Train Y MSE: 0.074 | Train Z MSE: 0.049 | Train Theta MSE: 0.006 | Train Phi MSE: 0.047 | AVG Pos MSE Train: 0.057 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.043 | Val Y MSE: 0.113 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.073 | AVG Rot MSE Val: 0.029
+[2024-01-27 14:27:57,691] INFO: Epoch 3/30 | Loss: 0.042 | Learning rate: 0.001 | Train X MSE: 0.046 | Train Y MSE: 0.069 | Train Z MSE: 0.044 | Train Theta MSE: 0.006 | Train Phi MSE: 0.046 | AVG Pos MSE Train: 0.053 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.043 | Val Y MSE: 0.103 | Val Z MSE: 0.063 | Val Theta MSE: 0.01 | Val Phi MSE: 0.049 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.03
+[2024-01-27 14:29:18,817] INFO: Epoch 4/30 | Loss: 0.04 | Learning rate: 0.001 | Train X MSE: 0.043 | Train Y MSE: 0.065 | Train Z MSE: 0.04 | Train Theta MSE: 0.006 | Train Phi MSE: 0.044 | AVG Pos MSE Train: 0.049 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.041 | Val Y MSE: 0.107 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.049 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.029
+[2024-01-27 14:30:40,034] INFO: Epoch 5/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.04 | Train Y MSE: 0.062 | Train Z MSE: 0.037 | Train Theta MSE: 0.006 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.047 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.045 | Val Y MSE: 0.131 | Val Z MSE: 0.062 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.079 | AVG Rot MSE Val: 0.028
+[2024-01-27 14:32:01,135] INFO: Epoch 6/30 | Loss: 0.037 | Learning rate: 0.001 | Train X MSE: 0.039 | Train Y MSE: 0.061 | Train Z MSE: 0.037 | Train Theta MSE: 0.006 | Train Phi MSE: 0.042 | AVG Pos MSE Train: 0.046 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.04 | Val Y MSE: 0.117 | Val Z MSE: 0.057 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.028
+[2024-01-27 14:33:22,249] INFO: Epoch 7/30 | Loss: 0.035 | Learning rate: 0.001 | Train X MSE: 0.037 | Train Y MSE: 0.057 | Train Z MSE: 0.035 | Train Theta MSE: 0.006 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.043 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.041 | Val Y MSE: 0.122 | Val Z MSE: 0.066 | Val Theta MSE: 0.01 | Val Phi MSE: 0.044 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.027
+[2024-01-27 14:34:43,439] INFO: Epoch 8/30 | Loss: 0.035 | Learning rate: 0.001 | Train X MSE: 0.036 | Train Y MSE: 0.055 | Train Z MSE: 0.035 | Train Theta MSE: 0.006 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.042 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.04 | Val Y MSE: 0.108 | Val Z MSE: 0.055 | Val Theta MSE: 0.01 | Val Phi MSE: 0.044 | AVG Pos MSE Val: 0.068 | AVG Rot MSE Val: 0.027
+[2024-01-27 14:36:04,743] INFO: Epoch 9/30 | Loss: 0.034 | Learning rate: 0.001 | Train X MSE: 0.035 | Train Y MSE: 0.056 | Train Z MSE: 0.034 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.042 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.041 | Val Y MSE: 0.113 | Val Z MSE: 0.059 | Val Theta MSE: 0.01 | Val Phi MSE: 0.044 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.027
+[2024-01-27 14:37:25,748] INFO: Epoch 10/30 | Loss: 0.033 | Learning rate: 0.001 | Train X MSE: 0.034 | Train Y MSE: 0.052 | Train Z MSE: 0.033 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.036 | Val Y MSE: 0.111 | Val Z MSE: 0.06 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.028
+[2024-01-27 14:38:47,117] INFO: Epoch 11/30 | Loss: 0.033 | Learning rate: 0.001 | Train X MSE: 0.033 | Train Y MSE: 0.055 | Train Z MSE: 0.033 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.04 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.04 | Val Y MSE: 0.127 | Val Z MSE: 0.06 | Val Theta MSE: 0.011 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.028
+Epoch 00011: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-27 14:40:08,242] INFO: Epoch 12/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.027 | Train Y MSE: 0.043 | Train Z MSE: 0.028 | Train Theta MSE: 0.006 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.033 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.038 | Val Y MSE: 0.115 | Val Z MSE: 0.055 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:41:29,494] INFO: Epoch 13/30 | Loss: 0.025 | Learning rate: 0.0001 | Train X MSE: 0.024 | Train Y MSE: 0.037 | Train Z MSE: 0.025 | Train Theta MSE: 0.006 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.029 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.036 | Val Y MSE: 0.114 | Val Z MSE: 0.054 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.068 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:42:50,686] INFO: Epoch 14/30 | Loss: 0.024 | Learning rate: 0.0001 | Train X MSE: 0.023 | Train Y MSE: 0.034 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.027 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.036 | Val Y MSE: 0.116 | Val Z MSE: 0.052 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.068 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:44:11,839] INFO: Epoch 15/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.022 | Train Y MSE: 0.032 | Train Z MSE: 0.023 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.026 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.036 | Val Y MSE: 0.115 | Val Z MSE: 0.052 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.068 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:45:33,068] INFO: Epoch 16/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.022 | Train Y MSE: 0.031 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.025 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.115 | Val Z MSE: 0.053 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.068 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:46:54,217] INFO: Epoch 17/30 | Loss: 0.022 | Learning rate: 0.0001 | Train X MSE: 0.021 | Train Y MSE: 0.03 | Train Z MSE: 0.021 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.118 | Val Z MSE: 0.053 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.026
+Epoch 00017: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-27 14:48:15,312] INFO: Epoch 18/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.02 | Train Y MSE: 0.028 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.117 | Val Z MSE: 0.053 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:49:36,344] INFO: Epoch 19/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.02 | Train Y MSE: 0.028 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.116 | Val Z MSE: 0.053 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:50:57,548] INFO: Epoch 20/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.02 | Train Y MSE: 0.027 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.116 | Val Z MSE: 0.054 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:52:18,681] INFO: Epoch 21/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.02 | Train Y MSE: 0.027 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.116 | Val Z MSE: 0.054 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:53:39,796] INFO: Epoch 22/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.02 | Train Y MSE: 0.027 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.116 | Val Z MSE: 0.054 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:55:00,987] INFO: Epoch 23/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.02 | Train Y MSE: 0.027 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.116 | Val Z MSE: 0.054 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.026
+Epoch 00023: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-27 14:56:22,520] INFO: Epoch 24/30 | Loss: 0.021 | Learning rate: 1e-06 | Train X MSE: 0.019 | Train Y MSE: 0.027 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.116 | Val Z MSE: 0.054 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:57:43,738] INFO: Epoch 25/30 | Loss: 0.021 | Learning rate: 1e-06 | Train X MSE: 0.019 | Train Y MSE: 0.027 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.116 | Val Z MSE: 0.054 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.026
+[2024-01-27 14:57:43,739] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb: / 0.002 MB of 0.002 MB uploaded (0.000 MB deduped)
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▂▃▃▃▄▄▄▅▅▅▅▆▆▆▇▇▇▇██
+wandb:     learning_rate ███████████▂▂▂▂▂▂▁▁▁▁▁▁▁▁
+wandb:              loss █▆▅▅▄▄▄▄▄▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▅▅▄▄▄▄▄▃▄▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▅▅▄▄▄▃▃▃▃▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▆▆▅▅▄▄▄▃▃▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▆▅▅▄▄▄▄▃▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▆▅▅▅▅▄▄▄▄▄▃▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▆▅▄▄▄▃▃▃▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse ▇▆██▅▄▃▃▃▄▄▁▁▂▁▂▂▂▂▂▂▂▂▂▂
+wandb:     val_theta_mse ▅▆▅▃▁▄▃▅▃▃█▂▁▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse █▅▅▄▆▄▄▄▄▁▃▂▁▁▁▂▂▂▂▂▂▂▂▂▂
+wandb:         val_y_mse ▄▃▁▂█▄▆▂▄▃▇▄▄▄▄▄▅▄▄▄▄▄▄▄▄
+wandb:         val_z_mse █▆▅▆▅▃▇▂▄▄▄▂▂▁▁▁▁▁▂▂▂▂▂▂▂
+wandb:
+wandb: Run summary:
+wandb:             epoch 25
+wandb:     learning_rate 0.0
+wandb:              loss 0.02073
+wandb: train_avg_pos_mse 0.02206
+wandb: train_avg_rot_mse 0.01874
+wandb:     train_phi_mse 0.03213
+wandb:   train_theta_mse 0.00534
+wandb:       train_x_mse 0.01945
+wandb:       train_y_mse 0.02679
+wandb:       train_z_mse 0.01993
+wandb:       val_phi_mse 0.0428
+wandb:     val_theta_mse 0.00965
+wandb:         val_x_mse 0.03678
+wandb:         val_y_mse 0.11591
+wandb:         val_z_mse 0.05372
+wandb:
+wandb:  View run glorious-sweep-5 at: https://wandb.ai/badertim/synthcave/runs/ysrld1k4
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240127_142351-ysrld1k4\logs
+wandb: Agent Starting Run: c34ku81k with config:
+wandb:  K: 8
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: CNN
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240127_145756-c34ku81k
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run icy-sweep-6
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/c34ku81k
+[2024-01-27 14:57:57,395] INFO: Model: CNN | Trainable parameters: 6.406M | Dataset type: image
+[2024-01-27 14:57:57,395] INFO: K: 8 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train'...
+Dataset initialized with 8847 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/val'...
+Dataset initialized with 3156 samples.
+[2024-01-27 14:59:15,260] INFO: Epoch 1/30 | Loss: 96.613 | Learning rate: 0.001 | Train X MSE: 71.953 | Train Y MSE: 198.795 | Train Z MSE: 10.315 | Train Theta MSE: 9.92 | Train Phi MSE: 192.138 | AVG Pos MSE Train: 93.687 | AVG Rot MSE Train: 101.029 | Val X MSE: 0.054 | Val Y MSE: 0.111 | Val Z MSE: 0.072 | Val Theta MSE: 0.014 | Val Phi MSE: 0.05 | AVG Pos MSE Val: 0.079 | AVG Rot MSE Val: 0.032
+[2024-01-27 15:00:33,011] INFO: Epoch 2/30 | Loss: 0.046 | Learning rate: 0.001 | Train X MSE: 0.05 | Train Y MSE: 0.075 | Train Z MSE: 0.048 | Train Theta MSE: 0.009 | Train Phi MSE: 0.046 | AVG Pos MSE Train: 0.058 | AVG Rot MSE Train: 0.028 | Val X MSE: 0.05 | Val Y MSE: 0.112 | Val Z MSE: 0.065 | Val Theta MSE: 0.014 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.03
+[2024-01-27 15:01:50,743] INFO: Epoch 3/30 | Loss: 0.042 | Learning rate: 0.001 | Train X MSE: 0.043 | Train Y MSE: 0.07 | Train Z MSE: 0.043 | Train Theta MSE: 0.008 | Train Phi MSE: 0.044 | AVG Pos MSE Train: 0.052 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.043 | Val Y MSE: 0.115 | Val Z MSE: 0.06 | Val Theta MSE: 0.012 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.073 | AVG Rot MSE Val: 0.029
+[2024-01-27 15:03:08,403] INFO: Epoch 4/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.039 | Train Y MSE: 0.064 | Train Z MSE: 0.039 | Train Theta MSE: 0.007 | Train Phi MSE: 0.042 | AVG Pos MSE Train: 0.047 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.043 | Val Y MSE: 0.106 | Val Z MSE: 0.056 | Val Theta MSE: 0.012 | Val Phi MSE: 0.044 | AVG Pos MSE Val: 0.068 | AVG Rot MSE Val: 0.028
+[2024-01-27 15:04:26,156] INFO: Epoch 5/30 | Loss: 0.036 | Learning rate: 0.001 | Train X MSE: 0.037 | Train Y MSE: 0.061 | Train Z MSE: 0.036 | Train Theta MSE: 0.007 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.044 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.046 | Val Y MSE: 0.097 | Val Z MSE: 0.057 | Val Theta MSE: 0.011 | Val Phi MSE: 0.048 | AVG Pos MSE Val: 0.067 | AVG Rot MSE Val: 0.029
+[2024-01-27 15:05:43,845] INFO: Epoch 6/30 | Loss: 0.034 | Learning rate: 0.001 | Train X MSE: 0.035 | Train Y MSE: 0.058 | Train Z MSE: 0.033 | Train Theta MSE: 0.007 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.042 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.039 | Val Y MSE: 0.112 | Val Z MSE: 0.07 | Val Theta MSE: 0.011 | Val Phi MSE: 0.044 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.028
+[2024-01-27 15:07:01,448] INFO: Epoch 7/30 | Loss: 0.032 | Learning rate: 0.001 | Train X MSE: 0.032 | Train Y MSE: 0.054 | Train Z MSE: 0.03 | Train Theta MSE: 0.007 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.038 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.042 | Val Y MSE: 0.117 | Val Z MSE: 0.068 | Val Theta MSE: 0.011 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.028
+Epoch 00007: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-27 15:08:19,063] INFO: Epoch 8/30 | Loss: 0.027 | Learning rate: 0.0001 | Train X MSE: 0.026 | Train Y MSE: 0.045 | Train Z MSE: 0.025 | Train Theta MSE: 0.006 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.032 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.053 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.025
+[2024-01-27 15:09:36,650] INFO: Epoch 9/30 | Loss: 0.024 | Learning rate: 0.0001 | Train X MSE: 0.022 | Train Y MSE: 0.037 | Train Z MSE: 0.021 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.027 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.038 | Val Y MSE: 0.098 | Val Z MSE: 0.054 | Val Theta MSE: 0.01 | Val Phi MSE: 0.04 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.025
+[2024-01-27 15:10:54,439] INFO: Epoch 10/30 | Loss: 0.022 | Learning rate: 0.0001 | Train X MSE: 0.02 | Train Y MSE: 0.034 | Train Z MSE: 0.019 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.04 | Val Y MSE: 0.1 | Val Z MSE: 0.053 | Val Theta MSE: 0.01 | Val Phi MSE: 0.04 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.025
+[2024-01-27 15:12:12,072] INFO: Epoch 11/30 | Loss: 0.021 | Learning rate: 0.0001 | Train X MSE: 0.018 | Train Y MSE: 0.032 | Train Z MSE: 0.019 | Train Theta MSE: 0.005 | Train Phi MSE: 0.03 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.039 | Val Y MSE: 0.097 | Val Z MSE: 0.054 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.025
+[2024-01-27 15:13:29,641] INFO: Epoch 12/30 | Loss: 0.02 | Learning rate: 0.0001 | Train X MSE: 0.017 | Train Y MSE: 0.03 | Train Z MSE: 0.017 | Train Theta MSE: 0.005 | Train Phi MSE: 0.03 | AVG Pos MSE Train: 0.021 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.04 | Val Y MSE: 0.104 | Val Z MSE: 0.056 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.025
+[2024-01-27 15:14:47,203] INFO: Epoch 13/30 | Loss: 0.019 | Learning rate: 0.0001 | Train X MSE: 0.016 | Train Y MSE: 0.028 | Train Z MSE: 0.016 | Train Theta MSE: 0.005 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.02 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.039 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.025
+Epoch 00013: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-27 15:16:04,833] INFO: Epoch 14/30 | Loss: 0.017 | Learning rate: 1e-05 | Train X MSE: 0.015 | Train Y MSE: 0.025 | Train Z MSE: 0.015 | Train Theta MSE: 0.004 | Train Phi MSE: 0.027 | AVG Pos MSE Train: 0.018 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.009 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.025
+[2024-01-27 15:17:22,515] INFO: Epoch 15/30 | Loss: 0.017 | Learning rate: 1e-05 | Train X MSE: 0.014 | Train Y MSE: 0.024 | Train Z MSE: 0.015 | Train Theta MSE: 0.004 | Train Phi MSE: 0.027 | AVG Pos MSE Train: 0.018 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.097 | Val Z MSE: 0.055 | Val Theta MSE: 0.009 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.026
+[2024-01-27 15:18:40,257] INFO: Epoch 16/30 | Loss: 0.017 | Learning rate: 1e-05 | Train X MSE: 0.014 | Train Y MSE: 0.024 | Train Z MSE: 0.015 | Train Theta MSE: 0.004 | Train Phi MSE: 0.027 | AVG Pos MSE Train: 0.018 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.097 | Val Z MSE: 0.055 | Val Theta MSE: 0.009 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.026
+[2024-01-27 15:19:58,057] INFO: Epoch 17/30 | Loss: 0.017 | Learning rate: 1e-05 | Train X MSE: 0.014 | Train Y MSE: 0.024 | Train Z MSE: 0.014 | Train Theta MSE: 0.004 | Train Phi MSE: 0.027 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.099 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-27 15:21:15,753] INFO: Epoch 18/30 | Loss: 0.017 | Learning rate: 1e-05 | Train X MSE: 0.014 | Train Y MSE: 0.024 | Train Z MSE: 0.014 | Train Theta MSE: 0.004 | Train Phi MSE: 0.027 | AVG Pos MSE Train: 0.017 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.097 | Val Z MSE: 0.055 | Val Theta MSE: 0.009 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.026
+[2024-01-27 15:21:15,754] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▃▃▃▄▄▅▅▆▆▆▇▇██
+wandb:     learning_rate ███████▂▂▂▂▂▂▁▁▁▁▁
+wandb:              loss █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse █▆▅▄▆▄▄▁▁▁▂▂▂▂▂▂▂▂
+wandb:     val_theta_mse ██▅▅▄▄▄▂▂▂▁▁▁▁▁▁▁▁
+wandb:         val_x_mse █▆▃▃▅▁▂▁▁▂▁▂▁▁▁▁▁▁
+wandb:         val_y_mse ▆▇▇▅▂▇█▁▂▃▂▄▂▂▂▂▂▂
+wandb:         val_z_mse █▅▄▂▃▇▇▁▁▁▁▂▂▂▂▂▂▂
+wandb:
+wandb: Run summary:
+wandb:             epoch 18
+wandb:     learning_rate 1e-05
+wandb:              loss 0.01657
+wandb: train_avg_pos_mse 0.01722
+wandb: train_avg_rot_mse 0.01558
+wandb:     train_phi_mse 0.02684
+wandb:   train_theta_mse 0.00432
+wandb:       train_x_mse 0.01391
+wandb:       train_y_mse 0.02352
+wandb:       train_z_mse 0.01424
+wandb:       val_phi_mse 0.04182
+wandb:     val_theta_mse 0.00943
+wandb:         val_x_mse 0.03941
+wandb:         val_y_mse 0.09717
+wandb:         val_z_mse 0.05531
+wandb:
+wandb:  View run icy-sweep-6 at: https://wandb.ai/badertim/synthcave/runs/c34ku81k
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240127_145756-c34ku81k\logs
+wandb: Agent Starting Run: 1jlv4blt with config:
+wandb:  K: 8
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: ASTGCN
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240127_152129-1jlv4blt
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run dainty-sweep-7
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/1jlv4blt
+[2024-01-27 15:21:30,028] INFO: Model: ASTGCN | Trainable parameters: 6.023M | Dataset type: graph
+[2024-01-27 15:21:30,029] INFO: K: 8 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph/train'...
+Dataset initialized with 8847 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph/val'...
+Dataset initialized with 3156 samples.
+[2024-01-27 15:59:28,181] INFO: Epoch 1/30 | Loss: 0.055 | Learning rate: 0.001 | Train X MSE: 0.062 | Train Y MSE: 0.092 | Train Z MSE: 0.057 | Train Theta MSE: 0.012 | Train Phi MSE: 0.053 | AVG Pos MSE Train: 0.07 | AVG Rot MSE Train: 0.033 | Val X MSE: 0.05 | Val Y MSE: 0.111 | Val Z MSE: 0.064 | Val Theta MSE: 0.012 | Val Phi MSE: 0.048 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.03
+[2024-01-27 16:37:19,006] INFO: Epoch 2/30 | Loss: 0.044 | Learning rate: 0.001 | Train X MSE: 0.048 | Train Y MSE: 0.073 | Train Z MSE: 0.046 | Train Theta MSE: 0.006 | Train Phi MSE: 0.045 | AVG Pos MSE Train: 0.056 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.043 | Val Y MSE: 0.141 | Val Z MSE: 0.058 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.081 | AVG Rot MSE Val: 0.028
+[2024-01-27 17:15:10,079] INFO: Epoch 3/30 | Loss: 0.042 | Learning rate: 0.001 | Train X MSE: 0.045 | Train Y MSE: 0.07 | Train Z MSE: 0.043 | Train Theta MSE: 0.006 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.053 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.039 | Val Y MSE: 0.118 | Val Z MSE: 0.056 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.027
+[2024-01-27 17:53:02,251] INFO: Epoch 4/30 | Loss: 0.04 | Learning rate: 0.001 | Train X MSE: 0.043 | Train Y MSE: 0.066 | Train Z MSE: 0.04 | Train Theta MSE: 0.006 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.05 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.04 | Val Y MSE: 0.113 | Val Z MSE: 0.057 | Val Theta MSE: 0.011 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.028
+[2024-01-27 18:31:14,489] INFO: Epoch 5/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.04 | Train Y MSE: 0.062 | Train Z MSE: 0.038 | Train Theta MSE: 0.006 | Train Phi MSE: 0.042 | AVG Pos MSE Train: 0.047 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.043 | Val Y MSE: 0.108 | Val Z MSE: 0.048 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.027
+[2024-01-27 19:09:13,968] INFO: Epoch 6/30 | Loss: 0.036 | Learning rate: 0.001 | Train X MSE: 0.038 | Train Y MSE: 0.059 | Train Z MSE: 0.035 | Train Theta MSE: 0.006 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.044 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.041 | Val Y MSE: 0.113 | Val Z MSE: 0.057 | Val Theta MSE: 0.01 | Val Phi MSE: 0.044 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.027
+[2024-01-27 19:47:08,477] INFO: Epoch 7/30 | Loss: 0.035 | Learning rate: 0.001 | Train X MSE: 0.036 | Train Y MSE: 0.058 | Train Z MSE: 0.035 | Train Theta MSE: 0.006 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.043 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.045 | Val Y MSE: 0.114 | Val Z MSE: 0.059 | Val Theta MSE: 0.011 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.027
+[2024-01-27 20:25:04,632] INFO: Epoch 8/30 | Loss: 0.034 | Learning rate: 0.001 | Train X MSE: 0.036 | Train Y MSE: 0.054 | Train Z MSE: 0.034 | Train Theta MSE: 0.006 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.041 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.045 | Val Y MSE: 0.115 | Val Z MSE: 0.055 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.027
+Epoch 00008: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-27 21:02:58,802] INFO: Epoch 9/30 | Loss: 0.029 | Learning rate: 0.0001 | Train X MSE: 0.029 | Train Y MSE: 0.044 | Train Z MSE: 0.029 | Train Theta MSE: 0.006 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.034 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.035 | Val Y MSE: 0.109 | Val Z MSE: 0.053 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.026
+[2024-01-27 21:40:56,499] INFO: Epoch 10/30 | Loss: 0.026 | Learning rate: 0.0001 | Train X MSE: 0.026 | Train Y MSE: 0.038 | Train Z MSE: 0.025 | Train Theta MSE: 0.006 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.03 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.035 | Val Y MSE: 0.109 | Val Z MSE: 0.051 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.025
+[2024-01-27 22:18:53,193] INFO: Epoch 11/30 | Loss: 0.025 | Learning rate: 0.0001 | Train X MSE: 0.025 | Train Y MSE: 0.036 | Train Z MSE: 0.024 | Train Theta MSE: 0.006 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.034 | Val Y MSE: 0.107 | Val Z MSE: 0.052 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.025
+[2024-01-27 22:56:47,748] INFO: Epoch 12/30 | Loss: 0.024 | Learning rate: 0.0001 | Train X MSE: 0.024 | Train Y MSE: 0.034 | Train Z MSE: 0.023 | Train Theta MSE: 0.005 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.027 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.036 | Val Y MSE: 0.107 | Val Z MSE: 0.053 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.025
+[2024-01-27 23:34:43,951] INFO: Epoch 13/30 | Loss: 0.024 | Learning rate: 0.0001 | Train X MSE: 0.023 | Train Y MSE: 0.033 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.026 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.108 | Val Z MSE: 0.051 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.025
+[2024-01-28 00:12:39,719] INFO: Epoch 14/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.023 | Train Y MSE: 0.032 | Train Z MSE: 0.021 | Train Theta MSE: 0.005 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.025 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.109 | Val Z MSE: 0.052 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.025
+Epoch 00014: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-28 00:50:37,810] INFO: Epoch 15/30 | Loss: 0.022 | Learning rate: 1e-05 | Train X MSE: 0.022 | Train Y MSE: 0.03 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.109 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.025
+[2024-01-28 01:28:29,257] INFO: Epoch 16/30 | Loss: 0.022 | Learning rate: 1e-05 | Train X MSE: 0.021 | Train Y MSE: 0.029 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.109 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.025
+[2024-01-28 02:06:23,358] INFO: Epoch 17/30 | Loss: 0.022 | Learning rate: 1e-05 | Train X MSE: 0.021 | Train Y MSE: 0.029 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.036 | Val Y MSE: 0.109 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.025
+[2024-01-28 02:44:15,415] INFO: Epoch 18/30 | Loss: 0.022 | Learning rate: 1e-05 | Train X MSE: 0.021 | Train Y MSE: 0.029 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.036 | Val Y MSE: 0.109 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.025
+[2024-01-28 03:22:07,115] INFO: Epoch 19/30 | Loss: 0.022 | Learning rate: 1e-05 | Train X MSE: 0.021 | Train Y MSE: 0.029 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.036 | Val Y MSE: 0.109 | Val Z MSE: 0.054 | Val Theta MSE: 0.009 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.025
+[2024-01-28 04:00:01,080] INFO: Epoch 20/30 | Loss: 0.022 | Learning rate: 1e-05 | Train X MSE: 0.021 | Train Y MSE: 0.029 | Train Z MSE: 0.019 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.036 | Val Y MSE: 0.109 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.025
+Epoch 00020: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-28 04:37:58,155] INFO: Epoch 21/30 | Loss: 0.022 | Learning rate: 1e-06 | Train X MSE: 0.021 | Train Y MSE: 0.028 | Train Z MSE: 0.019 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.036 | Val Y MSE: 0.109 | Val Z MSE: 0.054 | Val Theta MSE: 0.009 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.025
+[2024-01-28 04:37:58,155] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▃▃▃▄▄▅▅▅▆▆▆▇▇▇██
+wandb:     learning_rate ████████▂▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:              loss █▆▅▅▄▄▄▄▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▅▅▄▄▄▄▃▂▂▂▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▄▄▄▃▃▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▅▄▄▄▄▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▆▅▅▄▄▄▄▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▆▆▅▅▄▄▄▃▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▆▅▅▄▄▄▄▃▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse █▇▅▅▃▄▃▃▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse █▂▂▆▂▄▅▃▁▁▁▂▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse █▅▃▄▅▄▆▆▁▁▁▂▁▁▂▂▂▂▂▂▂
+wandb:         val_y_mse ▂█▃▂▁▂▂▃▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_z_mse █▆▅▅▁▅▆▄▃▂▃▃▃▃▃▃▃▃▄▃▄
+wandb:
+wandb: Run summary:
+wandb:             epoch 21
+wandb:     learning_rate 0.0
+wandb:              loss 0.02158
+wandb: train_avg_pos_mse 0.0229
+wandb: train_avg_rot_mse 0.01959
+wandb:     train_phi_mse 0.03387
+wandb:   train_theta_mse 0.00531
+wandb:       train_x_mse 0.02097
+wandb:       train_y_mse 0.02839
+wandb:       train_z_mse 0.01935
+wandb:       val_phi_mse 0.04111
+wandb:     val_theta_mse 0.00948
+wandb:         val_x_mse 0.03586
+wandb:         val_y_mse 0.10899
+wandb:         val_z_mse 0.05352
+wandb:
+wandb:  View run dainty-sweep-7 at: https://wandb.ai/badertim/synthcave/runs/1jlv4blt
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240127_152129-1jlv4blt\logs
+wandb: Agent Starting Run: ewtdimv0 with config:
+wandb:  K: 8
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: NTU
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240128_043809-ewtdimv0
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run bumbling-sweep-8
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/ewtdimv0
+[2024-01-28 04:38:10,727] INFO: Model: NTU | Trainable parameters: 8.968M | Dataset type: point
+[2024-01-28 04:38:10,727] INFO: K: 8 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud/train'...
+Dataset initialized with 8847 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud/val'...
+Dataset initialized with 3156 samples.
+[2024-01-28 04:43:32,344] INFO: Epoch 1/30 | Loss: 0.057 | Learning rate: 0.001 | Train X MSE: 0.069 | Train Y MSE: 0.096 | Train Z MSE: 0.062 | Train Theta MSE: 0.009 | Train Phi MSE: 0.051 | AVG Pos MSE Train: 0.075 | AVG Rot MSE Train: 0.03 | Val X MSE: 0.126 | Val Y MSE: 0.153 | Val Z MSE: 0.118 | Val Theta MSE: 0.012 | Val Phi MSE: 0.064 | AVG Pos MSE Val: 0.132 | AVG Rot MSE Val: 0.038
+[2024-01-28 04:48:48,349] INFO: Epoch 2/30 | Loss: 0.048 | Learning rate: 0.001 | Train X MSE: 0.056 | Train Y MSE: 0.079 | Train Z MSE: 0.053 | Train Theta MSE: 0.006 | Train Phi MSE: 0.047 | AVG Pos MSE Train: 0.062 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.411 | Val Y MSE: 1.758 | Val Z MSE: 0.152 | Val Theta MSE: 0.215 | Val Phi MSE: 0.113 | AVG Pos MSE Val: 0.774 | AVG Rot MSE Val: 0.164
+[2024-01-28 04:54:06,200] INFO: Epoch 3/30 | Loss: 0.047 | Learning rate: 0.001 | Train X MSE: 0.055 | Train Y MSE: 0.077 | Train Z MSE: 0.051 | Train Theta MSE: 0.006 | Train Phi MSE: 0.046 | AVG Pos MSE Train: 0.061 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.053 | Val Y MSE: 0.12 | Val Z MSE: 0.062 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.078 | AVG Rot MSE Val: 0.028
+[2024-01-28 04:59:25,198] INFO: Epoch 4/30 | Loss: 0.043 | Learning rate: 0.001 | Train X MSE: 0.048 | Train Y MSE: 0.068 | Train Z MSE: 0.045 | Train Theta MSE: 0.006 | Train Phi MSE: 0.045 | AVG Pos MSE Train: 0.054 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.045 | Val Y MSE: 0.13 | Val Z MSE: 0.066 | Val Theta MSE: 0.011 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.028
+[2024-01-28 05:04:44,357] INFO: Epoch 5/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.045 | Train Y MSE: 0.065 | Train Z MSE: 0.043 | Train Theta MSE: 0.006 | Train Phi MSE: 0.044 | AVG Pos MSE Train: 0.051 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.042 | Val Y MSE: 0.116 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.028
+[2024-01-28 05:10:02,247] INFO: Epoch 6/30 | Loss: 0.039 | Learning rate: 0.001 | Train X MSE: 0.044 | Train Y MSE: 0.061 | Train Z MSE: 0.04 | Train Theta MSE: 0.006 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.049 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.039 | Val Y MSE: 0.109 | Val Z MSE: 0.063 | Val Theta MSE: 0.01 | Val Phi MSE: 0.047 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.028
+[2024-01-28 05:15:21,362] INFO: Epoch 7/30 | Loss: 0.037 | Learning rate: 0.001 | Train X MSE: 0.041 | Train Y MSE: 0.058 | Train Z MSE: 0.039 | Train Theta MSE: 0.006 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.046 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.038 | Val Y MSE: 0.108 | Val Z MSE: 0.066 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.028
+[2024-01-28 05:20:37,140] INFO: Epoch 8/30 | Loss: 0.037 | Learning rate: 0.001 | Train X MSE: 0.04 | Train Y MSE: 0.057 | Train Z MSE: 0.037 | Train Theta MSE: 0.006 | Train Phi MSE: 0.042 | AVG Pos MSE Train: 0.045 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.058 | Val Y MSE: 0.113 | Val Z MSE: 0.074 | Val Theta MSE: 0.01 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.082 | AVG Rot MSE Val: 0.028
+Epoch 00008: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-28 05:25:55,644] INFO: Epoch 9/30 | Loss: 0.032 | Learning rate: 0.0001 | Train X MSE: 0.034 | Train Y MSE: 0.047 | Train Z MSE: 0.032 | Train Theta MSE: 0.006 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.038 | Val Y MSE: 0.107 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.044 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.027
+[2024-01-28 05:31:11,772] INFO: Epoch 10/30 | Loss: 0.03 | Learning rate: 0.0001 | Train X MSE: 0.032 | Train Y MSE: 0.042 | Train Z MSE: 0.029 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.034 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.036 | Val Y MSE: 0.101 | Val Z MSE: 0.06 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.026
+[2024-01-28 05:36:29,642] INFO: Epoch 11/30 | Loss: 0.029 | Learning rate: 0.0001 | Train X MSE: 0.031 | Train Y MSE: 0.04 | Train Z MSE: 0.028 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.033 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.035 | Val Y MSE: 0.102 | Val Z MSE: 0.058 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 05:41:45,355] INFO: Epoch 12/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.03 | Train Y MSE: 0.039 | Train Z MSE: 0.027 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.032 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.035 | Val Y MSE: 0.105 | Val Z MSE: 0.057 | Val Theta MSE: 0.009 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 05:47:03,756] INFO: Epoch 13/30 | Loss: 0.027 | Learning rate: 0.0001 | Train X MSE: 0.029 | Train Y MSE: 0.037 | Train Z MSE: 0.027 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.036 | Val Y MSE: 0.105 | Val Z MSE: 0.058 | Val Theta MSE: 0.009 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.026
+[2024-01-28 05:52:19,237] INFO: Epoch 14/30 | Loss: 0.027 | Learning rate: 0.0001 | Train X MSE: 0.029 | Train Y MSE: 0.036 | Train Z MSE: 0.026 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.03 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.036 | Val Y MSE: 0.103 | Val Z MSE: 0.057 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+Epoch 00014: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-28 05:57:38,277] INFO: Epoch 15/30 | Loss: 0.026 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.034 | Train Z MSE: 0.025 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.029 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.035 | Val Y MSE: 0.103 | Val Z MSE: 0.057 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:02:56,226] INFO: Epoch 16/30 | Loss: 0.026 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.034 | Train Z MSE: 0.024 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.029 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.036 | Val Y MSE: 0.103 | Val Z MSE: 0.057 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:08:13,838] INFO: Epoch 17/30 | Loss: 0.026 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.034 | Train Z MSE: 0.024 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.036 | Val Y MSE: 0.103 | Val Z MSE: 0.057 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:13:32,504] INFO: Epoch 18/30 | Loss: 0.026 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.034 | Train Z MSE: 0.024 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.035 | Val Y MSE: 0.103 | Val Z MSE: 0.057 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:18:51,480] INFO: Epoch 19/30 | Loss: 0.026 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.033 | Train Z MSE: 0.024 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.035 | Val Y MSE: 0.103 | Val Z MSE: 0.057 | Val Theta MSE: 0.009 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:24:07,777] INFO: Epoch 20/30 | Loss: 0.025 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.033 | Train Z MSE: 0.024 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.035 | Val Y MSE: 0.103 | Val Z MSE: 0.057 | Val Theta MSE: 0.009 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+Epoch 00020: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-28 06:29:25,481] INFO: Epoch 21/30 | Loss: 0.025 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.033 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.036 | Val Y MSE: 0.103 | Val Z MSE: 0.057 | Val Theta MSE: 0.009 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:34:42,702] INFO: Epoch 22/30 | Loss: 0.025 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.033 | Train Z MSE: 0.024 | Train Theta MSE: 0.006 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.036 | Val Y MSE: 0.104 | Val Z MSE: 0.057 | Val Theta MSE: 0.009 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:40:00,028] INFO: Epoch 23/30 | Loss: 0.025 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.033 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.036 | Val Y MSE: 0.104 | Val Z MSE: 0.057 | Val Theta MSE: 0.009 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:45:17,828] INFO: Epoch 24/30 | Loss: 0.025 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.033 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.035 | Val Y MSE: 0.104 | Val Z MSE: 0.057 | Val Theta MSE: 0.009 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:50:33,486] INFO: Epoch 25/30 | Loss: 0.025 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.033 | Train Z MSE: 0.024 | Train Theta MSE: 0.006 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.038 | Val Y MSE: 0.103 | Val Z MSE: 0.06 | Val Theta MSE: 0.009 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.067 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:50:33,487] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb: / 0.002 MB of 0.017 MB uploaded (0.000 MB deduped)
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▂▃▃▃▄▄▄▅▅▅▅▆▆▆▇▇▇▇██
+wandb:     learning_rate ████████▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:              loss █▆▆▅▄▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▆▅▄▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▅▅▄▄▄▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▆▆▅▅▄▄▄▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▃▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▆▆▅▄▄▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▆▆▅▅▄▄▄▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▆▆▅▅▄▄▄▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse ▃█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse ▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse ▃█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_y_mse ▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_z_mse ▅█▁▂▂▁▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:
+wandb: Run summary:
+wandb:             epoch 25
+wandb:     learning_rate 0.0
+wandb:              loss 0.02533
+wandb: train_avg_pos_mse 0.02789
+wandb: train_avg_rot_mse 0.02149
+wandb:     train_phi_mse 0.03748
+wandb:   train_theta_mse 0.0055
+wandb:       train_x_mse 0.02681
+wandb:       train_y_mse 0.03293
+wandb:       train_z_mse 0.02395
+wandb:       val_phi_mse 0.04346
+wandb:     val_theta_mse 0.0095
+wandb:         val_x_mse 0.03835
+wandb:         val_y_mse 0.1035
+wandb:         val_z_mse 0.0596
+wandb:
+wandb:  View run bumbling-sweep-8 at: https://wandb.ai/badertim/synthcave/runs/ewtdimv0
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240128_043809-ewtdimv0\logs
+wandb: Agent Starting Run: oyappag6 with config:
+wandb:  K: 4
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: TSViTcls
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240128_065046-oyappag6
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run worthy-sweep-9
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/oyappag6
+[2024-01-28 06:50:47,134] INFO: Model: TSViTcls | Trainable parameters: 3.444M | Dataset type: image
+[2024-01-28 06:50:47,134] INFO: K: 4 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train'...
+Dataset initialized with 9287 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/val'...
+Dataset initialized with 3332 samples.
+[2024-01-28 06:52:07,148] INFO: Epoch 1/30 | Loss: 0.054 | Learning rate: 0.001 | Train X MSE: 0.064 | Train Y MSE: 0.088 | Train Z MSE: 0.06 | Train Theta MSE: 0.012 | Train Phi MSE: 0.048 | AVG Pos MSE Train: 0.071 | AVG Rot MSE Train: 0.03 | Val X MSE: 0.048 | Val Y MSE: 0.112 | Val Z MSE: 0.071 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.077 | AVG Rot MSE Val: 0.028
+[2024-01-28 06:53:25,567] INFO: Epoch 2/30 | Loss: 0.045 | Learning rate: 0.001 | Train X MSE: 0.052 | Train Y MSE: 0.075 | Train Z MSE: 0.049 | Train Theta MSE: 0.006 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.059 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.044 | Val Y MSE: 0.128 | Val Z MSE: 0.075 | Val Theta MSE: 0.011 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.082 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:54:43,946] INFO: Epoch 3/30 | Loss: 0.042 | Learning rate: 0.001 | Train X MSE: 0.046 | Train Y MSE: 0.073 | Train Z MSE: 0.044 | Train Theta MSE: 0.005 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.054 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.041 | Val Y MSE: 0.099 | Val Z MSE: 0.058 | Val Theta MSE: 0.009 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:56:02,512] INFO: Epoch 4/30 | Loss: 0.039 | Learning rate: 0.001 | Train X MSE: 0.043 | Train Y MSE: 0.068 | Train Z MSE: 0.041 | Train Theta MSE: 0.005 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.051 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.04 | Val Y MSE: 0.102 | Val Z MSE: 0.06 | Val Theta MSE: 0.009 | Val Phi MSE: 0.044 | AVG Pos MSE Val: 0.067 | AVG Rot MSE Val: 0.026
+[2024-01-28 06:57:20,824] INFO: Epoch 5/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.04 | Train Y MSE: 0.066 | Train Z MSE: 0.039 | Train Theta MSE: 0.005 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.048 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.039 | Val Y MSE: 0.107 | Val Z MSE: 0.061 | Val Theta MSE: 0.008 | Val Phi MSE: 0.04 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.024
+[2024-01-28 06:58:39,366] INFO: Epoch 6/30 | Loss: 0.036 | Learning rate: 0.001 | Train X MSE: 0.038 | Train Y MSE: 0.063 | Train Z MSE: 0.037 | Train Theta MSE: 0.005 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.046 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.041 | Val Y MSE: 0.104 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.024
+[2024-01-28 06:59:57,469] INFO: Epoch 7/30 | Loss: 0.035 | Learning rate: 0.001 | Train X MSE: 0.037 | Train Y MSE: 0.06 | Train Z MSE: 0.035 | Train Theta MSE: 0.005 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.044 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.041 | Val Y MSE: 0.103 | Val Z MSE: 0.062 | Val Theta MSE: 0.009 | Val Phi MSE: 0.04 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.025
+[2024-01-28 07:01:15,740] INFO: Epoch 8/30 | Loss: 0.034 | Learning rate: 0.001 | Train X MSE: 0.036 | Train Y MSE: 0.06 | Train Z MSE: 0.035 | Train Theta MSE: 0.005 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.044 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.043 | Val Y MSE: 0.093 | Val Z MSE: 0.058 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.024
+Epoch 00008: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-28 07:02:33,866] INFO: Epoch 9/30 | Loss: 0.03 | Learning rate: 0.0001 | Train X MSE: 0.031 | Train Y MSE: 0.051 | Train Z MSE: 0.03 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.035 | Val Y MSE: 0.09 | Val Z MSE: 0.056 | Val Theta MSE: 0.008 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.06 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:03:52,050] INFO: Epoch 10/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.028 | Train Y MSE: 0.047 | Train Z MSE: 0.027 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.034 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.034 | Val Y MSE: 0.092 | Val Z MSE: 0.054 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.06 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:05:10,497] INFO: Epoch 11/30 | Loss: 0.027 | Learning rate: 0.0001 | Train X MSE: 0.028 | Train Y MSE: 0.045 | Train Z MSE: 0.026 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.033 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.09 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:06:28,720] INFO: Epoch 12/30 | Loss: 0.026 | Learning rate: 0.0001 | Train X MSE: 0.027 | Train Y MSE: 0.044 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.032 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.088 | Val Z MSE: 0.054 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.058 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:07:47,142] INFO: Epoch 13/30 | Loss: 0.026 | Learning rate: 0.0001 | Train X MSE: 0.026 | Train Y MSE: 0.042 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.089 | Val Z MSE: 0.054 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:09:05,335] INFO: Epoch 14/30 | Loss: 0.025 | Learning rate: 0.0001 | Train X MSE: 0.026 | Train Y MSE: 0.042 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.03 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.034 | Val Y MSE: 0.09 | Val Z MSE: 0.053 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+Epoch 00014: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-28 07:10:23,500] INFO: Epoch 15/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.025 | Train Y MSE: 0.04 | Train Z MSE: 0.023 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.029 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.089 | Val Z MSE: 0.054 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:11:41,748] INFO: Epoch 16/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.025 | Train Y MSE: 0.039 | Train Z MSE: 0.023 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.029 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.089 | Val Z MSE: 0.054 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:12:59,922] INFO: Epoch 17/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.024 | Train Y MSE: 0.039 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.029 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.089 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:14:18,143] INFO: Epoch 18/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.024 | Train Y MSE: 0.039 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.029 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.089 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:15:36,510] INFO: Epoch 19/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.024 | Train Y MSE: 0.039 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.029 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.089 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:16:54,758] INFO: Epoch 20/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.024 | Train Y MSE: 0.039 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.089 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+Epoch 00020: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-28 07:18:13,159] INFO: Epoch 21/30 | Loss: 0.024 | Learning rate: 1e-06 | Train X MSE: 0.024 | Train Y MSE: 0.039 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.089 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:19:31,299] INFO: Epoch 22/30 | Loss: 0.024 | Learning rate: 1e-06 | Train X MSE: 0.024 | Train Y MSE: 0.039 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.089 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:19:31,299] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▃▃▃▄▄▄▅▅▅▆▆▆▇▇▇██
+wandb:     learning_rate ████████▂▂▂▂▂▂▁▁▁▁▁▁▁▁
+wandb:              loss █▆▅▅▄▄▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▅▅▄▄▄▄▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▅▄▄▃▃▃▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▆▅▄▄▃▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▆▅▄▄▃▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▆▆▅▅▄▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▆▅▄▄▄▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse █▅▆▇▄▂▃▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse ▇█▄▃▁▄▃▄▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse █▆▅▄▄▅▅▅▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_y_mse ▅█▃▃▄▄▄▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_z_mse ▇█▃▃▃▁▄▃▂▁▂▁▁▁▁▁▂▂▂▂▂▂
+wandb:
+wandb: Run summary:
+wandb:             epoch 22
+wandb:     learning_rate 0.0
+wandb:              loss 0.02399
+wandb: train_avg_pos_mse 0.02827
+wandb: train_avg_rot_mse 0.01757
+wandb:     train_phi_mse 0.03063
+wandb:   train_theta_mse 0.00451
+wandb:       train_x_mse 0.02416
+wandb:       train_y_mse 0.03853
+wandb:       train_z_mse 0.02213
+wandb:       val_phi_mse 0.03719
+wandb:     val_theta_mse 0.00817
+wandb:         val_x_mse 0.03348
+wandb:         val_y_mse 0.08895
+wandb:         val_z_mse 0.05495
+wandb:
+wandb:  View run worthy-sweep-9 at: https://wandb.ai/badertim/synthcave/runs/oyappag6
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240128_065046-oyappag6\logs
+wandb: Sweep Agent: Waiting for job.
+wandb: Job received.
+wandb: Agent Starting Run: ehe0ozej with config:
+wandb:  K: 4
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: CNN
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240128_071951-ehe0ozej
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run fancy-sweep-10
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/ehe0ozej
+[2024-01-28 07:19:52,173] INFO: Model: CNN | Trainable parameters: 3.254M | Dataset type: image
+[2024-01-28 07:19:52,173] INFO: K: 4 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train'...
+Dataset initialized with 9287 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/val'...
+Dataset initialized with 3332 samples.
+[2024-01-28 07:20:49,436] INFO: Epoch 1/30 | Loss: 16.816 | Learning rate: 0.001 | Train X MSE: 10.683 | Train Y MSE: 37.095 | Train Z MSE: 6.828 | Train Theta MSE: 0.721 | Train Phi MSE: 28.761 | AVG Pos MSE Train: 18.202 | AVG Rot MSE Train: 14.741 | Val X MSE: 0.061 | Val Y MSE: 0.111 | Val Z MSE: 0.081 | Val Theta MSE: 0.011 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.084 | AVG Rot MSE Val: 0.028
+[2024-01-28 07:21:45,936] INFO: Epoch 2/30 | Loss: 0.044 | Learning rate: 0.001 | Train X MSE: 0.05 | Train Y MSE: 0.072 | Train Z MSE: 0.045 | Train Theta MSE: 0.007 | Train Phi MSE: 0.044 | AVG Pos MSE Train: 0.056 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.053 | Val Y MSE: 0.105 | Val Z MSE: 0.071 | Val Theta MSE: 0.009 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.028
+[2024-01-28 07:22:42,362] INFO: Epoch 3/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.045 | Train Y MSE: 0.07 | Train Z MSE: 0.041 | Train Theta MSE: 0.007 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.052 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.049 | Val Y MSE: 0.104 | Val Z MSE: 0.072 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.026
+[2024-01-28 07:23:38,931] INFO: Epoch 4/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.041 | Train Y MSE: 0.066 | Train Z MSE: 0.038 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.048 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.043 | Val Y MSE: 0.103 | Val Z MSE: 0.07 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.026
+[2024-01-28 07:24:35,401] INFO: Epoch 5/30 | Loss: 0.036 | Learning rate: 0.001 | Train X MSE: 0.039 | Train Y MSE: 0.062 | Train Z MSE: 0.036 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.046 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.041 | Val Y MSE: 0.101 | Val Z MSE: 0.068 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.026
+[2024-01-28 07:25:31,872] INFO: Epoch 6/30 | Loss: 0.035 | Learning rate: 0.001 | Train X MSE: 0.036 | Train Y MSE: 0.061 | Train Z MSE: 0.033 | Train Theta MSE: 0.006 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.043 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.038 | Val Y MSE: 0.101 | Val Z MSE: 0.059 | Val Theta MSE: 0.01 | Val Phi MSE: 0.04 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.025
+[2024-01-28 07:26:28,418] INFO: Epoch 7/30 | Loss: 0.033 | Learning rate: 0.001 | Train X MSE: 0.035 | Train Y MSE: 0.058 | Train Z MSE: 0.032 | Train Theta MSE: 0.006 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.042 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.046 | Val Y MSE: 0.101 | Val Z MSE: 0.07 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.026
+Epoch 00007: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-28 07:27:25,043] INFO: Epoch 8/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.028 | Train Y MSE: 0.048 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.034 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.039 | Val Y MSE: 0.097 | Val Z MSE: 0.06 | Val Theta MSE: 0.009 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:28:21,596] INFO: Epoch 9/30 | Loss: 0.026 | Learning rate: 0.0001 | Train X MSE: 0.026 | Train Y MSE: 0.044 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.039 | Val Y MSE: 0.096 | Val Z MSE: 0.06 | Val Theta MSE: 0.008 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:29:18,118] INFO: Epoch 10/30 | Loss: 0.025 | Learning rate: 0.0001 | Train X MSE: 0.024 | Train Y MSE: 0.042 | Train Z MSE: 0.021 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.029 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.04 | Val Y MSE: 0.097 | Val Z MSE: 0.062 | Val Theta MSE: 0.008 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:30:14,807] INFO: Epoch 11/30 | Loss: 0.024 | Learning rate: 0.0001 | Train X MSE: 0.023 | Train Y MSE: 0.041 | Train Z MSE: 0.02 | Train Theta MSE: 0.005 | Train Phi MSE: 0.03 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.038 | Val Y MSE: 0.1 | Val Z MSE: 0.061 | Val Theta MSE: 0.008 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.067 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:31:11,450] INFO: Epoch 12/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.022 | Train Y MSE: 0.039 | Train Z MSE: 0.019 | Train Theta MSE: 0.004 | Train Phi MSE: 0.03 | AVG Pos MSE Train: 0.027 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.04 | Val Y MSE: 0.094 | Val Z MSE: 0.06 | Val Theta MSE: 0.008 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:32:08,007] INFO: Epoch 13/30 | Loss: 0.022 | Learning rate: 0.0001 | Train X MSE: 0.021 | Train Y MSE: 0.038 | Train Z MSE: 0.018 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.026 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.038 | Val Y MSE: 0.095 | Val Z MSE: 0.061 | Val Theta MSE: 0.009 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.023
+Epoch 00013: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-28 07:33:04,600] INFO: Epoch 14/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.02 | Train Y MSE: 0.035 | Train Z MSE: 0.017 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.038 | Val Y MSE: 0.093 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:34:01,095] INFO: Epoch 15/30 | Loss: 0.021 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.035 | Train Z MSE: 0.016 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.06 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:34:57,733] INFO: Epoch 16/30 | Loss: 0.02 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.034 | Train Z MSE: 0.016 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.06 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:35:54,190] INFO: Epoch 17/30 | Loss: 0.02 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.034 | Train Z MSE: 0.016 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:36:50,664] INFO: Epoch 18/30 | Loss: 0.02 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.034 | Train Z MSE: 0.016 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:37:47,140] INFO: Epoch 19/30 | Loss: 0.02 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.034 | Train Z MSE: 0.016 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+Epoch 00019: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-28 07:38:43,611] INFO: Epoch 20/30 | Loss: 0.02 | Learning rate: 1e-06 | Train X MSE: 0.019 | Train Y MSE: 0.033 | Train Z MSE: 0.015 | Train Theta MSE: 0.004 | Train Phi MSE: 0.027 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:39:40,601] INFO: Epoch 21/30 | Loss: 0.02 | Learning rate: 1e-06 | Train X MSE: 0.019 | Train Y MSE: 0.033 | Train Z MSE: 0.015 | Train Theta MSE: 0.004 | Train Phi MSE: 0.027 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:40:40,827] INFO: Epoch 22/30 | Loss: 0.02 | Learning rate: 1e-06 | Train X MSE: 0.019 | Train Y MSE: 0.033 | Train Z MSE: 0.015 | Train Theta MSE: 0.004 | Train Phi MSE: 0.027 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:41:38,934] INFO: Epoch 23/30 | Loss: 0.02 | Learning rate: 1e-06 | Train X MSE: 0.018 | Train Y MSE: 0.033 | Train Z MSE: 0.015 | Train Theta MSE: 0.004 | Train Phi MSE: 0.027 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:42:35,578] INFO: Epoch 24/30 | Loss: 0.02 | Learning rate: 1e-06 | Train X MSE: 0.018 | Train Y MSE: 0.033 | Train Z MSE: 0.015 | Train Theta MSE: 0.004 | Train Phi MSE: 0.027 | AVG Pos MSE Train: 0.022 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.039 | Val Y MSE: 0.094 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 07:42:35,579] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▃▃▃▃▄▄▄▅▅▅▆▆▆▆▇▇▇██
+wandb:     learning_rate ███████▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:              loss █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse ██▅▄▅▃▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse █▄▇▆▇▆█▃▂▂▂▂▃▁▂▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse █▅▄▂▂▁▃▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_y_mse █▆▅▅▄▄▄▃▂▂▄▁▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_z_mse █▅▅▅▄▁▄▂▁▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:
+wandb: Run summary:
+wandb:             epoch 24
+wandb:     learning_rate 0.0
+wandb:              loss 0.01962
+wandb: train_avg_pos_mse 0.02228
+wandb: train_avg_rot_mse 0.01564
+wandb:     train_phi_mse 0.02732
+wandb:   train_theta_mse 0.00396
+wandb:       train_x_mse 0.01848
+wandb:       train_y_mse 0.03301
+wandb:       train_z_mse 0.01535
+wandb:       val_phi_mse 0.03746
+wandb:     val_theta_mse 0.00828
+wandb:         val_x_mse 0.03883
+wandb:         val_y_mse 0.09427
+wandb:         val_z_mse 0.05942
+wandb:
+wandb:  View run fancy-sweep-10 at: https://wandb.ai/badertim/synthcave/runs/ehe0ozej
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240128_071951-ehe0ozej\logs
+wandb: Agent Starting Run: qalsqsl4 with config:
+wandb:  K: 4
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: ASTGCN
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240128_074249-qalsqsl4
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run swift-sweep-11
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/qalsqsl4
+[2024-01-28 07:42:50,487] INFO: Model: ASTGCN | Trainable parameters: 6.016M | Dataset type: graph
+[2024-01-28 07:42:50,487] INFO: K: 4 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph/train'...
+Dataset initialized with 9287 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph/val'...
+Dataset initialized with 3332 samples.
+[2024-01-28 08:06:51,651] INFO: Epoch 1/30 | Loss: 0.052 | Learning rate: 0.001 | Train X MSE: 0.061 | Train Y MSE: 0.085 | Train Z MSE: 0.056 | Train Theta MSE: 0.008 | Train Phi MSE: 0.05 | AVG Pos MSE Train: 0.067 | AVG Rot MSE Train: 0.029 | Val X MSE: 0.053 | Val Y MSE: 0.112 | Val Z MSE: 0.075 | Val Theta MSE: 0.011 | Val Phi MSE: 0.045 | AVG Pos MSE Val: 0.08 | AVG Rot MSE Val: 0.028
+[2024-01-28 08:30:47,484] INFO: Epoch 2/30 | Loss: 0.044 | Learning rate: 0.001 | Train X MSE: 0.049 | Train Y MSE: 0.075 | Train Z MSE: 0.047 | Train Theta MSE: 0.006 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.057 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.043 | Val Y MSE: 0.103 | Val Z MSE: 0.063 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.026
+[2024-01-28 08:54:43,899] INFO: Epoch 3/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.045 | Train Y MSE: 0.072 | Train Z MSE: 0.043 | Train Theta MSE: 0.006 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.053 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.041 | Val Y MSE: 0.114 | Val Z MSE: 0.065 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.073 | AVG Rot MSE Val: 0.025
+[2024-01-28 09:18:41,577] INFO: Epoch 4/30 | Loss: 0.04 | Learning rate: 0.001 | Train X MSE: 0.043 | Train Y MSE: 0.07 | Train Z MSE: 0.04 | Train Theta MSE: 0.006 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.051 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.042 | Val Y MSE: 0.115 | Val Z MSE: 0.061 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.073 | AVG Rot MSE Val: 0.025
+[2024-01-28 09:42:49,102] INFO: Epoch 5/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.041 | Train Y MSE: 0.066 | Train Z MSE: 0.038 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.048 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.038 | Val Y MSE: 0.102 | Val Z MSE: 0.057 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.026
+[2024-01-28 10:07:38,467] INFO: Epoch 6/30 | Loss: 0.037 | Learning rate: 0.001 | Train X MSE: 0.039 | Train Y MSE: 0.063 | Train Z MSE: 0.037 | Train Theta MSE: 0.006 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.046 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.041 | Val Y MSE: 0.101 | Val Z MSE: 0.067 | Val Theta MSE: 0.01 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.024
+[2024-01-28 10:35:06,958] INFO: Epoch 7/30 | Loss: 0.035 | Learning rate: 0.001 | Train X MSE: 0.037 | Train Y MSE: 0.061 | Train Z MSE: 0.036 | Train Theta MSE: 0.006 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.045 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.039 | Val Y MSE: 0.106 | Val Z MSE: 0.08 | Val Theta MSE: 0.01 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.024
+Epoch 00007: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-28 11:03:03,617] INFO: Epoch 8/30 | Loss: 0.03 | Learning rate: 0.0001 | Train X MSE: 0.031 | Train Y MSE: 0.051 | Train Z MSE: 0.03 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.033 | Val Y MSE: 0.092 | Val Z MSE: 0.055 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.06 | AVG Rot MSE Val: 0.023
+[2024-01-28 11:28:35,585] INFO: Epoch 9/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.029 | Train Y MSE: 0.046 | Train Z MSE: 0.027 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.034 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.033 | Val Y MSE: 0.094 | Val Z MSE: 0.054 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.06 | AVG Rot MSE Val: 0.023
+[2024-01-28 11:54:50,577] INFO: Epoch 10/30 | Loss: 0.027 | Learning rate: 0.0001 | Train X MSE: 0.028 | Train Y MSE: 0.044 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.032 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.033 | Val Y MSE: 0.089 | Val Z MSE: 0.052 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.058 | AVG Rot MSE Val: 0.023
+[2024-01-28 12:20:42,547] INFO: Epoch 11/30 | Loss: 0.026 | Learning rate: 0.0001 | Train X MSE: 0.027 | Train Y MSE: 0.043 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.033 | Val Y MSE: 0.094 | Val Z MSE: 0.052 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.06 | AVG Rot MSE Val: 0.023
+[2024-01-28 14:08:39,192] INFO: Epoch 12/30 | Loss: 0.026 | Learning rate: 0.0001 | Train X MSE: 0.026 | Train Y MSE: 0.041 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.032 | Val Y MSE: 0.09 | Val Z MSE: 0.051 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.058 | AVG Rot MSE Val: 0.023
+[2024-01-28 14:35:24,597] INFO: Epoch 13/30 | Loss: 0.025 | Learning rate: 0.0001 | Train X MSE: 0.026 | Train Y MSE: 0.041 | Train Z MSE: 0.023 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.03 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.033 | Val Y MSE: 0.09 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.059 | AVG Rot MSE Val: 0.023
+Epoch 00013: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-28 15:02:41,542] INFO: Epoch 14/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.025 | Train Y MSE: 0.038 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.032 | Val Y MSE: 0.09 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.058 | AVG Rot MSE Val: 0.023
+[2024-01-28 15:28:45,840] INFO: Epoch 15/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.025 | Train Y MSE: 0.038 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.032 | Val Y MSE: 0.09 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.058 | AVG Rot MSE Val: 0.023
+[2024-01-28 15:55:08,561] INFO: Epoch 16/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.025 | Train Y MSE: 0.038 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.032 | Val Y MSE: 0.09 | Val Z MSE: 0.052 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.058 | AVG Rot MSE Val: 0.023
+[2024-01-28 16:20:20,843] INFO: Epoch 17/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.025 | Train Y MSE: 0.037 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.032 | Val Y MSE: 0.091 | Val Z MSE: 0.052 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.058 | AVG Rot MSE Val: 0.023
+[2024-01-28 16:46:31,340] INFO: Epoch 18/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.024 | Train Y MSE: 0.037 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.032 | Val Y MSE: 0.091 | Val Z MSE: 0.052 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.058 | AVG Rot MSE Val: 0.023
+[2024-01-28 17:12:02,449] INFO: Epoch 19/30 | Loss: 0.024 | Learning rate: 1e-05 | Train X MSE: 0.024 | Train Y MSE: 0.037 | Train Z MSE: 0.022 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.032 | Val Y MSE: 0.091 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.058 | AVG Rot MSE Val: 0.023
+Epoch 00019: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-28 17:36:44,609] INFO: Epoch 20/30 | Loss: 0.024 | Learning rate: 1e-06 | Train X MSE: 0.024 | Train Y MSE: 0.037 | Train Z MSE: 0.021 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.032 | Val Y MSE: 0.091 | Val Z MSE: 0.053 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.058 | AVG Rot MSE Val: 0.023
+[2024-01-28 17:36:44,610] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▃▃▄▄▄▅▅▅▆▆▇▇▇██
+wandb:     learning_rate ███████▂▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:              loss █▆▅▅▄▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▆▅▅▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▅▅▄▄▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▆▅▄▄▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▃▃▃▃▃▃▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▆▅▅▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▇▆▆▅▅▅▃▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:       train_z_mse █▆▅▅▄▄▄▃▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse █▆▅▄▅▃▃▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse █▆▄▄▇▄▆▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse █▅▄▄▃▄▃▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_y_mse ▇▅██▄▄▆▂▂▁▂▁▁▁▁▁▁▁▂▂
+wandb:         val_z_mse ▇▄▄▃▂▅█▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:
+wandb: Run summary:
+wandb:             epoch 20
+wandb:     learning_rate 0.0
+wandb:              loss 0.02366
+wandb: train_avg_pos_mse 0.02751
+wandb: train_avg_rot_mse 0.01788
+wandb:     train_phi_mse 0.03086
+wandb:   train_theta_mse 0.0049
+wandb:       train_x_mse 0.02428
+wandb:       train_y_mse 0.03688
+wandb:       train_z_mse 0.02137
+wandb:       val_phi_mse 0.03716
+wandb:     val_theta_mse 0.00879
+wandb:         val_x_mse 0.03208
+wandb:         val_y_mse 0.09076
+wandb:         val_z_mse 0.05251
+wandb:
+wandb:  View run swift-sweep-11 at: https://wandb.ai/badertim/synthcave/runs/qalsqsl4
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v15
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240128_074249-qalsqsl4\logs
+wandb: Agent Starting Run: qgjfixu5 with config:
+wandb:  K: 4
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: NTU
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240128_173656-qgjfixu5
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run likely-sweep-12
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/qgjfixu5
+[2024-01-28 17:36:57,142] INFO: Model: NTU | Trainable parameters: 8.962M | Dataset type: point
+[2024-01-28 17:36:57,143] INFO: K: 4 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud/train'...
+Dataset initialized with 9287 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud/val'...
+Dataset initialized with 3332 samples.
+[2024-01-28 17:42:48,344] INFO: Epoch 1/30 | Loss: 0.057 | Learning rate: 0.001 | Train X MSE: 0.068 | Train Y MSE: 0.094 | Train Z MSE: 0.063 | Train Theta MSE: 0.009 | Train Phi MSE: 0.049 | AVG Pos MSE Train: 0.075 | AVG Rot MSE Train: 0.029 | Val X MSE: 0.095 | Val Y MSE: 0.133 | Val Z MSE: 0.083 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.104 | AVG Rot MSE Val: 0.028
+[2024-01-28 17:48:30,119] INFO: Epoch 2/30 | Loss: 0.049 | Learning rate: 0.001 | Train X MSE: 0.058 | Train Y MSE: 0.082 | Train Z MSE: 0.055 | Train Theta MSE: 0.006 | Train Phi MSE: 0.046 | AVG Pos MSE Train: 0.065 | AVG Rot MSE Train: 0.026 | Val X MSE: 0.063 | Val Y MSE: 0.123 | Val Z MSE: 0.08 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.089 | AVG Rot MSE Val: 0.028
+[2024-01-28 17:54:11,595] INFO: Epoch 3/30 | Loss: 0.046 | Learning rate: 0.001 | Train X MSE: 0.053 | Train Y MSE: 0.077 | Train Z MSE: 0.052 | Train Theta MSE: 0.006 | Train Phi MSE: 0.045 | AVG Pos MSE Train: 0.06 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.094 | Val Y MSE: 0.185 | Val Z MSE: 0.094 | Val Theta MSE: 0.012 | Val Phi MSE: 0.05 | AVG Pos MSE Val: 0.124 | AVG Rot MSE Val: 0.031
+[2024-01-28 17:59:54,858] INFO: Epoch 4/30 | Loss: 0.043 | Learning rate: 0.001 | Train X MSE: 0.049 | Train Y MSE: 0.072 | Train Z MSE: 0.047 | Train Theta MSE: 0.006 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.056 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.044 | Val Y MSE: 0.101 | Val Z MSE: 0.069 | Val Theta MSE: 0.01 | Val Phi MSE: 0.044 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.027
+[2024-01-28 18:05:37,902] INFO: Epoch 5/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.046 | Train Y MSE: 0.069 | Train Z MSE: 0.044 | Train Theta MSE: 0.006 | Train Phi MSE: 0.042 | AVG Pos MSE Train: 0.053 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.045 | Val Y MSE: 0.111 | Val Z MSE: 0.061 | Val Theta MSE: 0.01 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.026
+[2024-01-28 18:11:20,299] INFO: Epoch 6/30 | Loss: 0.04 | Learning rate: 0.001 | Train X MSE: 0.044 | Train Y MSE: 0.067 | Train Z MSE: 0.042 | Train Theta MSE: 0.006 | Train Phi MSE: 0.042 | AVG Pos MSE Train: 0.051 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.038 | Val Y MSE: 0.106 | Val Z MSE: 0.069 | Val Theta MSE: 0.01 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.026
+[2024-01-28 18:17:03,256] INFO: Epoch 7/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.041 | Train Y MSE: 0.063 | Train Z MSE: 0.04 | Train Theta MSE: 0.006 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.048 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.043 | Val Y MSE: 0.112 | Val Z MSE: 0.065 | Val Theta MSE: 0.011 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.073 | AVG Rot MSE Val: 0.026
+[2024-01-28 18:22:46,701] INFO: Epoch 8/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.041 | Train Y MSE: 0.063 | Train Z MSE: 0.039 | Train Theta MSE: 0.006 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.048 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.046 | Val Y MSE: 0.096 | Val Z MSE: 0.073 | Val Theta MSE: 0.009 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.026
+[2024-01-28 18:28:30,992] INFO: Epoch 9/30 | Loss: 0.036 | Learning rate: 0.001 | Train X MSE: 0.039 | Train Y MSE: 0.061 | Train Z MSE: 0.037 | Train Theta MSE: 0.006 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.045 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.041 | Val Y MSE: 0.106 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.026
+Epoch 00009: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-28 18:34:14,470] INFO: Epoch 10/30 | Loss: 0.031 | Learning rate: 0.0001 | Train X MSE: 0.032 | Train Y MSE: 0.051 | Train Z MSE: 0.031 | Train Theta MSE: 0.005 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.038 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.04 | Val Y MSE: 0.091 | Val Z MSE: 0.057 | Val Theta MSE: 0.01 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.024
+[2024-01-28 18:39:57,013] INFO: Epoch 11/30 | Loss: 0.03 | Learning rate: 0.0001 | Train X MSE: 0.031 | Train Y MSE: 0.048 | Train Z MSE: 0.029 | Train Theta MSE: 0.005 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.036 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.038 | Val Y MSE: 0.093 | Val Z MSE: 0.056 | Val Theta MSE: 0.01 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.024
+[2024-01-28 18:45:41,502] INFO: Epoch 12/30 | Loss: 0.029 | Learning rate: 0.0001 | Train X MSE: 0.03 | Train Y MSE: 0.047 | Train Z MSE: 0.028 | Train Theta MSE: 0.005 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.035 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.036 | Val Y MSE: 0.09 | Val Z MSE: 0.057 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 18:51:29,862] INFO: Epoch 13/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.029 | Train Y MSE: 0.045 | Train Z MSE: 0.027 | Train Theta MSE: 0.005 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.034 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.036 | Val Y MSE: 0.092 | Val Z MSE: 0.056 | Val Theta MSE: 0.01 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.024
+[2024-01-28 18:57:09,324] INFO: Epoch 14/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.029 | Train Y MSE: 0.045 | Train Z MSE: 0.026 | Train Theta MSE: 0.005 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.033 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.037 | Val Y MSE: 0.092 | Val Z MSE: 0.057 | Val Theta MSE: 0.01 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.024
+[2024-01-28 19:03:00,685] INFO: Epoch 15/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.028 | Train Y MSE: 0.044 | Train Z MSE: 0.026 | Train Theta MSE: 0.005 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.033 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.092 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+Epoch 00015: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-28 19:08:44,738] INFO: Epoch 16/30 | Loss: 0.027 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.042 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 19:14:31,805] INFO: Epoch 17/30 | Loss: 0.027 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.042 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 19:20:12,989] INFO: Epoch 18/30 | Loss: 0.027 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.042 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 19:25:50,222] INFO: Epoch 19/30 | Loss: 0.026 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 19:31:26,057] INFO: Epoch 20/30 | Loss: 0.026 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.057 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 19:37:02,382] INFO: Epoch 21/30 | Loss: 0.026 | Learning rate: 1e-05 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+Epoch 00021: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-28 19:42:38,787] INFO: Epoch 22/30 | Loss: 0.026 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 19:48:16,909] INFO: Epoch 23/30 | Loss: 0.026 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 19:53:49,340] INFO: Epoch 24/30 | Loss: 0.026 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 19:59:22,453] INFO: Epoch 25/30 | Loss: 0.026 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 20:04:56,046] INFO: Epoch 26/30 | Loss: 0.026 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 20:10:30,819] INFO: Epoch 27/30 | Loss: 0.026 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 20:16:03,765] INFO: Epoch 28/30 | Loss: 0.026 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 20:21:36,587] INFO: Epoch 29/30 | Loss: 0.026 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.024 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+[2024-01-28 20:27:09,548] INFO: Epoch 30/30 | Loss: 0.026 | Learning rate: 1e-06 | Train X MSE: 0.027 | Train Y MSE: 0.041 | Train Z MSE: 0.025 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.035 | Val Y MSE: 0.091 | Val Z MSE: 0.056 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.061 | AVG Rot MSE Val: 0.024
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▁▂▂▂▂▃▃▃▃▄▄▄▄▅▅▅▅▆▆▆▆▇▇▇▇███
+wandb:     learning_rate █████████▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:              loss █▆▆▅▄▄▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▆▅▄▄▄▄▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▆▅▅▄▄▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▇▆▅▅▅▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▄▃▃▃▃▃▃▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▆▅▅▄▄▃▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▆▆▅▅▄▄▄▄▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▇▆▅▅▄▄▄▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse ▆▆█▄▄▃▃▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse ▂▂█▂▂▂▄▁▃▂▁▁▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse █▄█▂▂▁▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_y_mse ▄▃█▂▃▂▃▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_z_mse ▆▅█▃▂▃▃▄▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:
+wandb: Run summary:
+wandb:             epoch 30
+wandb:     learning_rate 0.0
+wandb:              loss 0.02627
+wandb: train_avg_pos_mse 0.03073
+wandb: train_avg_rot_mse 0.01958
+wandb:     train_phi_mse 0.03434
+wandb:   train_theta_mse 0.00481
+wandb:       train_x_mse 0.02671
+wandb:       train_y_mse 0.04094
+wandb:       train_z_mse 0.02455
+wandb:       val_phi_mse 0.03873
+wandb:     val_theta_mse 0.00934
+wandb:         val_x_mse 0.03499
+wandb:         val_y_mse 0.09099
+wandb:         val_z_mse 0.0565
+wandb:
+wandb:  View run likely-sweep-12 at: https://wandb.ai/badertim/synthcave/runs/qgjfixu5
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v16
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240128_173656-qgjfixu5\logs
+wandb: Agent Starting Run: o709j3lp with config:
+wandb:  K: 2
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: TSViTcls
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240128_202722-o709j3lp
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run happy-sweep-13
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/o709j3lp
+[2024-01-28 20:27:23,885] INFO: Model: TSViTcls | Trainable parameters: 3.441M | Dataset type: image
+[2024-01-28 20:27:23,885] INFO: K: 2 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train'...
+Dataset initialized with 9507 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/val'...
+Dataset initialized with 3420 samples.
+[2024-01-28 20:28:49,188] INFO: Epoch 1/30 | Loss: 0.054 | Learning rate: 0.001 | Train X MSE: 0.066 | Train Y MSE: 0.09 | Train Z MSE: 0.06 | Train Theta MSE: 0.008 | Train Phi MSE: 0.047 | AVG Pos MSE Train: 0.072 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.048 | Val Y MSE: 0.107 | Val Z MSE: 0.079 | Val Theta MSE: 0.009 | Val Phi MSE: 0.043 | AVG Pos MSE Val: 0.078 | AVG Rot MSE Val: 0.026
+[2024-01-28 20:30:11,072] INFO: Epoch 2/30 | Loss: 0.046 | Learning rate: 0.001 | Train X MSE: 0.053 | Train Y MSE: 0.078 | Train Z MSE: 0.051 | Train Theta MSE: 0.005 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.061 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.043 | Val Y MSE: 0.103 | Val Z MSE: 0.068 | Val Theta MSE: 0.009 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.025
+[2024-01-28 20:31:33,006] INFO: Epoch 3/30 | Loss: 0.043 | Learning rate: 0.001 | Train X MSE: 0.049 | Train Y MSE: 0.075 | Train Z MSE: 0.047 | Train Theta MSE: 0.005 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.057 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.046 | Val Y MSE: 0.104 | Val Z MSE: 0.076 | Val Theta MSE: 0.013 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.027
+[2024-01-28 20:32:55,139] INFO: Epoch 4/30 | Loss: 0.042 | Learning rate: 0.001 | Train X MSE: 0.047 | Train Y MSE: 0.073 | Train Z MSE: 0.045 | Train Theta MSE: 0.005 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.055 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.048 | Val Y MSE: 0.124 | Val Z MSE: 0.071 | Val Theta MSE: 0.013 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.081 | AVG Rot MSE Val: 0.027
+[2024-01-28 20:34:18,398] INFO: Epoch 5/30 | Loss: 0.04 | Learning rate: 0.001 | Train X MSE: 0.044 | Train Y MSE: 0.07 | Train Z MSE: 0.043 | Train Theta MSE: 0.005 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.053 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.037 | Val Y MSE: 0.106 | Val Z MSE: 0.06 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.068 | AVG Rot MSE Val: 0.024
+[2024-01-28 20:35:42,466] INFO: Epoch 6/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.046 | Train Y MSE: 0.073 | Train Z MSE: 0.044 | Train Theta MSE: 0.005 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.054 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.044 | Val Y MSE: 0.113 | Val Z MSE: 0.065 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.023
+[2024-01-28 20:37:05,747] INFO: Epoch 7/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.042 | Train Y MSE: 0.068 | Train Z MSE: 0.041 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.05 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.038 | Val Y MSE: 0.1 | Val Z MSE: 0.063 | Val Theta MSE: 0.009 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.067 | AVG Rot MSE Val: 0.023
+[2024-01-28 20:38:27,919] INFO: Epoch 8/30 | Loss: 0.037 | Learning rate: 0.001 | Train X MSE: 0.041 | Train Y MSE: 0.067 | Train Z MSE: 0.039 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.049 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.035 | Val Y MSE: 0.102 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.023
+[2024-01-28 20:39:51,637] INFO: Epoch 9/30 | Loss: 0.036 | Learning rate: 0.001 | Train X MSE: 0.04 | Train Y MSE: 0.065 | Train Z MSE: 0.038 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.048 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.038 | Val Y MSE: 0.1 | Val Z MSE: 0.06 | Val Theta MSE: 0.009 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.023
+[2024-01-28 20:41:14,248] INFO: Epoch 10/30 | Loss: 0.036 | Learning rate: 0.001 | Train X MSE: 0.039 | Train Y MSE: 0.064 | Train Z MSE: 0.037 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.047 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.04 | Val Y MSE: 0.111 | Val Z MSE: 0.059 | Val Theta MSE: 0.01 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.023
+Epoch 00010: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-28 20:42:37,114] INFO: Epoch 11/30 | Loss: 0.032 | Learning rate: 0.0001 | Train X MSE: 0.034 | Train Y MSE: 0.057 | Train Z MSE: 0.033 | Train Theta MSE: 0.005 | Train Phi MSE: 0.03 | AVG Pos MSE Train: 0.041 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.035 | Val Y MSE: 0.102 | Val Z MSE: 0.058 | Val Theta MSE: 0.009 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.022
+[2024-01-28 20:43:58,971] INFO: Epoch 12/30 | Loss: 0.03 | Learning rate: 0.0001 | Train X MSE: 0.033 | Train Y MSE: 0.054 | Train Z MSE: 0.031 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.034 | Val Y MSE: 0.105 | Val Z MSE: 0.058 | Val Theta MSE: 0.009 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.022
+[2024-01-28 20:45:23,899] INFO: Epoch 13/30 | Loss: 0.03 | Learning rate: 0.0001 | Train X MSE: 0.032 | Train Y MSE: 0.053 | Train Z MSE: 0.031 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.038 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.105 | Val Z MSE: 0.062 | Val Theta MSE: 0.008 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.067 | AVG Rot MSE Val: 0.022
+[2024-01-28 20:46:46,772] INFO: Epoch 14/30 | Loss: 0.029 | Learning rate: 0.0001 | Train X MSE: 0.032 | Train Y MSE: 0.052 | Train Z MSE: 0.03 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.038 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.102 | Val Z MSE: 0.06 | Val Theta MSE: 0.008 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.065 | AVG Rot MSE Val: 0.022
+[2024-01-28 20:48:10,082] INFO: Epoch 15/30 | Loss: 0.029 | Learning rate: 0.0001 | Train X MSE: 0.031 | Train Y MSE: 0.051 | Train Z MSE: 0.03 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.105 | Val Z MSE: 0.064 | Val Theta MSE: 0.008 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.068 | AVG Rot MSE Val: 0.022
+[2024-01-28 20:49:33,690] INFO: Epoch 16/30 | Loss: 0.029 | Learning rate: 0.0001 | Train X MSE: 0.031 | Train Y MSE: 0.051 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.103 | Val Z MSE: 0.063 | Val Theta MSE: 0.008 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.067 | AVG Rot MSE Val: 0.022
+Epoch 00016: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-28 20:50:57,402] INFO: Epoch 17/30 | Loss: 0.028 | Learning rate: 1e-05 | Train X MSE: 0.03 | Train Y MSE: 0.049 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.036 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.103 | Val Z MSE: 0.063 | Val Theta MSE: 0.008 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.022
+[2024-01-28 20:52:21,041] INFO: Epoch 18/30 | Loss: 0.028 | Learning rate: 1e-05 | Train X MSE: 0.03 | Train Y MSE: 0.049 | Train Z MSE: 0.028 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.036 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.103 | Val Z MSE: 0.064 | Val Theta MSE: 0.008 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.067 | AVG Rot MSE Val: 0.022
+[2024-01-28 20:52:21,042] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▃▃▃▄▄▅▅▆▆▆▇▇██
+wandb:     learning_rate ██████████▂▂▂▂▂▂▁▁
+wandb:              loss █▆▅▅▄▄▄▃▃▃▂▂▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▅▅▄▅▄▄▃▃▂▂▂▁▁▁▁▁
+wandb: train_avg_rot_mse █▆▅▅▄▄▃▃▃▃▂▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▆▅▅▄▄▃▃▃▃▂▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▃▃▃▃▃▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:       train_x_mse █▆▅▄▄▄▃▃▃▃▂▂▁▁▁▁▁▁
+wandb:       train_y_mse █▆▆▅▅▅▄▄▄▄▂▂▂▁▁▁▁▁
+wandb:       train_z_mse █▆▅▅▄▄▄▃▃▃▂▂▁▁▁▁▁▁
+wandb:       val_phi_mse █▆▇▇▄▂▃▃▂▂▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse ▂▂██▂▂▂▁▂▃▂▁▁▁▁▁▁▁
+wandb:         val_x_mse █▆▇█▃▆▃▂▃▄▂▁▁▁▁▁▁▁
+wandb:         val_y_mse ▃▂▂█▃▅▁▂▁▄▂▃▂▂▂▂▂▂
+wandb:         val_z_mse █▅▇▆▂▄▃▁▂▂▂▂▃▂▄▃▃▃
+wandb:
+wandb: Run summary:
+wandb:             epoch 18
+wandb:     learning_rate 1e-05
+wandb:              loss 0.0279
+wandb: train_avg_pos_mse 0.03586
+wandb: train_avg_rot_mse 0.01599
+wandb:     train_phi_mse 0.02778
+wandb:   train_theta_mse 0.00421
+wandb:       train_x_mse 0.03016
+wandb:       train_y_mse 0.04894
+wandb:       train_z_mse 0.0285
+wandb:       val_phi_mse 0.03559
+wandb:     val_theta_mse 0.00838
+wandb:         val_x_mse 0.03355
+wandb:         val_y_mse 0.10336
+wandb:         val_z_mse 0.06363
+wandb:
+wandb:  View run happy-sweep-13 at: https://wandb.ai/badertim/synthcave/runs/o709j3lp
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v17
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240128_202722-o709j3lp\logs
+wandb: Agent Starting Run: runejk99 with config:
+wandb:  K: 2
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: CNN
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240128_205233-runejk99
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run worthy-sweep-14
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/runejk99
+[2024-01-28 20:52:34,584] INFO: Model: CNN | Trainable parameters: 1.678M | Dataset type: image
+[2024-01-28 20:52:34,584] INFO: K: 2 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train'...
+Dataset initialized with 9507 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/val'...
+Dataset initialized with 3420 samples.
+[2024-01-28 20:53:28,549] INFO: Epoch 1/30 | Loss: 4.218 | Learning rate: 0.001 | Train X MSE: 0.174 | Train Y MSE: 0.846 | Train Z MSE: 11.304 | Train Theta MSE: 7.401 | Train Phi MSE: 1.374 | AVG Pos MSE Train: 4.108 | AVG Rot MSE Train: 4.387 | Val X MSE: 0.054 | Val Y MSE: 0.107 | Val Z MSE: 0.074 | Val Theta MSE: 0.01 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.079 | AVG Rot MSE Val: 0.025
+[2024-01-28 20:54:22,394] INFO: Epoch 2/30 | Loss: 0.045 | Learning rate: 0.001 | Train X MSE: 0.052 | Train Y MSE: 0.078 | Train Z MSE: 0.05 | Train Theta MSE: 0.006 | Train Phi MSE: 0.04 | AVG Pos MSE Train: 0.06 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.044 | Val Y MSE: 0.112 | Val Z MSE: 0.068 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.075 | AVG Rot MSE Val: 0.024
+[2024-01-28 20:55:16,070] INFO: Epoch 3/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.045 | Train Y MSE: 0.074 | Train Z MSE: 0.044 | Train Theta MSE: 0.005 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.055 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.04 | Val Y MSE: 0.104 | Val Z MSE: 0.066 | Val Theta MSE: 0.008 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.023
+[2024-01-28 20:56:10,025] INFO: Epoch 4/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.041 | Train Y MSE: 0.068 | Train Z MSE: 0.041 | Train Theta MSE: 0.005 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.05 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.043 | Val Y MSE: 0.105 | Val Z MSE: 0.064 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.023
+[2024-01-28 20:57:03,505] INFO: Epoch 5/30 | Loss: 0.036 | Learning rate: 0.001 | Train X MSE: 0.038 | Train Y MSE: 0.065 | Train Z MSE: 0.038 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.047 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.042 | Val Y MSE: 0.11 | Val Z MSE: 0.067 | Val Theta MSE: 0.01 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.073 | AVG Rot MSE Val: 0.024
+[2024-01-28 20:57:57,327] INFO: Epoch 6/30 | Loss: 0.035 | Learning rate: 0.001 | Train X MSE: 0.037 | Train Y MSE: 0.063 | Train Z MSE: 0.036 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.045 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.037 | Val Y MSE: 0.1 | Val Z MSE: 0.067 | Val Theta MSE: 0.01 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.068 | AVG Rot MSE Val: 0.023
+[2024-01-28 20:58:51,226] INFO: Epoch 7/30 | Loss: 0.033 | Learning rate: 0.001 | Train X MSE: 0.035 | Train Y MSE: 0.061 | Train Z MSE: 0.034 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.043 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.042 | Val Y MSE: 0.106 | Val Z MSE: 0.064 | Val Theta MSE: 0.01 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.023
+Epoch 00007: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-28 20:59:45,533] INFO: Epoch 8/30 | Loss: 0.028 | Learning rate: 0.0001 | Train X MSE: 0.028 | Train Y MSE: 0.053 | Train Z MSE: 0.026 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.036 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.038 | Val Y MSE: 0.096 | Val Z MSE: 0.06 | Val Theta MSE: 0.008 | Val Phi MSE: 0.034 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:00:38,330] INFO: Epoch 9/30 | Loss: 0.026 | Learning rate: 0.0001 | Train X MSE: 0.026 | Train Y MSE: 0.048 | Train Z MSE: 0.024 | Train Theta MSE: 0.004 | Train Phi MSE: 0.026 | AVG Pos MSE Train: 0.032 | AVG Rot MSE Train: 0.015 | Val X MSE: 0.036 | Val Y MSE: 0.098 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.034 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:01:32,327] INFO: Epoch 10/30 | Loss: 0.024 | Learning rate: 0.0001 | Train X MSE: 0.024 | Train Y MSE: 0.046 | Train Z MSE: 0.022 | Train Theta MSE: 0.004 | Train Phi MSE: 0.026 | AVG Pos MSE Train: 0.031 | AVG Rot MSE Train: 0.015 | Val X MSE: 0.037 | Val Y MSE: 0.094 | Val Z MSE: 0.058 | Val Theta MSE: 0.008 | Val Phi MSE: 0.034 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:02:26,422] INFO: Epoch 11/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.023 | Train Y MSE: 0.044 | Train Z MSE: 0.021 | Train Theta MSE: 0.004 | Train Phi MSE: 0.025 | AVG Pos MSE Train: 0.03 | AVG Rot MSE Train: 0.014 | Val X MSE: 0.038 | Val Y MSE: 0.094 | Val Z MSE: 0.059 | Val Theta MSE: 0.008 | Val Phi MSE: 0.034 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:03:20,756] INFO: Epoch 12/30 | Loss: 0.023 | Learning rate: 0.0001 | Train X MSE: 0.022 | Train Y MSE: 0.043 | Train Z MSE: 0.02 | Train Theta MSE: 0.004 | Train Phi MSE: 0.024 | AVG Pos MSE Train: 0.028 | AVG Rot MSE Train: 0.014 | Val X MSE: 0.037 | Val Y MSE: 0.096 | Val Z MSE: 0.058 | Val Theta MSE: 0.008 | Val Phi MSE: 0.034 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:04:15,085] INFO: Epoch 13/30 | Loss: 0.022 | Learning rate: 0.0001 | Train X MSE: 0.021 | Train Y MSE: 0.041 | Train Z MSE: 0.02 | Train Theta MSE: 0.004 | Train Phi MSE: 0.024 | AVG Pos MSE Train: 0.027 | AVG Rot MSE Train: 0.014 | Val X MSE: 0.036 | Val Y MSE: 0.099 | Val Z MSE: 0.058 | Val Theta MSE: 0.008 | Val Phi MSE: 0.034 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+Epoch 00013: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-28 21:05:08,746] INFO: Epoch 14/30 | Loss: 0.02 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.038 | Train Z MSE: 0.018 | Train Theta MSE: 0.003 | Train Phi MSE: 0.022 | AVG Pos MSE Train: 0.025 | AVG Rot MSE Train: 0.013 | Val X MSE: 0.037 | Val Y MSE: 0.097 | Val Z MSE: 0.058 | Val Theta MSE: 0.007 | Val Phi MSE: 0.034 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:06:01,962] INFO: Epoch 15/30 | Loss: 0.02 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.037 | Train Z MSE: 0.017 | Train Theta MSE: 0.003 | Train Phi MSE: 0.022 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.013 | Val X MSE: 0.037 | Val Y MSE: 0.095 | Val Z MSE: 0.058 | Val Theta MSE: 0.007 | Val Phi MSE: 0.034 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:06:56,542] INFO: Epoch 16/30 | Loss: 0.02 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.036 | Train Z MSE: 0.017 | Train Theta MSE: 0.003 | Train Phi MSE: 0.022 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.013 | Val X MSE: 0.037 | Val Y MSE: 0.096 | Val Z MSE: 0.058 | Val Theta MSE: 0.007 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:07:50,548] INFO: Epoch 17/30 | Loss: 0.019 | Learning rate: 1e-05 | Train X MSE: 0.019 | Train Y MSE: 0.036 | Train Z MSE: 0.017 | Train Theta MSE: 0.003 | Train Phi MSE: 0.022 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.013 | Val X MSE: 0.037 | Val Y MSE: 0.097 | Val Z MSE: 0.059 | Val Theta MSE: 0.007 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:08:44,028] INFO: Epoch 18/30 | Loss: 0.019 | Learning rate: 1e-05 | Train X MSE: 0.018 | Train Y MSE: 0.036 | Train Z MSE: 0.017 | Train Theta MSE: 0.003 | Train Phi MSE: 0.022 | AVG Pos MSE Train: 0.024 | AVG Rot MSE Train: 0.012 | Val X MSE: 0.037 | Val Y MSE: 0.097 | Val Z MSE: 0.058 | Val Theta MSE: 0.007 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:09:37,696] INFO: Epoch 19/30 | Loss: 0.019 | Learning rate: 1e-05 | Train X MSE: 0.018 | Train Y MSE: 0.035 | Train Z MSE: 0.017 | Train Theta MSE: 0.003 | Train Phi MSE: 0.021 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.012 | Val X MSE: 0.037 | Val Y MSE: 0.096 | Val Z MSE: 0.058 | Val Theta MSE: 0.007 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+Epoch 00019: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-28 21:10:31,367] INFO: Epoch 20/30 | Loss: 0.019 | Learning rate: 1e-06 | Train X MSE: 0.018 | Train Y MSE: 0.035 | Train Z MSE: 0.016 | Train Theta MSE: 0.003 | Train Phi MSE: 0.021 | AVG Pos MSE Train: 0.023 | AVG Rot MSE Train: 0.012 | Val X MSE: 0.037 | Val Y MSE: 0.096 | Val Z MSE: 0.058 | Val Theta MSE: 0.007 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.064 | AVG Rot MSE Val: 0.021
+[2024-01-28 21:10:31,368] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▃▃▄▄▄▅▅▅▆▆▇▇▇██
+wandb:     learning_rate ███████▂▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:              loss █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▃▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse █▇▆▅▇▃▃▁▁▁▂▁▁▁▂▂▂▂▂▂
+wandb:     val_theta_mse █▆▃▆▇▆█▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse █▄▂▄▃▁▃▂▁▂▂▁▁▁▁▁▁▁▁▁
+wandb:         val_y_mse ▆█▅▅▇▃▆▂▂▁▁▂▃▂▂▂▂▂▂▂
+wandb:         val_z_mse █▆▄▄▅▅▄▂▁▁▂▁▁▁▁▁▂▁▁▁
+wandb:
+wandb: Run summary:
+wandb:             epoch 20
+wandb:     learning_rate 0.0
+wandb:              loss 0.01872
+wandb: train_avg_pos_mse 0.02304
+wandb: train_avg_rot_mse 0.01226
+wandb:     train_phi_mse 0.02117
+wandb:   train_theta_mse 0.00335
+wandb:       train_x_mse 0.01797
+wandb:       train_y_mse 0.0348
+wandb:       train_z_mse 0.01633
+wandb:       val_phi_mse 0.0347
+wandb:     val_theta_mse 0.00747
+wandb:         val_x_mse 0.03721
+wandb:         val_y_mse 0.09635
+wandb:         val_z_mse 0.05815
+wandb:
+wandb:  View run worthy-sweep-14 at: https://wandb.ai/badertim/synthcave/runs/runejk99
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v18
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240128_205233-runejk99\logs
+wandb: Agent Starting Run: 0toezpgp with config:
+wandb:  K: 2
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: ASTGCN
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240128_211044-0toezpgp
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run youthful-sweep-15
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/0toezpgp
+[2024-01-28 21:10:45,313] INFO: Model: ASTGCN | Trainable parameters: 6.013M | Dataset type: graph
+[2024-01-28 21:10:45,314] INFO: K: 2 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph/train'...
+Dataset initialized with 9507 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph/val'...
+Dataset initialized with 3420 samples.
+[2024-01-28 21:28:34,359] INFO: Epoch 1/30 | Loss: 0.053 | Learning rate: 0.001 | Train X MSE: 0.065 | Train Y MSE: 0.088 | Train Z MSE: 0.059 | Train Theta MSE: 0.008 | Train Phi MSE: 0.046 | AVG Pos MSE Train: 0.071 | AVG Rot MSE Train: 0.027 | Val X MSE: 0.05 | Val Y MSE: 0.109 | Val Z MSE: 0.078 | Val Theta MSE: 0.009 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.079 | AVG Rot MSE Val: 0.026
+[2024-01-28 21:46:14,683] INFO: Epoch 2/30 | Loss: 0.045 | Learning rate: 0.001 | Train X MSE: 0.053 | Train Y MSE: 0.079 | Train Z MSE: 0.049 | Train Theta MSE: 0.005 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.06 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.05 | Val Y MSE: 0.105 | Val Z MSE: 0.065 | Val Theta MSE: 0.009 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.073 | AVG Rot MSE Val: 0.027
+[2024-01-28 22:03:59,600] INFO: Epoch 3/30 | Loss: 0.042 | Learning rate: 0.001 | Train X MSE: 0.047 | Train Y MSE: 0.075 | Train Z MSE: 0.045 | Train Theta MSE: 0.005 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.056 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.046 | Val Y MSE: 0.108 | Val Z MSE: 0.069 | Val Theta MSE: 0.009 | Val Phi MSE: 0.04 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.024
+[2024-01-28 22:21:42,967] INFO: Epoch 4/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.046 | Train Y MSE: 0.074 | Train Z MSE: 0.044 | Train Theta MSE: 0.005 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.055 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.039 | Val Y MSE: 0.1 | Val Z MSE: 0.06 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.066 | AVG Rot MSE Val: 0.024
+[2024-01-28 22:39:21,478] INFO: Epoch 5/30 | Loss: 0.04 | Learning rate: 0.001 | Train X MSE: 0.044 | Train Y MSE: 0.071 | Train Z MSE: 0.043 | Train Theta MSE: 0.005 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.053 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.038 | Val Y MSE: 0.107 | Val Z MSE: 0.059 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.068 | AVG Rot MSE Val: 0.024
+[2024-01-28 22:57:01,727] INFO: Epoch 6/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.042 | Train Y MSE: 0.069 | Train Z MSE: 0.041 | Train Theta MSE: 0.005 | Train Phi MSE: 0.035 | AVG Pos MSE Train: 0.05 | AVG Rot MSE Train: 0.02 | Val X MSE: 0.044 | Val Y MSE: 0.109 | Val Z MSE: 0.059 | Val Theta MSE: 0.009 | Val Phi MSE: 0.04 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.025
+[2024-01-28 23:14:14,165] INFO: Epoch 7/30 | Loss: 0.037 | Learning rate: 0.001 | Train X MSE: 0.041 | Train Y MSE: 0.068 | Train Z MSE: 0.04 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.049 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.039 | Val Y MSE: 0.109 | Val Z MSE: 0.062 | Val Theta MSE: 0.009 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.023
+Epoch 00007: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-28 23:30:51,569] INFO: Epoch 8/30 | Loss: 0.033 | Learning rate: 0.0001 | Train X MSE: 0.036 | Train Y MSE: 0.06 | Train Z MSE: 0.035 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.043 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.034 | Val Y MSE: 0.097 | Val Z MSE: 0.057 | Val Theta MSE: 0.008 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.022
+[2024-01-28 23:47:26,745] INFO: Epoch 9/30 | Loss: 0.032 | Learning rate: 0.0001 | Train X MSE: 0.034 | Train Y MSE: 0.057 | Train Z MSE: 0.033 | Train Theta MSE: 0.004 | Train Phi MSE: 0.03 | AVG Pos MSE Train: 0.041 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.058 | Val Theta MSE: 0.008 | Val Phi MSE: 0.036 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.022
+[2024-01-29 00:04:04,144] INFO: Epoch 10/30 | Loss: 0.031 | Learning rate: 0.0001 | Train X MSE: 0.033 | Train Y MSE: 0.055 | Train Z MSE: 0.032 | Train Theta MSE: 0.004 | Train Phi MSE: 0.03 | AVG Pos MSE Train: 0.04 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.035 | Val Y MSE: 0.099 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.022
+[2024-01-29 00:20:39,510] INFO: Epoch 11/30 | Loss: 0.031 | Learning rate: 0.0001 | Train X MSE: 0.033 | Train Y MSE: 0.055 | Train Z MSE: 0.032 | Train Theta MSE: 0.004 | Train Phi MSE: 0.03 | AVG Pos MSE Train: 0.04 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.056 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.022
+[2024-01-29 00:37:15,583] INFO: Epoch 12/30 | Loss: 0.03 | Learning rate: 0.0001 | Train X MSE: 0.032 | Train Y MSE: 0.054 | Train Z MSE: 0.031 | Train Theta MSE: 0.004 | Train Phi MSE: 0.03 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.034 | Val Y MSE: 0.099 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.022
+[2024-01-29 00:53:52,534] INFO: Epoch 13/30 | Loss: 0.03 | Learning rate: 0.0001 | Train X MSE: 0.032 | Train Y MSE: 0.053 | Train Z MSE: 0.031 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.038 | AVG Rot MSE Train: 0.017 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.056 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.022
+Epoch 00013: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-29 01:10:28,661] INFO: Epoch 14/30 | Loss: 0.029 | Learning rate: 1e-05 | Train X MSE: 0.031 | Train Y MSE: 0.051 | Train Z MSE: 0.03 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.056 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.063 | AVG Rot MSE Val: 0.022
+[2024-01-29 01:27:03,666] INFO: Epoch 15/30 | Loss: 0.029 | Learning rate: 1e-05 | Train X MSE: 0.031 | Train Y MSE: 0.051 | Train Z MSE: 0.03 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 01:43:43,563] INFO: Epoch 16/30 | Loss: 0.029 | Learning rate: 1e-05 | Train X MSE: 0.031 | Train Y MSE: 0.051 | Train Z MSE: 0.03 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.022
+[2024-01-29 02:00:18,431] INFO: Epoch 17/30 | Loss: 0.029 | Learning rate: 1e-05 | Train X MSE: 0.031 | Train Y MSE: 0.05 | Train Z MSE: 0.03 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 02:16:53,895] INFO: Epoch 18/30 | Loss: 0.029 | Learning rate: 1e-05 | Train X MSE: 0.031 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 02:33:30,764] INFO: Epoch 19/30 | Loss: 0.029 | Learning rate: 1e-05 | Train X MSE: 0.031 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.029 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+Epoch 00019: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-29 02:50:08,566] INFO: Epoch 20/30 | Loss: 0.028 | Learning rate: 1e-06 | Train X MSE: 0.03 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 03:06:44,606] INFO: Epoch 21/30 | Loss: 0.028 | Learning rate: 1e-06 | Train X MSE: 0.03 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 03:23:21,628] INFO: Epoch 22/30 | Loss: 0.028 | Learning rate: 1e-06 | Train X MSE: 0.03 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 03:39:57,119] INFO: Epoch 23/30 | Loss: 0.028 | Learning rate: 1e-06 | Train X MSE: 0.03 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 03:56:35,321] INFO: Epoch 24/30 | Loss: 0.028 | Learning rate: 1e-06 | Train X MSE: 0.03 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 04:13:13,922] INFO: Epoch 25/30 | Loss: 0.028 | Learning rate: 1e-06 | Train X MSE: 0.03 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 04:29:49,369] INFO: Epoch 26/30 | Loss: 0.028 | Learning rate: 1e-06 | Train X MSE: 0.03 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 04:46:27,300] INFO: Epoch 27/30 | Loss: 0.028 | Learning rate: 1e-06 | Train X MSE: 0.03 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 05:03:10,236] INFO: Epoch 28/30 | Loss: 0.028 | Learning rate: 1e-06 | Train X MSE: 0.03 | Train Y MSE: 0.05 | Train Z MSE: 0.029 | Train Theta MSE: 0.004 | Train Phi MSE: 0.028 | AVG Pos MSE Train: 0.037 | AVG Rot MSE Train: 0.016 | Val X MSE: 0.034 | Val Y MSE: 0.098 | Val Z MSE: 0.055 | Val Theta MSE: 0.008 | Val Phi MSE: 0.035 | AVG Pos MSE Val: 0.062 | AVG Rot MSE Val: 0.021
+[2024-01-29 05:03:10,237] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▂▃▃▃▃▄▄▄▄▅▅▅▅▆▆▆▆▇▇▇▇██
+wandb:     learning_rate ███████▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:              loss █▆▅▅▄▄▄▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▅▅▄▄▄▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▆▅▄▄▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▆▅▄▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▃▃▃▃▃▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▅▄▄▄▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▆▆▅▅▄▄▃▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▆▅▅▄▄▄▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse ▆█▄▄▄▅▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse █▆▅█▄▇▅▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse ██▆▃▃▅▃▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_y_mse █▅▇▃▇██▁▁▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         val_z_mse █▄▅▂▂▂▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:
+wandb: Run summary:
+wandb:             epoch 28
+wandb:     learning_rate 0.0
+wandb:              loss 0.02843
+wandb: train_avg_pos_mse 0.03654
+wandb: train_avg_rot_mse 0.01626
+wandb:     train_phi_mse 0.02844
+wandb:   train_theta_mse 0.00408
+wandb:       train_x_mse 0.03039
+wandb:       train_y_mse 0.04996
+wandb:       train_z_mse 0.02927
+wandb:       val_phi_mse 0.03471
+wandb:     val_theta_mse 0.00827
+wandb:         val_x_mse 0.03401
+wandb:         val_y_mse 0.09767
+wandb:         val_z_mse 0.05495
+wandb:
+wandb:  View run youthful-sweep-15 at: https://wandb.ai/badertim/synthcave/runs/0toezpgp
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v19
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240128_211044-0toezpgp\logs
+wandb: Agent Starting Run: rfah8h5x with config:
+wandb:  K: 2
+wandb:  batch_size: 8
+wandb:  epochs: 30
+wandb:  graph_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/graph
+wandb:  image_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image
+wandb:  model_name: NTU
+wandb:  point_dataset_path: C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud
+wandb: wandb version 0.16.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in C:\Users\bader\Desktop\SynthCave\wandb\run-20240129_050323-rfah8h5x
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run ancient-sweep-16
+wandb:  View project at https://wandb.ai/badertim/synthcave
+wandb:  View sweep at https://wandb.ai/badertim/synthcave/sweeps/e8r2kwh0
+wandb:  View run at https://wandb.ai/badertim/synthcave/runs/rfah8h5x
+[2024-01-29 05:03:24,058] INFO: Model: NTU | Trainable parameters: 8.959M | Dataset type: point
+[2024-01-29 05:03:24,058] INFO: K: 2 | Epochs: 30 | Batch size: 8 | Device: cuda
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud/train'...
+Dataset initialized with 9507 samples.
+Initializing dataset from 'C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/point_cloud/val'...
+Dataset initialized with 3420 samples.
+[2024-01-29 05:08:26,325] INFO: Epoch 1/30 | Loss: 0.058 | Learning rate: 0.001 | Train X MSE: 0.072 | Train Y MSE: 0.099 | Train Z MSE: 0.064 | Train Theta MSE: 0.008 | Train Phi MSE: 0.048 | AVG Pos MSE Train: 0.078 | AVG Rot MSE Train: 0.028 | Val X MSE: 0.063 | Val Y MSE: 0.116 | Val Z MSE: 0.08 | Val Theta MSE: 0.011 | Val Phi MSE: 0.049 | AVG Pos MSE Val: 0.086 | AVG Rot MSE Val: 0.03
+[2024-01-29 05:13:21,402] INFO: Epoch 2/30 | Loss: 0.05 | Learning rate: 0.001 | Train X MSE: 0.061 | Train Y MSE: 0.082 | Train Z MSE: 0.058 | Train Theta MSE: 0.006 | Train Phi MSE: 0.045 | AVG Pos MSE Train: 0.067 | AVG Rot MSE Train: 0.025 | Val X MSE: 0.068 | Val Y MSE: 0.125 | Val Z MSE: 0.086 | Val Theta MSE: 0.01 | Val Phi MSE: 0.046 | AVG Pos MSE Val: 0.093 | AVG Rot MSE Val: 0.028
+[2024-01-29 05:18:19,276] INFO: Epoch 3/30 | Loss: 0.048 | Learning rate: 0.001 | Train X MSE: 0.056 | Train Y MSE: 0.079 | Train Z MSE: 0.054 | Train Theta MSE: 0.006 | Train Phi MSE: 0.043 | AVG Pos MSE Train: 0.063 | AVG Rot MSE Train: 0.024 | Val X MSE: 0.049 | Val Y MSE: 0.102 | Val Z MSE: 0.072 | Val Theta MSE: 0.009 | Val Phi MSE: 0.042 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.026
+[2024-01-29 05:23:13,255] INFO: Epoch 4/30 | Loss: 0.046 | Learning rate: 0.001 | Train X MSE: 0.054 | Train Y MSE: 0.078 | Train Z MSE: 0.051 | Train Theta MSE: 0.006 | Train Phi MSE: 0.041 | AVG Pos MSE Train: 0.061 | AVG Rot MSE Train: 0.023 | Val X MSE: 0.045 | Val Y MSE: 0.108 | Val Z MSE: 0.076 | Val Theta MSE: 0.009 | Val Phi MSE: 0.041 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.025
+[2024-01-29 05:28:07,075] INFO: Epoch 5/30 | Loss: 0.042 | Learning rate: 0.001 | Train X MSE: 0.049 | Train Y MSE: 0.072 | Train Z MSE: 0.047 | Train Theta MSE: 0.005 | Train Phi MSE: 0.039 | AVG Pos MSE Train: 0.056 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.046 | Val Y MSE: 0.103 | Val Z MSE: 0.069 | Val Theta MSE: 0.009 | Val Phi MSE: 0.04 | AVG Pos MSE Val: 0.073 | AVG Rot MSE Val: 0.025
+[2024-01-29 05:33:04,555] INFO: Epoch 6/30 | Loss: 0.041 | Learning rate: 0.001 | Train X MSE: 0.046 | Train Y MSE: 0.07 | Train Z MSE: 0.046 | Train Theta MSE: 0.005 | Train Phi MSE: 0.038 | AVG Pos MSE Train: 0.054 | AVG Rot MSE Train: 0.022 | Val X MSE: 0.044 | Val Y MSE: 0.118 | Val Z MSE: 0.061 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.024
+[2024-01-29 05:37:59,366] INFO: Epoch 7/30 | Loss: 0.04 | Learning rate: 0.001 | Train X MSE: 0.045 | Train Y MSE: 0.069 | Train Z MSE: 0.043 | Train Theta MSE: 0.005 | Train Phi MSE: 0.037 | AVG Pos MSE Train: 0.052 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.051 | Val Y MSE: 0.107 | Val Z MSE: 0.064 | Val Theta MSE: 0.009 | Val Phi MSE: 0.039 | AVG Pos MSE Val: 0.074 | AVG Rot MSE Val: 0.024
+[2024-01-29 05:42:54,271] INFO: Epoch 8/30 | Loss: 0.038 | Learning rate: 0.001 | Train X MSE: 0.043 | Train Y MSE: 0.066 | Train Z MSE: 0.042 | Train Theta MSE: 0.005 | Train Phi MSE: 0.036 | AVG Pos MSE Train: 0.05 | AVG Rot MSE Train: 0.021 | Val X MSE: 0.053 | Val Y MSE: 0.108 | Val Z MSE: 0.068 | Val Theta MSE: 0.009 | Val Phi MSE: 0.04 | AVG Pos MSE Val: 0.076 | AVG Rot MSE Val: 0.025
+Epoch 00008: reducing learning rate of group 0 to 1.0000e-04.
+[2024-01-29 05:47:51,751] INFO: Epoch 9/30 | Loss: 0.035 | Learning rate: 0.0001 | Train X MSE: 0.038 | Train Y MSE: 0.06 | Train Z MSE: 0.037 | Train Theta MSE: 0.005 | Train Phi MSE: 0.034 | AVG Pos MSE Train: 0.045 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.043 | Val Y MSE: 0.102 | Val Z MSE: 0.062 | Val Theta MSE: 0.009 | Val Phi MSE: 0.038 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.023
+[2024-01-29 05:52:46,817] INFO: Epoch 10/30 | Loss: 0.033 | Learning rate: 0.0001 | Train X MSE: 0.036 | Train Y MSE: 0.057 | Train Z MSE: 0.035 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.043 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.043 | Val Y MSE: 0.106 | Val Z MSE: 0.061 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.023
+[2024-01-29 05:57:45,670] INFO: Epoch 11/30 | Loss: 0.033 | Learning rate: 0.0001 | Train X MSE: 0.035 | Train Y MSE: 0.056 | Train Z MSE: 0.035 | Train Theta MSE: 0.005 | Train Phi MSE: 0.033 | AVG Pos MSE Train: 0.042 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.042 | Val Y MSE: 0.104 | Val Z MSE: 0.061 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.069 | AVG Rot MSE Val: 0.023
+[2024-01-29 06:02:40,403] INFO: Epoch 12/30 | Loss: 0.032 | Learning rate: 0.0001 | Train X MSE: 0.035 | Train Y MSE: 0.055 | Train Z MSE: 0.034 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.041 | AVG Rot MSE Train: 0.019 | Val X MSE: 0.043 | Val Y MSE: 0.106 | Val Z MSE: 0.063 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.023
+[2024-01-29 06:07:35,943] INFO: Epoch 13/30 | Loss: 0.032 | Learning rate: 0.0001 | Train X MSE: 0.035 | Train Y MSE: 0.054 | Train Z MSE: 0.034 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.041 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.042 | Val Y MSE: 0.105 | Val Z MSE: 0.065 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.023
+[2024-01-29 06:12:34,749] INFO: Epoch 14/30 | Loss: 0.031 | Learning rate: 0.0001 | Train X MSE: 0.034 | Train Y MSE: 0.053 | Train Z MSE: 0.033 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.04 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.041 | Val Y MSE: 0.105 | Val Z MSE: 0.064 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.023
+Epoch 00014: reducing learning rate of group 0 to 1.0000e-05.
+[2024-01-29 06:17:31,537] INFO: Epoch 15/30 | Loss: 0.031 | Learning rate: 1e-05 | Train X MSE: 0.033 | Train Y MSE: 0.052 | Train Z MSE: 0.032 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.042 | Val Y MSE: 0.107 | Val Z MSE: 0.066 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.023
+[2024-01-29 06:22:28,075] INFO: Epoch 16/30 | Loss: 0.031 | Learning rate: 1e-05 | Train X MSE: 0.034 | Train Y MSE: 0.051 | Train Z MSE: 0.032 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.043 | Val Y MSE: 0.107 | Val Z MSE: 0.067 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.023
+[2024-01-29 06:27:26,474] INFO: Epoch 17/30 | Loss: 0.031 | Learning rate: 1e-05 | Train X MSE: 0.033 | Train Y MSE: 0.051 | Train Z MSE: 0.032 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.04 | Val Y MSE: 0.104 | Val Z MSE: 0.065 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.023
+[2024-01-29 06:32:23,964] INFO: Epoch 18/30 | Loss: 0.03 | Learning rate: 1e-05 | Train X MSE: 0.033 | Train Y MSE: 0.051 | Train Z MSE: 0.032 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.04 | Val Y MSE: 0.105 | Val Z MSE: 0.065 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.07 | AVG Rot MSE Val: 0.023
+[2024-01-29 06:37:23,327] INFO: Epoch 19/30 | Loss: 0.03 | Learning rate: 1e-05 | Train X MSE: 0.033 | Train Y MSE: 0.051 | Train Z MSE: 0.032 | Train Theta MSE: 0.005 | Train Phi MSE: 0.032 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.042 | Val Y MSE: 0.106 | Val Z MSE: 0.067 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.072 | AVG Rot MSE Val: 0.023
+[2024-01-29 06:42:23,823] INFO: Epoch 20/30 | Loss: 0.03 | Learning rate: 1e-05 | Train X MSE: 0.033 | Train Y MSE: 0.051 | Train Z MSE: 0.032 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.041 | Val Y MSE: 0.105 | Val Z MSE: 0.067 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.023
+Epoch 00020: reducing learning rate of group 0 to 1.0000e-06.
+[2024-01-29 06:47:20,686] INFO: Epoch 21/30 | Loss: 0.03 | Learning rate: 1e-06 | Train X MSE: 0.033 | Train Y MSE: 0.05 | Train Z MSE: 0.032 | Train Theta MSE: 0.005 | Train Phi MSE: 0.031 | AVG Pos MSE Train: 0.039 | AVG Rot MSE Train: 0.018 | Val X MSE: 0.041 | Val Y MSE: 0.106 | Val Z MSE: 0.065 | Val Theta MSE: 0.009 | Val Phi MSE: 0.037 | AVG Pos MSE Val: 0.071 | AVG Rot MSE Val: 0.023
+[2024-01-29 06:47:20,687] INFO: Early stopping
+wandb: Waiting for W&B process to finish... (success).
+wandb:
+wandb: Run history:
+wandb:             epoch ▁▁▂▂▂▃▃▃▄▄▅▅▅▆▆▆▇▇▇██
+wandb:     learning_rate ████████▂▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:              loss █▆▅▅▄▄▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_pos_mse █▆▅▅▄▄▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb: train_avg_rot_mse █▆▆▅▄▄▃▃▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train_phi_mse █▇▆▅▄▄▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:   train_theta_mse █▄▃▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_x_mse █▆▅▅▄▃▃▃▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:       train_y_mse █▆▅▅▄▄▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:       train_z_mse █▇▆▅▄▄▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:       val_phi_mse █▆▄▄▃▂▂▃▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     val_theta_mse █▄▃▃▃▂▂▂▂▁▂▁▁▁▁▁▁▁▁▁▁
+wandb:         val_x_mse ▇█▃▂▃▂▄▄▂▂▁▂▁▁▁▂▁▁▁▁▁
+wandb:         val_y_mse ▅█▁▃▁▆▃▃▁▂▂▂▂▂▃▃▂▂▂▂▂
+wandb:         val_z_mse ▆█▄▅▃▁▂▃▁▁▁▂▂▂▂▃▂▂▃▃▂
+wandb:
+wandb: Run summary:
+wandb:             epoch 21
+wandb:     learning_rate 0.0
+wandb:              loss 0.0304
+wandb: train_avg_pos_mse 0.03856
+wandb: train_avg_rot_mse 0.01802
+wandb:     train_phi_mse 0.03145
+wandb:   train_theta_mse 0.00458
+wandb:       train_x_mse 0.03328
+wandb:       train_y_mse 0.0505
+wandb:       train_z_mse 0.03191
+wandb:       val_phi_mse 0.03687
+wandb:     val_theta_mse 0.0087
+wandb:         val_x_mse 0.04126
+wandb:         val_y_mse 0.10638
+wandb:         val_z_mse 0.06537
+wandb:
+wandb:  View run ancient-sweep-16 at: https://wandb.ai/badertim/synthcave/runs/rfah8h5x
+wandb:  View job at https://wandb.ai/badertim/synthcave/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEzMjkxNTUyMg==/version_details/v20
+wandb: Synced 5 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: .\wandb\run-20240129_050323-rfah8h5x\logs
+wandb: Sweep Agent: Waiting for job.
+wandb: Sweep Agent: Exiting.
+
+C:\Users\bader\Desktop\SynthCave>
