@@ -29,6 +29,7 @@ from model.PSTNet.PSTNet import NTU
 from model.TSViTcls.TSViT import TSViTcls
 from model.ZERO.ZERO import ZERO
 from model.RANDOM.RANDOM import RANDOM
+from model.ICP.ICP import ICP
 
 from dataset.SynthCave import GraphDataset, ImageDataset, PointDataset
 
@@ -75,6 +76,8 @@ def get_model_from_name(model_name, K):
         return ZERO(K=K)
     elif model_name == "RANDOM":
         return RANDOM(K=K)
+    elif model_name == "ICP":
+        return ICP(K=K)
     else:
         raise ValueError("Model name not supported")
 
@@ -407,6 +410,7 @@ if __name__ == "__main__":
         "parameters": {
             "model_config": {
                 "values": [
+                    {"model_name": "ICP", "K": 2, "path": ""},
                     {"model_name": "RANDOM", "K": -1, "path": ""},
                     {"model_name": "ZERO", "K": -1, "path": ""},
                     {"model_name": "TSViTcls", "K": 4, "path": "C:/Users/bader/Desktop/SynthCave/models/worthy-sweep-9.pt"}, 
