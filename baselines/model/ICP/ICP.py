@@ -18,6 +18,7 @@ class ICP(nn.Module):
         assert self.initial_points % self.reduction_factor == 0, f"Reduction factor must be a factor of {self.initial_points}"
 
     def forward(self, xyzs, imu_data=None):
+        # xyzs: (B, K, C, N) -> (B, K, self.initial_points, 3) where N=3=X,Y,Z with Y being the height
         B, K, C, N = xyzs.shape
 
         # B, K, self.initial_points, N -> B, K, self.initial_points/self.reduction_factor, 3  (take every self.reduction_factor th point)
@@ -46,7 +47,10 @@ class ICP(nn.Module):
             # Extract x, y, z changes
             x, z, y = t[0], t[1], t[2]
             # Store the results
-            res[b, :] = torch.tensor([x, y, z, theta, phi])
+            tensor = torch.tensor([x, y, z, theta, phi])
+            # limit tensor to be between -1 and 1
+            tensor = torch.clamp(tensor, -1, 1)
+            res[b, :] = tensor
  
         return res.to(xyzs.device)
 
