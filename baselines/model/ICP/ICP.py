@@ -11,9 +11,20 @@ class ICP(nn.Module):
 
         self.dataset_type = "point"
         self.K = K
+        self.height = 80
+        self.width = 240
+        self.initial_points = self.height * self.width
+        self.reduction_factor = 10
+        assert self.initial_points % self.reduction_factor == 0, f"Reduction factor must be a factor of {self.initial_points}"
 
     def forward(self, xyzs, imu_data=None):
         B, K, C, N = xyzs.shape
+
+        # B, K, self.initial_points, N -> B, K, self.initial_points/self.reduction_factor, 3  (take every self.reduction_factor th point)
+        xyzs = xyzs.reshape(B, K, self.height, self.width, 3)
+        xyzs = xyzs[:, :, ::self.reduction_factor, ::self.reduction_factor, :]
+        xyzs = xyzs.reshape(B, K, -1, 3)
+
         res = torch.zeros((B, 5))
         # Perform ICP
         for b in range(B):
