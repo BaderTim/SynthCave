@@ -395,11 +395,11 @@ if __name__ == "__main__":
 
     sweep_configuration = {
         "project": args.wandb_project,
-        "name": f"mv_sweep_{time.time()}",
+        "name": f"train_sweep_{time.time()}",
         "metric": {"name": "val_mse", "goal": "minimize"},
         "method": "grid",
         "parameters": {
-            "model_name": {"values": ["CNN", "TSViTcls", "ASTGCN", "NTU"]},
+            "model_name": {"values": ["TSViTcls", "CNN", "ASTGCN", "NTU"]},
             "graph_dataset_path": {"values": [args.graph_dataset_path]},
             "image_dataset_path": {"values": [args.image_dataset_path]},
             "point_dataset_path": {"values": [args.point_dataset_path]},
