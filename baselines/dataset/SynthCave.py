@@ -4,7 +4,7 @@ import numpy as np
 from torch.utils.data import Dataset
 
 class GraphDataset(Dataset):
-    def __init__(self, data_folder: str, frames: int, gt_as_rad: bool = True, gt_limit: None | list = [-1, 1]):
+    def __init__(self, data_folder: str, frames: int, gt_as_rad: bool = True, gt_limit: None | list = [-1, 1], return_seq_name: bool = False):
         """
         Args:
             data_folder (string): Path to the graph dataset's train/val folder.
@@ -17,6 +17,7 @@ class GraphDataset(Dataset):
         self.frames = frames
         self.gt_as_rad = gt_as_rad
         self.gt_limit = gt_limit
+        self.return_seq_name = return_seq_name
         self.theta_rounded_hist = []
         self.phi_rounded_hist = []
         self.x_rounded_hist = []
@@ -24,6 +25,7 @@ class GraphDataset(Dataset):
         self.z_rounded_hist = []
         # the keys represent the cumulative number of samples
         self.index = {}
+        self.id_name_map = {}
         self.samples = 0
         print(f"Initializing dataset from '{self.path}'...")
         # loop through folders
@@ -31,9 +33,11 @@ class GraphDataset(Dataset):
             filename = os.fsdecode(file)
             if filename.endswith("_gt.npy"): # load sequence set at once and not after another
                 sequence_id = int(filename.split("_")[0])
-                graphs = np.load(os.path.join(self.path, f"{sequence_id}_graph.npy"))
-                imus = np.load(os.path.join(self.path, f"{sequence_id}_imu.npy"))
-                gts = np.load(os.path.join(self.path, f"{sequence_id}_gt.npy"))
+                sequence_name = "_".join(filename.split("_")[1:-1])
+                self.id_name_map[sequence_id] = sequence_name
+                graphs = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_graph.npy"))
+                imus = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_imu.npy"))
+                gts = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_gt.npy"))
                 if graphs.shape[0] != imus.shape[0] or graphs.shape[0] != gts.shape[0]:
                     raise Exception(f"In sequence {sequence_id}, the number of graphs ({graphs.shape[0]}), IMU ({imus.shape[0]}) and GT ({gts.shape[0]}) do not match.")
                 samples_in_graphs = graphs.shape[0] - self.frames + 1
@@ -82,10 +86,12 @@ class GraphDataset(Dataset):
         for i, key in enumerate(keys):
             if idx < key:
                 # means that the index is in previous key sequence
-                full_graph = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_graph.npy"))
-                full_edges = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_edges.npy"))
-                full_imu = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_imu.npy"))
-                full_gt = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_gt.npy"))
+                sequence_id = self.index[keys[i-1]]
+                sequence_name = self.id_name_map[sequence_id]
+                full_graph = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_graph.npy"))
+                full_edges = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_edges.npy"))
+                full_imu = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_imu.npy"))
+                full_gt = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_gt.npy"))
                 # get the index of the sample in the sequence
                 idx_in_sequence = idx - keys[i-1]
                 # return the sample
@@ -104,12 +110,16 @@ class GraphDataset(Dataset):
                 graph = graph.permute(1, 2, 0)
                 edges = edges[0].permute(1, 0)
                 gt = torch.tensor([gt[0], gt[1], gt[2], gt[6], gt[7]])
+                if self.return_seq_name:
+                    return graph, edges, imu, gt, sequence_name
                 return graph, edges, imu, gt
         # means that the index is in the last key sequence
-        full_graph = np.load(os.path.join(self.path, f"{self.index[keys[-1]]}_graph.npy"))
-        full_edges = np.load(os.path.join(self.path, f"{self.index[keys[-1]]}_edges.npy"))
-        full_imu = np.load(os.path.join(self.path, f"{self.index[keys[-1]]}_imu.npy"))
-        full_gt = np.load(os.path.join(self.path, f"{self.index[keys[-1]]}_gt.npy"))
+        sequence_id = self.index[keys[-1]]
+        sequence_name = self.id_name_map[sequence_id]
+        full_graph = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_graph.npy"))
+        full_edges = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_edges.npy"))
+        full_imu = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_imu.npy"))
+        full_gt = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_gt.npy"))
         # get the index of the sample in the sequence
         idx_in_sequence = idx - keys[-1]
         # return the sample
@@ -128,6 +138,8 @@ class GraphDataset(Dataset):
         graph = graph.permute(1, 2, 0)
         edges = edges[0].permute(1, 0)
         gt = torch.tensor([gt[0], gt[1], gt[2], gt[6], gt[7]])
+        if self.return_seq_name:
+            return graph, edges, imu, gt, sequence_name
         return graph, edges, imu, gt
     
     def gt_as_degree(self, gt: torch.Tensor):
@@ -138,7 +150,7 @@ class GraphDataset(Dataset):
             
 
 class PointDataset(Dataset):
-    def __init__(self, data_folder: str, frames: int, gt_as_rad: bool = True, gt_limit: None | list = [-1, 1]):
+    def __init__(self, data_folder: str, frames: int, gt_as_rad: bool = True, gt_limit: None | list = [-1, 1], return_seq_name: bool = False):
         """
         Args:
             data_folder (string): Path to the point cloud dataset's train/val folder.
@@ -151,6 +163,7 @@ class PointDataset(Dataset):
         self.frames = frames
         self.gt_as_rad = gt_as_rad
         self.gt_limit = gt_limit
+        self.return_seq_name = return_seq_name
         self.theta_rounded_hist = []
         self.phi_rounded_hist = []
         self.x_rounded_hist = []
@@ -158,6 +171,7 @@ class PointDataset(Dataset):
         self.z_rounded_hist = []
         # the keys represent the cumulative number of samples
         self.index = {}
+        self.id_name_map = {}
         self.samples = 0
         print(f"Initializing dataset from '{self.path}'...")
         # loop through folders
@@ -165,9 +179,11 @@ class PointDataset(Dataset):
             filename = os.fsdecode(file)
             if filename.endswith("_gt.npy"): # load sequence set at once and not after another
                 sequence_id = int(filename.split("_")[0])
-                pcs = np.load(os.path.join(self.path, f"{sequence_id}_pc.npy"))
-                imus = np.load(os.path.join(self.path, f"{sequence_id}_imu.npy"))
-                gts = np.load(os.path.join(self.path, f"{sequence_id}_gt.npy"))
+                sequence_name = "_".join(filename.split("_")[1:-1])
+                self.id_name_map[sequence_id] = sequence_name
+                pcs = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_pc.npy"))
+                imus = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_imu.npy"))
+                gts = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_gt.npy"))
                 if pcs.shape[0] != imus.shape[0] or pcs.shape[0] != gts.shape[0]:
                     raise Exception(f"In sequence {sequence_id}, the number of point clouds ({pcs.shape[0]}), IMU ({imus.shape[0]}) and GT ({gts.shape[0]}) do not match.")
                 samples_in_pcs = pcs.shape[0] - self.frames + 1
@@ -215,9 +231,11 @@ class PointDataset(Dataset):
         for i, key in enumerate(keys):
             if idx < key:
                 # means that the index is in previous key sequence
-                full_pc = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_pc.npy"))
-                full_imu = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_imu.npy"))
-                full_gt = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_gt.npy"))
+                sequence_id = self.index[keys[i-1]]
+                sequence_name = self.id_name_map[sequence_id]
+                full_pc = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_pc.npy"))
+                full_imu = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_imu.npy"))
+                full_gt = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_gt.npy"))
                 # get the index of the sample in the sequence
                 idx_in_sequence = idx - keys[i-1]
                 # return the sample
@@ -232,11 +250,15 @@ class PointDataset(Dataset):
                 # remove variables from memory
                 del full_pc, full_imu, full_gt
                 gt = torch.tensor([gt[0], gt[1], gt[2], gt[6], gt[7]])
+                if self.return_seq_name:
+                    return pc, imu, gt, sequence_name
                 return pc, imu, gt
         # means that the index is in the last key sequence
-        full_pc = np.load(os.path.join(self.path, f"{self.index[keys[-1]]}_pc.npy"))
-        full_imu = np.load(os.path.join(self.path, f"{self.index[keys[-1]]}_imu.npy"))
-        full_gt = np.load(os.path.join(self.path, f"{self.index[keys[-1]]}_gt.npy"))
+        sequence_id = self.index[keys[-1]]
+        sequence_name = self.id_name_map[sequence_id]
+        full_pc = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_pc.npy"))
+        full_imu = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_imu.npy"))
+        full_gt = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_gt.npy"))
         # get the index of the sample in the sequence
         idx_in_sequence = idx - keys[-1]
         # return the sample
@@ -250,6 +272,8 @@ class PointDataset(Dataset):
         gt = torch.from_numpy(gt_np) # (8,)
         del full_pc, full_imu, full_gt
         gt = torch.tensor([gt[0], gt[1], gt[2], gt[6], gt[7]])
+        if self.return_seq_name:
+            return pc, imu, gt, sequence_name
         return pc, imu, gt
     
     def gt_as_degree(self, gt: torch.Tensor):
@@ -260,7 +284,7 @@ class PointDataset(Dataset):
 
 
 class ImageDataset(Dataset):
-    def __init__(self, data_folder: str, frames: int, gt_as_rad: bool = True, gt_limit: None | list = [-1, 1]):
+    def __init__(self, data_folder: str, frames: int, gt_as_rad: bool = True, gt_limit: None | list = [-1, 1], return_seq_name: bool = False):
         """
         Args:
             data_folder (string): Path to the image dataset's train/val folder.
@@ -273,6 +297,7 @@ class ImageDataset(Dataset):
         self.frames = frames
         self.gt_as_rad = gt_as_rad
         self.gt_limit = gt_limit
+        self.return_seq_name = return_seq_name
         self.theta_rounded_hist = []
         self.phi_rounded_hist = []
         self.x_rounded_hist = []
@@ -280,6 +305,7 @@ class ImageDataset(Dataset):
         self.z_rounded_hist = []
         # the keys represent the cumulative number of samples
         self.index = {}
+        self.id_name_map = {}
         self.samples = 0
         print(f"Initializing dataset from '{self.path}'...")
         # loop through folders
@@ -287,9 +313,11 @@ class ImageDataset(Dataset):
             filename = os.fsdecode(file)
             if filename.endswith("_gt.npy"): # load sequence set at once and not after another
                 sequence_id = int(filename.split("_")[0])
-                imgs = np.load(os.path.join(self.path, f"{sequence_id}_img.npy"))
-                imus = np.load(os.path.join(self.path, f"{sequence_id}_imu.npy"))
-                gts = np.load(os.path.join(self.path, f"{sequence_id}_gt.npy"))
+                sequence_name = "_".join(filename.split("_")[1:-1])
+                self.id_name_map[sequence_id] = sequence_name
+                imgs = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_img.npy"))
+                imus = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_imu.npy"))
+                gts = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_gt.npy"))
                 if imgs.shape[0] != imus.shape[0] or imgs.shape[0] != gts.shape[0]:
                     raise Exception(f"In sequence {sequence_id}, the number of images ({imgs.shape[0]}), IMU ({imus.shape[0]}) and GT ({gts.shape[0]}) do not match.")
                 samples_in_imgs = imgs.shape[0] - self.frames + 1
@@ -338,9 +366,11 @@ class ImageDataset(Dataset):
         for i, key in enumerate(keys):
             if idx < key:
                 # means that the index is in previous key sequence
-                full_imgs = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_img.npy"))
-                full_imu = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_imu.npy"))
-                full_gt = np.load(os.path.join(self.path, f"{self.index[keys[i-1]]}_gt.npy"))
+                sequence_id = self.index[keys[i-1]]
+                sequence_name = self.id_name_map[sequence_id]
+                full_imgs = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_img.npy"))
+                full_imu = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_imu.npy"))
+                full_gt = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_gt.npy"))
                 # get the index of the sample in the sequence
                 idx_in_sequence = idx - keys[i-1]
                 # return the sample
@@ -356,11 +386,15 @@ class ImageDataset(Dataset):
                 del full_imgs, full_imu, full_gt
                 imgs = imgs.permute(0, 2, 1).unsqueeze(1) # (T, 1, V, H)
                 gt = torch.tensor([gt[0], gt[1], gt[2], gt[6], gt[7]])
+                if self.return_seq_name:
+                    return imgs, imu, gt, sequence_name
                 return imgs, imu, gt
         # means that the index is in the last key sequence
-        full_imgs = np.load(os.path.join(self.path, f"{self.index[keys[-1]]}_img.npy"))
-        full_imu = np.load(os.path.join(self.path, f"{self.index[keys[-1]]}_imu.npy"))
-        full_gt = np.load(os.path.join(self.path, f"{self.index[keys[-1]]}_gt.npy"))
+        sequence_id = self.index[keys[-1]]
+        sequence_name = self.id_name_map[sequence_id]
+        full_imgs = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_img.npy"))
+        full_imu = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_imu.npy"))
+        full_gt = np.load(os.path.join(self.path, f"{sequence_id}_{sequence_name}_gt.npy"))
         # get the index of the sample in the sequence
         idx_in_sequence = idx - keys[-1]
         # return the sample
@@ -375,6 +409,8 @@ class ImageDataset(Dataset):
         del full_imgs, full_imu, full_gt
         imgs = imgs.permute(0, 2, 1).unsqueeze(1)  # (T, 1, V, H)
         gt = torch.tensor([gt[0], gt[1], gt[2], gt[6], gt[7]])
+        if self.return_seq_name:
+            return imgs, imu, gt, sequence_name
         return imgs, imu, gt
 
     def gt_as_degree(self, gt: torch.Tensor):
@@ -384,14 +420,15 @@ class ImageDataset(Dataset):
         return torch.tensor([gt[0], gt[1], gt[2], np.rad2deg(gt[3]), np.rad2deg(gt[4])])
     
 
-# ds = ImageDataset("C:/Users/bader/Desktop/SynthCave/data/4_staging/lidar1/depth_image/train", 2)
+# ds = ImageDataset("C:/Users/bader/Desktop/SynthCave/data/4_staging_named/lidar1/depth_image/test", 2, return_seq_name=True)
 
 # max_phi, max_theta = 0, 0
 
 # phis, thetas = [], []
 
 # for i in range(len(ds)):
-#     _, _, gt = ds[i]
+#     _, _, gt, seq_name = ds[i]
+#     print(seq_name)
 #     phi, theta = gt[3].item(), gt[4].item()
 #     if phi > max_phi:
 #         max_phi = phi
@@ -401,7 +438,7 @@ class ImageDataset(Dataset):
 #     phis.append(round(phi, 1))
 #     thetas.append(round(theta, 1))
 # print(max_phi, max_theta)
-# # plot histogram
+# plot histogram
 # import matplotlib.pyplot as plt
 # plt.hist(phis, bins=100)
 # plt.show()
