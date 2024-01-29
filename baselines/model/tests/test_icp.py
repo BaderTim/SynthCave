@@ -86,6 +86,6 @@ def test_icp_module():
 def test_icp_model():
     K = 2
     model = ICP(K=K)
-    x = torch.randn(8, K, 50_200, 3) # (B, L, C, N)
+    x = torch.randn(8, K, 19_200, 3) # (B, L, C, N)
     out = model(x)
     assert out.shape == (8, 5)
