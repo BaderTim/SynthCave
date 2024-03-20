@@ -410,7 +410,6 @@ if __name__ == "__main__":
         "parameters": {
             "model_config": {
                 "values": [
-                    {"model_name": "ICP", "K": 2, "path": ""},
                     {"model_name": "RANDOM", "K": -1, "path": ""},
                     {"model_name": "ZERO", "K": -1, "path": ""},
                     {"model_name": "TSViTcls", "K": 4, "path": "C:/Users/bader/Desktop/SynthCave/models/worthy-sweep-9.pt"}, 
