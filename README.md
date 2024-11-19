@@ -2,6 +2,8 @@
 
 This repository contains the code for the dataset generation, as well as the code for the models used in the SynthCave paper. The models are implemented in PyTorch and include a **CNN**, **ASTGCN**, **TSViT**, and **PSTNet**. 
 
+[View Paper](https://github.com/BaderTim/SynthCave/blob/main/Paper.pdf)
+
 
 ## About
 
@@ -9,6 +11,7 @@ This repository contains the code for the dataset generation, as well as the cod
 
 
 The raw data was recorded with simulated LiDAR and IMU sensors, using the [Minecraft Measurement Mod](https://github.com/BaderTim/minecraft-measurement-mod) with Minecaft version 1.20.2. The dataset is publicly available on [Kaggle](https://www.kaggle.com/datasets/badertim/synthcave-3d-odometry-estimation).
+
 
 ## Installation
 
