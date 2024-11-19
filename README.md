@@ -38,13 +38,3 @@ The raw data was recorded with simulated LiDAR and IMU sensors, using the [Minec
     - [TSViT](https://github.com/michaeltrs/DeepSatModels/tree/main?tab=readme-ov-file): `python baselines/model/TSViTcls/TSViT.py`
     - [PSTNet](https://github.com/hehefan/Point-Spatio-Temporal-Convolution): `python baselines/model/PSTNet/PSTNet.py`
 
-## Citation
-Please cite the following paper if you use this dataset or the code in your work:
-```
-@article{bader2023synthcave,
-  title={SynthCave: A Deep Learning Benchmark for 3D Odometry Estimation in Caves},
-  author={Bader, Tim},
-  journal={TBA},
-  year={223}
-}
-```
